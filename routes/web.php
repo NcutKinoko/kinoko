@@ -19,4 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::POST('Backstage/register','BackstageRegisterController@create')->name('Backstage_register');
+Route::prefix('Backstage')->group(function (){
+    Route::get('/register/form','Auth\BackstageRegisterController@ShowRegisterform')->name('Backstage.show.register');
+    Route::POST('/register','Auth\BackstageRegisterController@create')->name('Backstage.register');
+});
+

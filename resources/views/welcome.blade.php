@@ -73,6 +73,7 @@
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('Backstage.show.register') }}">後台會員註冊</a>
                     @endauth
                 </div>
             @endif

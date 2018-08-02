@@ -9,6 +9,10 @@ class Backstage extends Authenticatable
 {
     use Notifiable;
 
+
+    protected $table = 'Backstage_users';
+    protected $guarded = 'Backstage';
+
     /**
      * The attributes that are mass assignable.
      *

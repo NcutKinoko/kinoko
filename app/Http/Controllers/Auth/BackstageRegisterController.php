@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Backstage;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -62,13 +64,19 @@ class BackstageRegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'account' => $data['account'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        Backstage::create([
+            'name' => $request['name'],
+            'account' => $request['account'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
         ]);
+        return back()->with('success','註冊成功 !');
+    }
+
+    protected function ShowRegisterform()
+    {
+        return view('BackstageAuth.register');
     }
 }
