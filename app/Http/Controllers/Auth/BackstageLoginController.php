@@ -36,7 +36,7 @@ class BackstageLoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:Backstage')->except('logout');
+        $this->middleware('guest:backstage')->except('logout');
     }
 
     public function login(Request $request) {
@@ -46,7 +46,7 @@ class BackstageLoginController extends Controller
             'password' => 'required|min:6'
         ]);
         //attempt to login the stores in 判斷店家是否有使用權(0=false)，1=true
-        if (Auth::guard('Backstage')->attempt(['account' => $request->account, 'password' => $request->password],$request->remember)){
+        if (Auth::guard('backstage')->attempt(['account' => $request->account, 'password' => $request->password])){
             //if successful redirect to stores dashboard
             return redirect()->intended(route('home'));
         }

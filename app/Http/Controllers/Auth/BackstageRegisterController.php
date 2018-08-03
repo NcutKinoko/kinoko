@@ -6,6 +6,7 @@ use App\Backstage;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -77,6 +78,14 @@ class BackstageRegisterController extends Controller
 
     protected function ShowRegisterform()
     {
+        if (Auth::check())
+        {
+            dd("has login");
+        }
+        else
+            {
+            dd("not login");
+        }
         return view('BackstageAuth.register');
     }
 }

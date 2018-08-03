@@ -70,6 +70,8 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ route('Backstage.show.register') }}">後台會員註冊</a>
+                        <a href="{{ route('Backstage.show.login') }}">後台會員登入</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>

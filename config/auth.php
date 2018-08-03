@@ -45,9 +45,9 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
-        'Backstage' => [
-            'driver' => 'token',
-            'provider' => 'Backstage',
+        'backstage' => [
+            'driver' => 'session',
+            'provider' => 'backstages',
         ],
     ],
 
@@ -73,7 +73,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-        'Backstage' => [
+        'backstages' => [
             'driver' => 'eloquent',
             'model' => App\Backstage::class,
         ],
@@ -105,8 +105,8 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
-        'Backstage' => [
-            'provider' => 'Backstage',
+        'backstages' => [
+            'provider' => 'backstages',
             'table' => 'password_resets',
             'expire' => 60,
         ],
