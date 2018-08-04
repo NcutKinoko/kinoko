@@ -31,7 +31,7 @@ class BackstageRegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = 'Backstage/home';
 
     /**
      * Create a new controller instance.
@@ -40,7 +40,7 @@ class BackstageRegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:backstage');
     }
 
     /**
@@ -73,19 +73,13 @@ class BackstageRegisterController extends Controller
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
-        return back()->with('success','註冊成功 !');
+
+        return redirect(Route('Backstage.home'));
+//        return back()->with('success','註冊成功 !');
     }
 
     protected function ShowRegisterform()
     {
-        if (Auth::check())
-        {
-            dd("has login");
-        }
-        else
-            {
-            dd("not login");
-        }
         return view('BackstageAuth.register');
     }
 }
