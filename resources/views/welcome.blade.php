@@ -66,18 +66,18 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login') or Route::has('Backstage.login'))
+            @if (Route::has('login'))
                 <div class="top-right links">
-                    @auth
+                    @if(Auth::check())
                         <a href="{{ url('/home') }}">Home</a>
-                        <a href="{{ route('Backstage.show.register') }}">後台會員註冊</a>
-                        <a href="{{ route('Backstage.show.login') }}">後台會員登入</a>
-                    @else
+                    @elseif(Auth::guard('backstage')->check())
+                        <a href="{{ url('Backstage/home') }}">Home</a>
+                        @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
                         <a href="{{ route('Backstage.show.register') }}">後台會員註冊</a>
                         <a href="{{ route('Backstage.show.login') }}">後台會員登入</a>
-                    @endauth
+                    @endif
                 </div>
             @endif
 
