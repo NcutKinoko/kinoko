@@ -74,8 +74,8 @@ class BackstageRegisterController extends Controller
             'password' => Hash::make($request['password']),
         ]);
 
-        return redirect(Route('Backstage.home'));
-//        return back()->with('success','註冊成功 !');
+//         return redirect(Route('Backstage.home'));
+        return back()->with('success','註冊成功 !');
     }
 
     protected function ShowRegisterform()
