@@ -29,27 +29,38 @@
             padding: 14px 50px;
         }
 
-        .number > li > ul {
-            list-style-type: none;
-            padding: 14px 16px;
-            margin: 0;
-        }
-
-        .number > li > ul > li {
-            position: relative;
-            width: 50px;
-            height: 20px;
-            padding: 5px;
-        }
-
-        .number > li > ul:hover  .number > li > ul > li{
-            display: none;
-        }
-
         .number > li > a:hover {
-            background-color: white;
             color: #AA7700;
-            font-weight: bold;
+            background-color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        .dropdown-fuck {
+            cursor: pointer;
+        }
+
+        .dropdown-fuck > ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFFF;
+            position: absolute;
+            z-index: 1;
+            display: none;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        }
+
+        .dropdown-fuck > ul > li {
+            padding: 12px 16px;
+            right: 0;
+        }
+
+        .dropdown-fuck:hover > ul {
+            display: block;
+        }
+
+        .dropdown-fuck>ul>li:hover {
+            background-color: gray;
         }
 
         .list {
@@ -89,12 +100,11 @@
             <ul class="number">
                 <li><a href="#register" class="number-li-a">註冊</a></li>
                 <li><a href="#login" class="number-li-a">登入</a></li>
-                <li style="display: inline-block;color: black;text-decoration: none;padding: 14px 50px;border-radius: 10px;">
+                <li class="dropdown-fuck"
+                    style="color: black;text-decoration: none;padding: 14px 50px;border-radius: 10px;">
                     登出<i class="fa fa-caret-down"></i>
                     <ul>
                         <li>登出</li>
-                        <li>喔喔</li>
-                        <li>好喔</li>
                     </ul>
                 </li>
                 <li style="float: left;padding: 14px 50px;font-size: large;">新社香菇</li>
