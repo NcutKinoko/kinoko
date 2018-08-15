@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    html,body{
+        background-color: #FFFFFF;
+    }
+</style>
+
 <head>
 
 </head>
 
-<body style="background: #FFFFFF">
+<body>
 
 @include('layouts.partials.navigation')
 

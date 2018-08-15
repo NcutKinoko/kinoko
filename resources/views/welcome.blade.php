@@ -73,8 +73,8 @@
                     @elseif(Auth::guard('backstage')->check())
                         <a href="{{ url('Backstage/home') }}">Home</a>
                         @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('login') }}">登入會員</a>
+                        <a href="{{ route('register') }}">註冊會員</a>
                         <a href="{{ route('Backstage.show.register') }}">後台會員註冊</a>
                         <a href="{{ route('Backstage.show.login') }}">後台會員登入</a>
                     @endif
