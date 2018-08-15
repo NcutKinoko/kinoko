@@ -1,4 +1,4 @@
-<navigation>
+<nav style="background-color: #FFFFFF">
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -6,9 +6,36 @@
           integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/csshake/1.5.3/csshake.min.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/csshake/1.5.3/csshake.min.css"/>
     <style>
+        .conversation{
+            width: 0;
+            height: 0;
+            border-width: 10px;
+            border-style: solid;
+            border-color: transparent transparent #FFFFFF transparent;
+            display: none;
+            position: absolute;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            transform: translateX(10px);
+        }
+
+        .dropdown-right-top:hover .conversation{
+            display: block;
+            perspective: 1000px;
+            opacity: 0;
+            -webkit-animation-name: menu;
+            -webkit-animation-duration: 300ms;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
+        }
+        
+        .width {
+            margin: auto;
+            padding: 10px;
+            width: 80%;
+        }
+
         .number {
             list-style-type: none;
             margin: 0;
@@ -51,29 +78,44 @@
             position: absolute;
             z-index: 1;
             display: none;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         }
 
         .dropdown-right-top > ul > li {
             padding: 12px 16px;
             position: relative;
             left: 0;
+            border-radius: 10px;
         }
 
-        .dropdown-right-top > ul > li>a {
+        .dropdown-right-top > ul > li > a {
             text-decoration: none;
             color: black;
         }
 
         .dropdown-right-top:hover > ul {
             display: block;
-            /*perspective: 1000px;*/
-            /*opacity: 0;*/
-            /*animation: menu ;*/
-
+            perspective: 1000px;
+            opacity: 0;
+            -webkit-animation-name: menu;
+            -webkit-animation-duration: 300ms;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
         }
 
-        .dropdown-right-top>ul>li:hover {
+        @keyframes menu {
+            0% {
+                opacity: 0;
+                transform: rotateY(-90deg) translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: rotateY(0deg) translateY(0px);
+            }
+        }
+
+        .dropdown-right-top > ul > li:hover {
             background-color: #f9f9f9;
         }
 
@@ -107,12 +149,11 @@
             text-decoration: none;
             animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
 
-            transform: rotate(0deg);
-
             backface-visibility: hidden;
 
             perspective: 1000px;
         }
+
         @keyframes shake {
 
             10%, 90% {
@@ -141,15 +182,15 @@
 
         }
     </style>
-
     <!--navigation-->
-    <div>
+    <div class="width">
         <ul class="number">
             <li style="float: left;padding: 14px 50px;font-size: large;">新社香菇</li>
-        @if(Auth::check())
+            @if(Auth::check())
                 <li class="dropdown-right-top"
                     style="color: black;text-decoration: none;padding: 14px 50px;border-radius: 10px;">
                     {{ Auth::user()->name }} <i class="fa fa-caret-down"></i>
+                    <div class="conversation"></div>
                     <ul>
                         <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -161,15 +202,15 @@
                         @csrf
                     </form>
                 </li>
-        @else
-                <li><a href="{{ route('register') }}" >註冊</a></li>
-                <li><a href="{{ route('login') }}" >登入</a></li>
-        @endif
+            @else
+                <li><a href="{{ route('register') }}">註冊</a></li>
+                <li><a href="{{ route('login') }}">登入</a></li>
+            @endif
         </ul>
-        <hr size="0"/>
+        <hr color="sandybrown"/>
         <ul class="list">
             <li class="list-li"><a href="#index" class="list-li-a">首頁</a></li>
             <li class="list-li"><a href="#history" class="list-li-a">歷史</a></li>
         </ul>
     </div>
-</navigation>
+</nav>
