@@ -192,13 +192,13 @@
                     {{ Auth::user()->name }} <i class="fa fa-caret-down"></i>
                     <div class="conversation"></div>
                     <ul>
-                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <li><a href="{{ route('Logout_New') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 登出
                             </a>
                         </li>
                     </ul>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    <form id="logout-form" action="{{ route('Logout_New') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
                 </li>

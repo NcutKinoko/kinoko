@@ -23,6 +23,8 @@ Route::get('/index',function (){
     return view('index.index');
 });
 
+Route::get('/logout', 'Auth\LoginController@logout')->name('Logout_New');
+
 Route::prefix('Backstage')->group(function (){
     Route::get('/register/form','Auth\BackstageRegisterController@ShowRegisterform')->name('Backstage.show.register');
     Route::get('/login','Auth\BackstageLoginController@ShowLoginform')->name('Backstage.show.login');
