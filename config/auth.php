@@ -107,7 +107,7 @@ return [
         ],
         'backstages' => [
             'provider' => 'backstages',
-            'table' => 'password_resets',
+            'table' => 'backstage_password_resets',
             'expire' => 60,
         ],
     ],

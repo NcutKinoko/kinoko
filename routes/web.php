@@ -31,5 +31,9 @@ Route::prefix('Backstage')->group(function (){
     Route::POST('/login','Auth\BackstageLoginController@login')->name('Backstage.login');
     Route::POST('/register','Auth\BackstageRegisterController@create')->name('Backstage.register');
     Route::get('/home', 'BackstageController@index')->name('Backstage.home');
+    Route::get('/show/sendmail','Auth\BackstageForgotPasswordController@ShowSendMailform')->name('Backstage.show.sendmail');
+    Route::POST('/sendmail','Auth\BackstageForgotPasswordController@SendMail')->name('Backstage.sendmail');
+    Route::get('/password/reset/{token}','Auth\BackstageResetPasswordController@showResetForm')->name('Backstage.show.reset');
+    Route::POST('/password/reset','Auth\BackstageResetPasswordController@reset')->name('Backstage.show.reset');
 });
 
