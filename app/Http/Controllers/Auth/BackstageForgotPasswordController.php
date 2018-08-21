@@ -89,6 +89,6 @@ class BackstageForgotPasswordController extends Controller
      */
     public function broker()
     {
-        return Password::broker();
+        return Password::broker('backstages');
     }
 }

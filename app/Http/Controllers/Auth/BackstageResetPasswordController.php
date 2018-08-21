@@ -46,7 +46,7 @@ class BackstageResetPasswordController extends Controller
     }
     public function broker()
     {
-        return Password::broker('backstage');
+        return Password::broker('backstages');
     }
 
     public function showResetForm(Request $request, $token = null)
