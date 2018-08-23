@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use illuminate\support\facades\Auth;
-use illuminate\support\facades\Password;
-use illuminate\http\request;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Auth;
 
 class BackstageResetPasswordController extends Controller
 {
@@ -20,9 +20,7 @@ class BackstageResetPasswordController extends Controller
     | explore this trait and override any methods you wish to tweak.
     |
     */
-
     use ResetsPasswords;
-
     /**
      * Where to redirect users after resetting their password.
      *
@@ -54,10 +52,5 @@ class BackstageResetPasswordController extends Controller
         return view('BackstageAuth.passwords.reset')->with(
             ['token'=>$token,'email'=>$request->email]
         );
-    }
-
-    public function reset(Request $request)
-    {
-        $this->validate($request,$this->rules(),$this->validationErrorMessages());
     }
 }
