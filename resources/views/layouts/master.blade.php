@@ -11,9 +11,7 @@
 </head>
 
 <body>
-
 @include('layouts.partials.navigation')
-
 @yield('content')
 <!--footer-->
 @include('layouts.partials.footer')
