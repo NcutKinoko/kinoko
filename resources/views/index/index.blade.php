@@ -23,11 +23,13 @@
         }
         .product-list > h1
         {
+            margin-top: 10px;
             color: #FFFFFF;
         }
         .product-list > ul{
             margin-left: 0;
             margin-right: 0;
+            margin-bottom: 0;
             text-align: center;
             list-style: none;
             padding: 15px;

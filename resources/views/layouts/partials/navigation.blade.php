@@ -10,33 +10,12 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/csshake/1.5.3/csshake.min.css"/>
         <style>
-            .conversation {
-                width: 0;
-                height: 0;
-                border-width: 10px;
-                border-style: solid;
-                border-color: transparent transparent #FFFFFF transparent;
-                display: none;
-                position: absolute;
-                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-                transform: translateX(10px);
-            }
 
             .float-navigation {
                 width: 100%;
                 position: fixed;
                 top: 0;
                 z-index: 1;
-            }
-
-            .dropdown-right-top:hover .conversation {
-                display: block;
-                perspective: 1000px;
-                opacity: 0;
-                -webkit-animation-name: menu;
-                -webkit-animation-duration: 300ms;
-                animation-timing-function: ease-in-out;
-                animation-fill-mode: forwards;
             }
 
             .number {
@@ -190,7 +169,6 @@
                     <li class="dropdown-right-top"
                         style="color: black;text-decoration: none;padding: 14px 50px;border-radius: 10px;">
                         {{ Auth::user()->name }} <i class="fa fa-caret-down"></i>
-                        <div class="conversation"></div>
                         <ul>
                             <li><a href="{{ route('Logout_New') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
