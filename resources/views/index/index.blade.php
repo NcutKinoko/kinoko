@@ -12,14 +12,12 @@
         .product
         {
             width: 100%;
-            height: 450px;
             text-align: center;
         }
         .product-list {
             width: 90%;
             height: 100%;
             margin: 0 auto;
-            padding: 0 70px;
             background-color: black;
             display:inline-block;
         }
@@ -28,14 +26,17 @@
             color: #FFFFFF;
         }
         .product-list > ul{
+            margin-left: 0;
+            margin-right: 0;
             text-align: center;
             list-style: none;
             padding: 15px;
         }
         .product-list > ul > li{
-            width:350px;
-            height: 350px;
+            width: 320px;
+            height: 320px;
             display: inline-block;
+            margin:  1em 0 1em 0;
         }
         .img-size{
             width:300px;
