@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Category extends Migration
+class TransactionRecord extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class Category extends Migration
      */
     public function up()
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('TransactionRecord', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->integer('member_id');
+            $table->integer('SumOfTransaction');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class Category extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('TransactionRecord');
     }
 }
