@@ -37,3 +37,9 @@ Route::prefix('Backstage')->group(function (){
     Route::POST('/password/reset','Auth\BackstageResetPasswordController@reset')->name('Backstage.reset');
 });
 
+Route::prefix('product')->group(function (){
+    Route::get('/create/form','ProductController@ShowCreateForm')->name('show.product.form');
+});
+
+
+
