@@ -26,8 +26,8 @@ class ProductController extends Controller
     public function create()
     {
         $CategoryList = Category::all();
-
-        return view('Backstage.product.create', compact('CategoryList'));
+        $product = Product::all();
+        return view('Backstage.product.create', compact('CategoryList','product'));
     }
 
     /**
@@ -38,7 +38,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        //如果有檔案才做存入
         if ($request->hasFile('img')) {
+            //取得檔案名稱
             $file_name = time().'.'.$request['img']->getClientOriginalExtension();
             $request->file('img')->move(public_path("/img/product"), $file_name);
             // save new image $file_name to database

@@ -34,4 +34,10 @@
             <button type="submit" class="btn btn-success">新增</button>
         </div>
     </form>
+    <div>
+        @foreach($product as $products)
+            <p>{{$products->name}}</p>
+            <img src="img/product/{{$products->img}}" alt="Smiley face" height="42" width="42">
+            @endforeach
+    </div>
 </div>
