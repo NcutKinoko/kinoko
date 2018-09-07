@@ -38,21 +38,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $filename = $request->file('img')->path();
-        $file = fopen($filename, "r");
-        $fileContents = fread($file,filesize($filename));
-        fclose($file);
-        $fileContents = base64_encode($fileContents);
-
-        dd($fileContents);
+        if ($request->hasFile('img')) {
+            $file_name = time().'.'.$request['img']->getClientOriginalExtension();
+            $request->file('img')->move(public_path("/img/product"), $file_name);
+            // save new image $file_name to database
+            // $product->update(['picture' => $file_name]);
             Product::create([
                 'category_id' => $request['category'],
                 'name' => $request['name'],
                 'price' => $request['price'],
                 'size' => $request['size'],
-                'img' => $fileContents,
+                'img' => $file_name,
                 'inventory' => $request['inventory']
             ]);
+        }
+        return redirect()->back();
     }
 
     /**
