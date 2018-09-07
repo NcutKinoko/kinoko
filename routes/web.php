@@ -38,7 +38,13 @@ Route::prefix('Backstage')->group(function (){
 });
 
 Route::prefix('product')->group(function (){
-    Route::get('/create/form','ProductController@ShowCreateForm')->name('show.product.form');
+    Route::get('/create/form','ProductController@create')->name('show.product.form');
+    Route::POST('/store','ProductController@store')->name('store.product');
+});
+
+Route::prefix('category')->group(function (){
+    Route::get('/create/form','CategoryController@create')->name('show.category.form');
+    Route::POST('/store','CategoryController@store')->name('store.category');
 });
 
 

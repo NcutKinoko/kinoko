@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -11,9 +13,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ShowCreateForm()
+    public function index()
     {
-        return view('Backstage.product.create');
+        //
     }
 
     /**
@@ -23,24 +25,40 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $CategoryList = Category::all();
+
+        return view('Backstage.product.create', compact('CategoryList'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $filename = $request->file('img')->path();
+        $file = fopen($filename, "r");
+        $fileContents = fread($file,filesize($filename));
+        fclose($file);
+        $fileContents = base64_encode($fileContents);
+
+        dd($fileContents);
+            Product::create([
+                'category_id' => $request['category'],
+                'name' => $request['name'],
+                'price' => $request['price'],
+                'size' => $request['size'],
+                'img' => $fileContents,
+                'inventory' => $request['inventory']
+            ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -51,7 +69,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -62,8 +80,8 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -74,7 +92,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
