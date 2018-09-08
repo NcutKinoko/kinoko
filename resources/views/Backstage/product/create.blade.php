@@ -37,7 +37,7 @@
     <div>
         @foreach($product as $products)
             <p>{{$products->name}}</p>
-            <img src="img/product/{{$products->img}}" alt="Smiley face" height="42" width="42">
+            <img src="{{url('../img/product/' . $products->img)}}" alt="Smiley face" height="100" width="100">
             @endforeach
     </div>
 </div>
