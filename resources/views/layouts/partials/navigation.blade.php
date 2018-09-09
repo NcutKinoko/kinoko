@@ -20,8 +20,8 @@
                         </form>
                     </li>
                 @else
-                    <li><a href="{{ route('register') }}">註冊</a></li>
-                    <li><a href="{{ route('login') }}">登入</a></li>
+                        <li><a href="{{ route('register') }}" style="color: #AA7700">註冊</a></li>
+                        <li><a href="{{ route('login') }}" style="color: #AA7700">登入</a></li>
                 @endif
             </ul>
             <ul class="list">

@@ -10,7 +10,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: sandybrown;
+    background-color: white;
     text-align: right;
     font-family: DFKai-sb
 }
@@ -20,7 +20,7 @@
 }
 
 .number > li > a {
-    color: black;
+
     text-decoration: none;
     border-radius: 10px;
     padding: 14px 50px;
@@ -28,8 +28,8 @@
 }
 
 .number > li > a:hover {
-    color: #AA7700;
-    background-color: #FFFFFF;
+    color: white;
+    border: 1pt #AA7700 solid ;
     text-decoration: none;
 }
 
@@ -66,7 +66,7 @@
     perspective: 1000px;
     opacity: 0;
     -webkit-animation-name: menu;
-    -webkit-animation-duration: 10000ms;
+    -webkit-animation-duration: 800ms;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
@@ -91,7 +91,6 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: sandybrown;
     text-align: center;
     font-family: DFKai-sb
 }
