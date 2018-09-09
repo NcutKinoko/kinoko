@@ -47,5 +47,14 @@ Route::prefix('category')->group(function (){
     Route::POST('/store','CategoryController@store')->name('store.category');
 });
 
+Route::prefix('menu')->group(function (){
+    Route::get('/create/form','MenuController@create')->name('show.menu.form');
+    Route::POST('/store','MenuController@store')->name('store.menu');
+});
+
+Route::prefix('sauce')->group(function (){
+    Route::get('/create/form','SauceController@create')->name('show.sauce.form');
+    Route::POST('/store','SauceController@store')->name('store.sauce');
+});
 
 

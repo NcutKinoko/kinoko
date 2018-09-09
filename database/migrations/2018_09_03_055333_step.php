@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
 class Step extends Migration
 {
     /**
@@ -16,7 +15,7 @@ class Step extends Migration
         Schema::create('step', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('menu_id');
-            $table->string('step');
+            $table->string('step')->nullable();
             $table->timestamps();
         });
     }
