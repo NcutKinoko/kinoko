@@ -57,4 +57,6 @@ Route::prefix('sauce')->group(function (){
     Route::POST('/store','SauceController@store')->name('store.sauce');
 });
 
-
+Route::prefix('step')->group(function (){
+    Route::POST('/store','StepController@store')->name('store.step');
+});

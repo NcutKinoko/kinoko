@@ -29,7 +29,8 @@ class MenuController extends Controller
     {
         $sauceList = Sauce::all();
         $productList = Product::all();
-        return view('Backstage.menu.create', compact('sauceList', 'productList'));
+        $menuList = Menu::all();
+        return view('Backstage.menu.create', compact('sauceList', 'productList','menuList'));
     }
 
     /**

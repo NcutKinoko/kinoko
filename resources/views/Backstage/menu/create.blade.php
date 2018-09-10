@@ -1,5 +1,5 @@
 <div>
-    <form action="{{route('store.menu')}}" method="POST" role="form" enctype="multipart/form-data" >
+    <form action="{{route('store.menu')}}" method="POST" role="form" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="form-group">
             <label>料理名稱</label>
@@ -43,4 +43,21 @@
             <button type="submit" class="btn btn-success">新增</button>
         </div>
     </form>
+</div>
+<div>
+    @foreach($menuList as $menuLists)
+        <p>{{$menuLists->name}}</p>
+        <img src="{{url('../img/menu/' . $menuLists->img)}}" alt="Smiley face" height="100" width="100">
+
+        <form action="{{route('store.step',$menuLists->id)}}" method="POST" role="form" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="form-group">
+                <label>新增料理步驟</label>
+                <input name="name" class="form-control" placeholder="請輸入步驟" required>
+            </div>
+            <div class="text-left">
+                <button type="submit" class="btn btn-success">新增</button>
+            </div>
+        </form>
+    @endforeach
 </div>
