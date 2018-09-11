@@ -37,7 +37,7 @@ class StepController extends Controller
     {
         Step::create([
             'menu_id' => $id,
-            'step' => $request
+            'step' => $request['step']
         ]);
 
         $stepList = Step::all();

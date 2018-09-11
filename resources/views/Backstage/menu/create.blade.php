@@ -45,6 +45,7 @@
     </form>
 </div>
 <div>
+
     @foreach($menuList as $menuLists)
         <p>{{$menuLists->name}}</p>
         <img src="{{url('../img/menu/' . $menuLists->img)}}" alt="Smiley face" height="100" width="100">
@@ -53,11 +54,30 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <label>新增料理步驟</label>
-                <input name="name" class="form-control" placeholder="請輸入步驟" required>
+                <input name="step" class="form-control" placeholder="請輸入步驟" required>
             </div>
             <div class="text-left">
                 <button type="submit" class="btn btn-success">新增</button>
             </div>
         </form>
+            <table>
+        @foreach($stepList as $stepLists)
+            @if($stepLists->menu_id == $menuLists->id)
+                    <tr>
+                        <td>{{$stepLists->step}}</td>
+                    </tr>
+            @endif
+        @endforeach
+            </table>
+        <script>
+            var tables = document.getElementsByTagName('table');
+            var table = tables[tables.length - 1];
+            var rows = table.rows;
+            for(var i = 0, td; i < rows.length; i++){
+                td = document.createElement('td');
+                td.appendChild(document.createTextNode(i + 1));
+                rows[i].insertBefore(td, rows[i].firstChild);
+            }
+        </script>
     @endforeach
 </div>
