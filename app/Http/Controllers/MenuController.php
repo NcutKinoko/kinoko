@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Menu;
 use App\Product;
-use App\Sauce;
+
 use App\Step;
 use Illuminate\Http\Request;
 
@@ -27,11 +27,10 @@ class MenuController extends Controller
      */
     public function create()
     {
-        $sauceList = Sauce::all();
         $productList = Product::all();
         $menuList = Menu::all();
         $stepList = Step::all();
-        return view('Backstage.menu.create', compact('sauceList', 'productList','menuList','stepList'));
+        return view('Backstage.menu.create', compact( 'productList','menuList','stepList'));
     }
 
     /**
@@ -51,7 +50,7 @@ class MenuController extends Controller
             // $product->update(['picture' => $file_name]);
             Menu::create([
                 'product_id' => $request['product'],
-                'sauce_id' => $request['sauce'],
+                'sauce' => $request['sauce'],
                 'name' => $request['name'],
                 'seasoning' => $request['seasoning'],
                 'material' => $request['material'],

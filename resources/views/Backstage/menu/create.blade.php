@@ -1,3 +1,8 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+<body>
 <div>
     <form action="{{route('store.menu')}}" method="POST" role="form" enctype="multipart/form-data">
         {{ csrf_field() }}
@@ -7,7 +12,7 @@
         </div>
         <div class="form-group">
             <label>調味料</label>
-            <input name="seasoning" class="form-control" placeholder="請輸入調味料名稱" required>
+            <input name="seasoning" class="form-control" placeholder="請輸入調味料名稱">
         </div>
         <div class="form-group">
             <label>材料</label>
@@ -23,13 +28,8 @@
             </select>
         </div>
         <div class="form-group">
-            <label>使用醬汁</label>
-            <select name="sauce" required>
-                <option value="" disabled="disabled" selected="selected">請選擇使用醬汁</option>
-                @foreach($sauceList as $sauceLists)
-                    <option value={{$sauceLists->id}}>{{$sauceLists->name}}</option>
-                @endforeach
-            </select>
+            <label>醬汁</label>
+            <input name="sauce" class="form-control" placeholder="請輸入醬汁名稱" required>
         </div>
         <div class="form-group">
             <label>備註</label>
@@ -60,20 +60,24 @@
                 <button type="submit" class="btn btn-success">新增</button>
             </div>
         </form>
-            <table>
-        @foreach($stepList as $stepLists)
-            @if($stepLists->menu_id == $menuLists->id)
+
+        <table>
+            @foreach($stepList as $stepLists)
+                @if($stepLists->menu_id == $menuLists->id)
                     <tr>
                         <td>{{$stepLists->step}}</td>
+                        <td>
+                            <button data-id="{{ $stepLists->id }}" data-token="{{ csrf_token() }}" class="Delete">x</button>
+                        </td>
                     </tr>
-            @endif
-        @endforeach
-            </table>
+                @endif
+            @endforeach
+        </table>
         <script>
             var tables = document.getElementsByTagName('table');
             var table = tables[tables.length - 1];
             var rows = table.rows;
-            for(var i = 0, td; i < rows.length; i++){
+            for (var i = 0, td; i < rows.length; i++) {
                 td = document.createElement('td');
                 td.appendChild(document.createTextNode(i + 1));
                 rows[i].insertBefore(td, rows[i].firstChild);
@@ -81,3 +85,33 @@
         </script>
     @endforeach
 </div>
+<p id="demo"></p>
+<button class="gg" id="gg">新增文字</button>
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $(document).ready(function () {
+        $(".Delete").click(function () {
+            var id = $(this).data("id");
+            var url = "step/destroy/" + id;// the script where you handle the form input.
+            document.getElementById("demo").innerHTML = id;
+            $.ajax({
+                type: "delete",
+                url: url,
+                dataType:JSON,
+                data: {
+                    'id': id
+                },// serializes the form's elements.
+                success: function (data) {
+                    alert(data);// show response from the php script.
+                }
+            });
+        });
+    });
+
+</script>
+</body>
+

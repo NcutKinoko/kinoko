@@ -52,11 +52,7 @@ Route::prefix('menu')->group(function (){
     Route::POST('/store','MenuController@store')->name('store.menu');
 });
 
-Route::prefix('sauce')->group(function (){
-    Route::get('/create/form','SauceController@create')->name('show.sauce.form');
-    Route::POST('/store','SauceController@store')->name('store.sauce');
-});
-
 Route::prefix('step')->group(function (){
     Route::POST('/store/{id}','StepController@store')->name('store.step');
+    Route::delete('/destroy/{id}','StepController@destroy')->name('destroy.step');
 });

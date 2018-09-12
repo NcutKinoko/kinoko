@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Step;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StepController extends Controller
 {
@@ -87,6 +88,7 @@ class StepController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Step::destroy($id);
+        return response();
     }
 }

@@ -16,9 +16,9 @@ class Menu extends Migration
         Schema::create('menu', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id');
-            $table->integer('sauce_id');
             $table->string('name');
-            $table->string('seasoning');
+            $table->string('sauce');
+            $table->string('seasoning')->nullable();
             $table->string('material');
             $table->string('img');
             $table->string('remark');
