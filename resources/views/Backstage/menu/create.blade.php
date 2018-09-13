@@ -61,32 +61,31 @@
             </div>
         </form>
 
-        <table>
+        <table class="step">
             @foreach($stepList as $stepLists)
                 @if($stepLists->menu_id == $menuLists->id)
-                    <tr>
+                    <tr id="tr{{$stepLists->id}}">
                         <td>{{$stepLists->step}}</td>
                         <td>
-                            <button data-id="{{ $stepLists->id }}" data-token="{{ csrf_token() }}" class="Delete">x</button>
+                            <button data-content="{{$stepLists->id}}" id="delete" class="delete">x</button>
                         </td>
                     </tr>
                 @endif
             @endforeach
         </table>
         <script>
-            var tables = document.getElementsByTagName('table');
-            var table = tables[tables.length - 1];
-            var rows = table.rows;
-            for (var i = 0, td; i < rows.length; i++) {
-                td = document.createElement('td');
-                td.appendChild(document.createTextNode(i + 1));
-                rows[i].insertBefore(td, rows[i].firstChild);
-            }
+                var tables = document.getElementsByTagName('table');
+                var table = tables[tables.length - 1];
+                var rows = table.rows;
+                for (var i = 0, td; i < rows.length; i++) {
+                    td = document.createElement('td');
+                    td.appendChild(document.createTextNode(i + 1));
+                    rows[i].insertBefore(td, rows[i].firstChild);
+                }
         </script>
     @endforeach
 </div>
-<p id="demo"></p>
-<button class="gg" id="gg">新增文字</button>
+
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
@@ -94,24 +93,25 @@
         }
     });
     $(document).ready(function () {
-        $(".Delete").click(function () {
-            var id = $(this).data("id");
-            var url = "step/destroy/" + id;// the script where you handle the form input.
-            document.getElementById("demo").innerHTML = id;
+        $(".delete").click(function () {
+            var id = $(this).attr('data-content');
             $.ajax({
-                type: "delete",
-                url: url,
-                dataType:JSON,
-                data: {
-                    'id': id
-                },// serializes the form's elements.
-                success: function (data) {
-                    alert(data);// show response from the php script.
-                }
+                url: "{{route('destroy.step')}}",
+                method: "POST",
+                data: {id: id},
             });
+            var TrId = $(this).attr('data-content');
+            $('#tr'+TrId).remove();
+            var div = document.getElementsByTagName('div');
+            div.refresh();
+            renumberRows();
         });
     });
-
+    function renumberRows() {
+        $('#data tr').each(function(index, el){
+            $(this).children('td').first().text(index++);
+        });
+    }
 </script>
 </body>
 

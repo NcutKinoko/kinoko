@@ -54,5 +54,5 @@ Route::prefix('menu')->group(function (){
 
 Route::prefix('step')->group(function (){
     Route::POST('/store/{id}','StepController@store')->name('store.step');
-    Route::delete('/destroy/{id}','StepController@destroy')->name('destroy.step');
+    Route::POST('/destroy','StepController@destroy')->name('destroy.step');
 });

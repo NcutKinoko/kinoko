@@ -6,6 +6,7 @@ use App\Step;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class StepController extends Controller
 {
     /**
@@ -86,9 +87,11 @@ class StepController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        Step::destroy($id);
-        return response();
+        $step = Step::find($request->input('id'));
+        $step->delete();
+
+        return redirect()->back();
     }
 }
