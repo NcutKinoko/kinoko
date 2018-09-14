@@ -1,5 +1,6 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://code.jqery.com/jquery-1.9.1.min.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
@@ -61,7 +62,7 @@
             </div>
         </form>
 
-        <table class="step">
+        <table id="{{$menuLists->id}}" class="step">
             @foreach($stepList as $stepLists)
                 @if($stepLists->menu_id == $menuLists->id)
                     <tr id="tr{{$stepLists->id}}">
@@ -85,7 +86,7 @@
         </script>
     @endforeach
 </div>
-
+<p id="demo"></p>
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
@@ -102,15 +103,18 @@
             });
             var TrId = $(this).attr('data-content');
             $('#tr'+TrId).remove();
-            var div = document.getElementsByTagName('div');
-            div.refresh();
-            renumberRows();
+            alert($(this).closest('.step').attr('id'));
+            // document.getElementById('demo').innerText = tableID;
+            renumberRows(tableID);
         });
     });
-    function renumberRows() {
-        $('#data tr').each(function(index, el){
-            $(this).children('td').first().text(index++);
-        });
+    function renumberRows(tableID) {
+        var tables = document.getElementById(tableID);
+        var table = tables[tables.length - 1];
+        var rows = table.rows;
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].firstChild.appendChild(document.createTextNode(i + 1));
+        }
     }
 </script>
 </body>
