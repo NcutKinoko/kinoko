@@ -62,7 +62,7 @@
             </div>
         </form>
 
-        <table id="{{$menuLists->id}}" class="step">
+        <table style="border: 3px  #cccccc solid;" class="step" id="{{$menuLists->id}}" onchange="tableChange()">
             @foreach($stepList as $stepLists)
                 @if($stepLists->menu_id == $menuLists->id)
                     <tr id="tr{{$stepLists->id}}">
@@ -75,14 +75,14 @@
             @endforeach
         </table>
         <script>
-                var tables = document.getElementsByTagName('table');
-                var table = tables[tables.length - 1];
-                var rows = table.rows;
-                for (var i = 0, td; i < rows.length; i++) {
-                    td = document.createElement('td');
-                    td.appendChild(document.createTextNode(i + 1));
-                    rows[i].insertBefore(td, rows[i].firstChild);
-                }
+            var tables = document.getElementsByTagName('table');
+            var table = tables[tables.length - 1];
+            var rows = table.rows;
+            for (var i = 0, td; i < rows.length; i++) {
+                td = document.createElement('td');
+                td.appendChild(document.createTextNode(i + 1));
+                rows[i].insertBefore(td, rows[i].firstChild);
+            }
         </script>
     @endforeach
 </div>
@@ -93,28 +93,32 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $(document).ready(function () {
-        $(".delete").click(function () {
-            var id = $(this).attr('data-content');
-            $.ajax({
-                url: "{{route('destroy.step')}}",
-                method: "POST",
-                data: {id: id},
-            });
-            var TrId = $(this).attr('data-content');
-            $('#tr'+TrId).remove();
-            alert($(this).closest('.step').attr('id'));
-            // document.getElementById('demo').innerText = tableID;
-            renumberRows(tableID);
+
+    $(document).on("click", ".delete", function () {
+        var id = $(this).attr('data-content');
+        $.ajax({
+            url: "{{route('destroy.step')}}",
+            method: "POST",
+            data: {id: id},
         });
+        var TrId = $(this).attr('data-content');
+        $('#tr' + TrId).remove();
+        renumberRows()
     });
-    function renumberRows(tableID) {
-        var tables = document.getElementById(tableID);
-        var table = tables[tables.length - 1];
-        var rows = table.rows;
-        for (var i = 0; i < rows.length; i++) {
-            rows[i].firstChild.appendChild(document.createTextNode(i + 1));
-        }
+
+    function renumberRows() {
+        var tables = document.getElementsByTagName('table');
+        var count = 0;
+        [].forEach.call(tables, function(el) {
+            count = 0;
+            [].forEach.call(el.rows, function(ee) {
+                td = document.createElement('td');
+                count += 1;
+                td.appendChild(document.createTextNode(count));
+                ee.replaceChild(td,ee.firstElementChild);
+                console.log(ee.firstElementChild);
+            });
+        });
     }
 </script>
 </body>
