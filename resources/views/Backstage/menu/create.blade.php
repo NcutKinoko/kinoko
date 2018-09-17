@@ -1,6 +1,5 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="http://code.jqery.com/jquery-1.9.1.min.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
@@ -108,7 +107,7 @@
 
     function renumberRows() {
         var tables = document.getElementsByTagName('table');
-        var count = 0;
+        var count;
         [].forEach.call(tables, function(el) {
             count = 0;
             [].forEach.call(el.rows, function(ee) {
