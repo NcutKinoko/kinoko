@@ -25,7 +25,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('Backstage.category.create');
+        $categoryList = Category::all();
+        return view('Backstage.category.create',compact('categoryList'));
     }
 
     /**
@@ -37,9 +38,13 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         Category::create([
-           'name' => $request['name']
+           'name' => $request->input('name')
         ]);
-        return redirect()->back();
+        $category =  Category::all()->last();
+        $sen['success'] = true;
+        $sen['result'] = $category['name'];
+        $sen['id'] = $category['id'];
+        return response($sen);
     }
 
     /**
@@ -82,8 +87,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $category = Category::find($request->input('id'));
+        $category->delete();
+        return redirect()->back();
     }
 }
