@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Step;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -35,16 +36,16 @@ class StepController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         Step::create([
-            'menu_id' => $id,
+            'menu_id' =>$request['id'],
             'step' => $request['step']
         ]);
 
-        $stepList = Step::all();
+        $sen = Step::all()->last();
 
-        return redirect()->back()->with('stepList',[$stepList]);
+        return Response($sen);
     }
 
     /**

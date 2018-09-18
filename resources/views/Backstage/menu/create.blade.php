@@ -50,18 +50,19 @@
         <p>{{$menuLists->name}}</p>
         <img src="{{url('../img/menu/' . $menuLists->img)}}" alt="Smiley face" height="100" width="100">
 
-        <form action="{{route('store.step',$menuLists->id)}}" method="POST" role="form" enctype="multipart/form-data">
+        <form action="{{route('store.step')}}" id="createStep{{$menuLists->id}}" method="POST"
+              role="form" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
                 <label>新增料理步驟</label>
-                <input name="step" class="form-control" placeholder="請輸入步驟" required>
+                <input id="stepContent{{$menuLists->id}}" name="step" class="form-control" placeholder="請輸入步驟" required>
             </div>
             <div class="text-left">
-                <button type="submit" class="btn btn-success">新增</button>
+                <button data-content="{{$menuLists->id}}" class="createStepButton" id="createStepButton">新增</button>
             </div>
         </form>
 
-        <table style="border: 3px  #cccccc solid;" class="step" id="{{$menuLists->id}}" onchange="tableChange()">
+        <table style="border: 3px  #cccccc solid;" class="step" id="{{$menuLists->id}}">
             @foreach($stepList as $stepLists)
                 @if($stepLists->menu_id == $menuLists->id)
                     <tr id="tr{{$stepLists->id}}">
@@ -92,7 +93,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
+    //刪除菜單步驟的方法
     $(document).on("click", ".delete", function () {
         var id = $(this).attr('data-content');
         $.ajax({
@@ -105,20 +106,74 @@
         renumberRows()
     });
 
+    //將菜單步驟做重新編號的方法
     function renumberRows() {
         var tables = document.getElementsByTagName('table');
         var count;
-        [].forEach.call(tables, function(el) {
+        [].forEach.call(tables, function (el) {
             count = 0;
-            [].forEach.call(el.rows, function(ee) {
+            [].forEach.call(el.rows, function (ee) {
                 td = document.createElement('td');
                 count += 1;
                 td.appendChild(document.createTextNode(count));
-                ee.replaceChild(td,ee.firstElementChild);
+                ee.replaceChild(td, ee.firstElementChild);
                 console.log(ee.firstElementChild);
             });
         });
     }
+
+    //新增菜單的方法
+    $(document).on("click", ".createStepButton", function (e) {
+        //防止表單被提交出去導致頁面reload
+        e.preventDefault();
+        //使用ajax方法將資料存進資料庫
+        var id = $(this).attr('data-content');
+        var stepContent = document.getElementById('stepContent' + id).value;
+        console.log(stepContent);
+        $.ajax({
+            // beforeSend: function (XMLHttpRequest) {
+            //     return (checkAll());
+            // },
+            url: "{{route('store.step')}}",
+            method: "POST",
+            dataType: "json",
+            data: {
+                step: stepContent,
+                id: id,
+            },
+            //存入成功後執行的code
+            success: function ($sen) {//$sen為controller的response回傳值
+                console.log($sen);
+                var table = document.getElementById($sen['menu_id']);
+                console.log(table.rows.length);
+                var lastRaws ;
+                var lastNumber;
+                if (table.rows.length == 0) {
+                    lastNumber = 0;
+                }else{
+                    lastRaws = table.rows[table.rows.length - 1];
+                    lastNumber = lastRaws.firstChild.textContent;
+                }
+                var tr = document.createElement("tr");
+                tr.setAttribute("id", "tr" + $sen['id']);
+                table.appendChild(tr);
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                td.innerHTML = parseInt(lastNumber) + 1;
+                var td2 = document.createElement("td");
+                tr.appendChild(td2);
+                td2.innerHTML = $sen['step'];
+                var td3 = document.createElement("td");
+                var button = document.createElement("button");
+                button.setAttribute("class", "delete",);
+                button.setAttribute("data-content", $sen['id']);
+                button.textContent = "x";
+                td3.appendChild(button);
+                tr.appendChild(td3);
+                console.log(table);
+            }
+        });
+    });
 </script>
 </body>
 
