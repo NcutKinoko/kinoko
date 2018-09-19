@@ -94,7 +94,6 @@
         </script>
     @endforeach
 </div>
-<p id="demo"></p>
 <script type="text/javascript">
     $.ajaxSetup({//我也不知道這段用來幹嘛的
         headers: {
