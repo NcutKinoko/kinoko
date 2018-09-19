@@ -96,7 +96,7 @@
 </div>
 <p id="demo"></p>
 <script type="text/javascript">
-    $.ajaxSetup({
+    $.ajaxSetup({//我也不知道這段用來幹嘛的
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
@@ -116,15 +116,15 @@
 
     //將菜單步驟做重新編號的方法
     function renumberRows() {
-        var tables = document.getElementsByTagName('table');
+        var tables = document.getElementsByTagName('table');//頁面上所有table物件
         var count;
-        [].forEach.call(tables, function (el) {
+        [].forEach.call(tables, function (el) {//執行每一張table
             count = 0;
-            [].forEach.call(el.rows, function (ee) {
+            [].forEach.call(el.rows, function (ee) {//執行每一列資料
                 td = document.createElement('td');
-                count += 1;
-                td.appendChild(document.createTextNode(count));
-                ee.replaceChild(td, ee.firstElementChild);
+                count += 1;//每一次都要對編號作累加
+                td.appendChild(document.createTextNode(count));//將編號放入td內
+                ee.replaceChild(td, ee.firstElementChild);//用剛剛的td來取代掉原本資料列內的td
                 console.log(ee.firstElementChild);
             });
         });
@@ -132,16 +132,16 @@
 
     //新增菜單的方法的方法
     $(document).on("click", ".createStepButton", function (e) {
-        //防止表單被提交出去導致頁面reload
-        e.preventDefault();
-        //使用ajax方法將資料存進資料庫
-        var id = $(this).attr('data-content');
-        var stepContent = document.getElementById('stepContent' + id).value;
-        console.log(stepContent);
+        e.preventDefault();//防止表單被提交出去導致頁面reload
+        var id = $(this).attr('data-content');//抓取被點擊的button內屬性值為data-content的內容
+        var stepContent = document.getElementById('stepContent' + id).value;//根據id抓取input的資料
+        console.log(stepContent);//console.log()是用來輸出資料的程式語法，輸出的資料可以在chrome內對網頁按右鍵後在Console區域內做觀看，主要用來debug
+        //使用ajax做資料新增
         $.ajax({
-            // beforeSend: function (XMLHttpRequest) {
-            //     return (checkAll());
-            // },
+            //呼叫防呆方法
+            beforeSend: function () {
+                return checkAll(stepContent);
+            },
             url: "{{route('store.step')}}",
             method: "POST",
             dataType: "json",
@@ -152,30 +152,30 @@
             //存入成功後執行的code
             success: function ($sen) {//$sen為controller的response回傳值
                 console.log($sen);
-                var table = document.getElementById($sen['menu_id']);
+                var table = document.getElementById($sen['menu_id']);//透過Table的ID取得Table物件
                 console.log(table.rows.length);
                 var lastRaws;
                 var lastNumber;
                 //抓取table內的編號
-                if (table.rows.length == 0) {
+                if (table.rows.length == 0) {//如果等於0代表這個資料表內目前沒資料
                     lastNumber = 0;
                 } else {
-                    lastRaws = table.rows[table.rows.length - 1];
-                    lastNumber = lastRaws.firstChild.textContent;
+                    lastRaws = table.rows[table.rows.length - 1];//將資料表的最後一列放入lastRaws
+                    lastNumber = lastRaws.firstChild.textContent;//將最後一列的第一個td放入lastNumber
                 }
-                var tr = document.createElement("tr");
-                tr.setAttribute("id", "tr" + $sen['id']);
-                table.appendChild(tr);
+                var tr = document.createElement("tr");//createElement是用來建立html元件的語法
+                tr.setAttribute("id", "tr" + $sen['id']);//setAttribute是用來設定html元件的屬性值的語法
+                table.appendChild(tr);//appendChild是將指定物件加入另一個物件的語法
                 var td = document.createElement("td");
                 tr.appendChild(td);
-                td.innerHTML = parseInt(lastNumber) + 1;
+                td.innerHTML = parseInt(lastNumber) + 1;//將文字或數字加入到td內
                 var td2 = document.createElement("td");
                 var p = document.createElement("p");
                 var contentInput = document.createElement("input");
                 contentInput.setAttribute("style", "width: 100%;");
-                contentInput.setAttribute("hidden", "hidden");
+                contentInput.setAttribute("hidden", "hidden");//這邊相當於hidden = "hidden"
                 contentInput.setAttribute("id", "update" + $sen['id']);
-                contentInput.setAttribute("value",$sen['step']);
+                contentInput.setAttribute("value", $sen['step']);
                 p.innerHTML = $sen['step'];
                 tr.appendChild(td2);
                 td2.appendChild(p);
@@ -192,7 +192,7 @@
                 var sendButton = document.createElement("button");
                 updateButton.setAttribute("class", "update");
                 updateButton.setAttribute("data-content", $sen['id']);
-                updateButton.textContent = "修改";
+                updateButton.textContent = "修改";//將文字加入到物件的文字內容裡
                 sendButton.setAttribute("class", "send");
                 sendButton.setAttribute("data-content", $sen['id']);
                 sendButton.setAttribute("hidden", "hidden");
@@ -203,6 +203,16 @@
                 console.log(table);
             }
         });
+        //檢查input是否為空值
+        function checkAll(stepContent) {
+            if (stepContent == "") {
+                alert("請輸入內容後在做新增");
+                return false
+            }
+            else {
+                return true
+            }
+        }
     });
     //準備修改菜單步驟的方法
     $(document).on("click", ".update", function () {
@@ -225,14 +235,17 @@
     //將修改後的資料做送出
     $(document).on("click", ".send", function () {
         var id = $(this).attr('data-content');
-        var updateContent = document.getElementById('update' + id);
-        console.log(updateContent.value);
+        var updateContent = document.getElementById('update' + id).value;
+        console.log(updateContent);
         $.ajax({
+            beforeSend: function () {
+                return checkAll(updateContent);
+            },
             url: "{{route('update.step')}}",
             method: "POST",
             data: {
                 id: id,
-                content: updateContent.value,
+                content: updateContent,
             },
             success: function ($request) {
                 var tr = document.getElementById('tr' + $request['id']);
@@ -252,6 +265,15 @@
                 sendButton.setAttribute("hidden", "hidden");
             }
         });
+        function checkAll(updateContent) {
+            if (updateContent == "") {
+                alert("請輸入內容後在做修改");
+                return false
+            }
+            else {
+                return true
+            }
+        }
     });
 
 </script>
