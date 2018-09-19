@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Menu;
 use App\Product;
-
 use App\Step;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
@@ -30,7 +31,7 @@ class MenuController extends Controller
         $productList = Product::all();
         $menuList = Menu::all();
         $stepList = Step::all();
-        return view('Backstage.menu.create', compact( 'productList','menuList','stepList'));
+        return view('Backstage.menu.create', compact('productList', 'menuList', 'stepList'));
     }
 
     /**
@@ -107,6 +108,16 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $fileName = Menu::all()->where('id', $id)->pluck('img');
+        $image_path = "C:\wagon/uwamp/www/kinoko/public/img/menu/" . $fileName[0];
+//        dd($image_path);
+        $menu = Menu::find($id);
+        $menu->delete();
+        if (File::exists($image_path)) {
+            File::delete($image_path);
+        }
+        $whereArray = array('menu_id' => $id);
+        DB::table('step')->where($whereArray)->delete();
+        return redirect()->back();
     }
 }

@@ -51,6 +51,7 @@ Route::prefix('category')->group(function (){
 Route::prefix('menu')->group(function (){
     Route::get('/create/form','MenuController@create')->name('show.menu.form');
     Route::POST('/store','MenuController@store')->name('store.menu');
+    Route::delete('/destroy/{id}','MenuController@destroy')->name('destroy.menu');
 });
 
 Route::prefix('step')->group(function (){

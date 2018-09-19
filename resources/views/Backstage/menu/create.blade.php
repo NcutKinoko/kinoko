@@ -50,6 +50,12 @@
         <p>{{$menuLists->name}}</p>
         <img src="{{url('../img/menu/' . $menuLists->img)}}" alt="Smiley face" height="100" width="100">
 
+        <form class="delete" action="{{route('destroy.menu',$menuLists->id)}}" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <input type="submit" class="btn btn-danger" value="刪除此菜餚">
+        </form>
+
         <form action="{{route('store.step')}}" id="createStep{{$menuLists->id}}" method="POST"
               role="form" enctype="multipart/form-data">
             {{ csrf_field() }}
