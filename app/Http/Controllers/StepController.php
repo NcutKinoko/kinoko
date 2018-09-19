@@ -77,9 +77,13 @@ class StepController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $update = Step::all()->find($request['id']);
+        $update->update([
+           'step' => $request['content']
+        ]);
+        return Response($request);
     }
 
     /**

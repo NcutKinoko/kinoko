@@ -66,9 +66,17 @@
             @foreach($stepList as $stepLists)
                 @if($stepLists->menu_id == $menuLists->id)
                     <tr id="tr{{$stepLists->id}}">
-                        <td>{{$stepLists->step}}</td>
+                        <td>
+                            <p>{{$stepLists->step}}</p>
+                            <input id="update{{$stepLists->id}}" name="step" class="form-control" placeholder="請輸入步驟"
+                                   style="width: 100%" hidden="hidden" value="{{$stepLists->step}}">
+                        </td>
                         <td>
                             <button data-content="{{$stepLists->id}}" id="delete" class="delete">x</button>
+                        </td>
+                        <td>
+                            <button data-content="{{$stepLists->id}}" id="update" class="update">修改</button>
+                            <button data-content="{{$stepLists->id}}" id="send" class="send" hidden="hidden">送出</button>
                         </td>
                     </tr>
                 @endif
@@ -122,7 +130,7 @@
         });
     }
 
-    //新增菜單的方法
+    //新增菜單的方法的方法
     $(document).on("click", ".createStepButton", function (e) {
         //防止表單被提交出去導致頁面reload
         e.preventDefault();
@@ -146,11 +154,12 @@
                 console.log($sen);
                 var table = document.getElementById($sen['menu_id']);
                 console.log(table.rows.length);
-                var lastRaws ;
+                var lastRaws;
                 var lastNumber;
+                //抓取table內的編號
                 if (table.rows.length == 0) {
                     lastNumber = 0;
-                }else{
+                } else {
                     lastRaws = table.rows[table.rows.length - 1];
                     lastNumber = lastRaws.firstChild.textContent;
                 }
@@ -161,8 +170,16 @@
                 tr.appendChild(td);
                 td.innerHTML = parseInt(lastNumber) + 1;
                 var td2 = document.createElement("td");
+                var p = document.createElement("p");
+                var contentInput = document.createElement("input");
+                contentInput.setAttribute("style", "width: 100%;");
+                contentInput.setAttribute("hidden", "hidden");
+                contentInput.setAttribute("id", "update" + $sen['id']);
+                contentInput.setAttribute("value",$sen['step']);
+                p.innerHTML = $sen['step'];
                 tr.appendChild(td2);
-                td2.innerHTML = $sen['step'];
+                td2.appendChild(p);
+                td2.appendChild(contentInput);
                 var td3 = document.createElement("td");
                 var button = document.createElement("button");
                 button.setAttribute("class", "delete",);
@@ -170,10 +187,73 @@
                 button.textContent = "x";
                 td3.appendChild(button);
                 tr.appendChild(td3);
+                var td4 = document.createElement("td");
+                var updateButton = document.createElement("button");
+                var sendButton = document.createElement("button");
+                updateButton.setAttribute("class", "update");
+                updateButton.setAttribute("data-content", $sen['id']);
+                updateButton.textContent = "修改";
+                sendButton.setAttribute("class", "send");
+                sendButton.setAttribute("data-content", $sen['id']);
+                sendButton.setAttribute("hidden", "hidden");
+                sendButton.textContent = "送出";
+                tr.appendChild(td4);
+                td4.appendChild(updateButton);
+                td4.appendChild(sendButton);
                 console.log(table);
             }
         });
     });
+    //準備修改菜單步驟的方法
+    $(document).on("click", ".update", function () {
+        var id = $(this).attr('data-content');
+        var tr = document.getElementById('tr' + id);
+        var deleteTd = tr.children[tr.children.length - 2];
+        var deleteButton = deleteTd.children[deleteTd.children.length - 1];
+        deleteButton.setAttribute("disabled", "");
+        var updateTd = tr.children[tr.children.length - 1];
+        var updateButton = updateTd.children[updateTd.children.length - 2];
+        var sendButton = updateTd.children[updateTd.children.length - 1];
+        updateButton.setAttribute("hidden", "hidden");
+        sendButton.removeAttribute("hidden");
+        var contentTd = tr.children[tr.children.length - 3];
+        var contentP = contentTd.children[contentTd.children.length - 2];
+        var contentInput = contentTd.children[contentTd.children.length - 1];
+        contentP.setAttribute("hidden", "hidden");
+        contentInput.removeAttribute("hidden");
+    });
+    //將修改後的資料做送出
+    $(document).on("click", ".send", function () {
+        var id = $(this).attr('data-content');
+        var updateContent = document.getElementById('update' + id);
+        console.log(updateContent.value);
+        $.ajax({
+            url: "{{route('update.step')}}",
+            method: "POST",
+            data: {
+                id: id,
+                content: updateContent.value,
+            },
+            success: function ($request) {
+                var tr = document.getElementById('tr' + $request['id']);
+                var contentTd = tr.children[tr.children.length - 3];
+                var contentP = contentTd.children[contentTd.children.length - 2];
+                var contentInput = contentTd.children[contentTd.children.length - 1];
+                contentP.removeAttribute("hidden");
+                contentP.innerHTML = $request['content'];
+                contentInput.setAttribute("hidden", "hidden");
+                var deleteTd = tr.children[tr.children.length - 2];
+                var deleteButton = deleteTd.children[deleteTd.children.length - 1];
+                deleteButton.removeAttribute("disabled");
+                var updateTd = tr.children[tr.children.length - 1];
+                var updateButton = updateTd.children[updateTd.children.length - 2];
+                var sendButton = updateTd.children[updateTd.children.length - 1];
+                updateButton.removeAttribute("hidden");
+                sendButton.setAttribute("hidden", "hidden");
+            }
+        });
+    });
+
 </script>
 </body>
 
