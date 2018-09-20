@@ -21,7 +21,7 @@ class Menu extends Migration
             $table->string('seasoning')->nullable();
             $table->string('material');
             $table->string('img');
-            $table->string('remark');
+            $table->string('remark')->nullable();
             $table->timestamps();
         });
     }

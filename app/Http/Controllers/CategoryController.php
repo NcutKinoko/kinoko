@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\Routing\Route;
 
 class CategoryController extends Controller
@@ -26,21 +28,21 @@ class CategoryController extends Controller
     public function create()
     {
         $categoryList = Category::all();
-        return view('Backstage.category.create',compact('categoryList'));
+        return view('Backstage.category.create', compact('categoryList'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         Category::create([
-           'name' => $request->input('name')
+            'name' => $request->input('name')
         ]);
-        $category =  Category::all()->last();
+        $category = Category::all()->last();
         $sen['success'] = true;
         $sen['result'] = $category['name'];
         $sen['id'] = $category['id'];
@@ -50,7 +52,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -61,7 +63,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -72,8 +74,8 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -84,13 +86,14 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {
         $category = Category::find($request->input('id'));
         $category->delete();
+        DB::table('product')->where('category_id', $request['id'])->update(['category_id' => 0]);
         return redirect()->back();
     }
 }

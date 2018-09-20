@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -38,6 +39,18 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+//            $messsages = array(
+//                'price.integer' => '單價必須為數字',
+//                'inventory.integer' => '庫存量必須為數字',
+//                );
+//            $rules = array(
+//                'price' => 'required|integer',
+//                'inventory' => 'required|integer',
+//                );
+//            $validator = Validator::make($request->all(), $rules, $messsages);
+//            if ($validator->fails()) {
+//                return redirect()->back()->withErrors($validator->errors())->withInput();
+//            }
         //如果有檔案才做存入
         if ($request->hasFile('img')) {
             //取得檔案名稱
@@ -76,7 +89,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $updateProduct = Product::all()->where('id',$id);
+        $categoryList = Category::all();
+        return view('Backstage.product.update',compact('updateProduct','categoryList'));
     }
 
     /**

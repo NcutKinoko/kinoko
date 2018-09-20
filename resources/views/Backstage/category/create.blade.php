@@ -9,7 +9,7 @@
         {{ csrf_field() }}
         <div class="form-group">
             <label>產品類別名稱</label>
-            <input name="name" class="form-control" placeholder="請輸入產品類別名稱" required>
+            <input id="categoryName" name="name" class="form-control" placeholder="請輸入產品類別名稱">
         </div>
         <div class="text-left">
             <button type="submit" class="create" id="createButton">新增</button>
@@ -37,12 +37,16 @@
     createButton.addEventListener('click', function (e) {
         e.preventDefault();
         $.ajax({
+            beforeSend: function () {
+                var categoryName = document.getElementById('categoryName');
+                var NameContent = categoryName.value;
+                return checkAll(NameContent);
+            },
             url: "{{route('store.category')}}",
             method: "POST",
             dataType: "json",
             data: $("#createCategory").serialize(),
             success: function ($sen) {
-                console.log($sen);
                 var table = document.getElementById('categoryTable');
                 var tr = document.createElement("tr");
                 tr.setAttribute("id", "tr" + $sen['id']);
@@ -60,6 +64,15 @@
                 console.log(table);
             }
         });
+        function checkAll(NameContent) {
+            if (NameContent == "") {
+                alert("請輸入內容後在做新增");
+                return false
+            }
+            else {
+                return true
+            }
+        }
     });
     $.ajaxSetup({
         headers: {

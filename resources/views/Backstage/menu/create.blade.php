@@ -33,7 +33,7 @@
         </div>
         <div class="form-group">
             <label>備註</label>
-            <textarea name="remark" class="form-control" placeholder="請輸入備註" required></textarea>
+            <textarea name="remark" class="form-control" placeholder="請輸入備註"></textarea>
         </div>
         <div class="form-group">
             <label>上傳菜餚照片</label>
@@ -50,7 +50,7 @@
         <p>{{$menuLists->name}}</p>
         <img src="{{url('../img/menu/' . $menuLists->img)}}" alt="Smiley face" height="100" width="100">
 
-        <form class="delete" action="{{route('destroy.menu',$menuLists->id)}}" method="POST">
+        <form class="delete" action="{{route('destroy.menu',$menuLists->id)}}" method="POST" onsubmit="return ConfirmDelete()">
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             <input type="submit" class="btn btn-danger" value="刪除此菜餚">
@@ -281,6 +281,14 @@
         }
     });
 
+    function ConfirmDelete()
+    {
+        var x = confirm("你確定要刪除此菜餚嗎?");
+        if (x)
+            return true;
+        else
+            return false;
+    }
 </script>
 </body>
 
