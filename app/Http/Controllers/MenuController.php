@@ -109,8 +109,7 @@ class MenuController extends Controller
     public function destroy($id)
     {
         $fileName = Menu::all()->where('id', $id)->pluck('img');
-        $image_path = "C:\wagon/uwamp/www/kinoko/public/img/menu/" . $fileName[0];
-//        dd($image_path);
+        $image_path = public_path("\img\menu\\") . $fileName[0];
         $menu = Menu::find($id);
         $menu->delete();
         if (File::exists($image_path)) {

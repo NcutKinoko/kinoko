@@ -1,6 +1,7 @@
 <div>
     @foreach($updateProduct as $updateProducts)
-        <form action="{{route('store.product')}}" method="POST" role="form" enctype="multipart/form-data">
+        <form action="{{route('update.product',$updateProducts->id)}}" method="POST" role="form"
+              enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
                 <label>產品名稱</label>

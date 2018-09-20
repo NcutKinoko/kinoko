@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Menu;
 use App\Product;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -103,7 +106,25 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $fileName = Product::all()->where('id', $id)->pluck('img');
+        $image_path = public_path("\img\product\\") . $fileName[0];
+        if (File::exists($image_path)) {
+            File::delete($image_path);
+        }
+        if ($request->hasFile('img')) {
+            //取得檔案名稱
+            $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
+            $request->file('img')->move(public_path("/img/product"), $file_name);
+            DB::table('product')->where('id', $id)->update([
+                'category_id' => $request['category'],
+                'name' => $request['name'],
+                'price' => $request['price'],
+                'size' => $request['size'],
+                'img' => $request['img'],
+                'inventory' => $request['inventory'],
+            ]);
+        }
+        return redirect()->Route('show.product.form');
     }
 
     /**
