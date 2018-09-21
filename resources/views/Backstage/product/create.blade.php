@@ -39,9 +39,13 @@
             <p>{{$products->name}}</p>
             <img src="{{url('../img/product/' . $products->img)}}" alt="Smiley face" height="100" width="100">
             <a href="{{route('show.product.updateForm',$products->id)}}" class="btn btn-success">修改</a>
+            <form class="delete" action="{{route('destroy.product',$products->id)}}" method="POST" onsubmit="return ConfirmDelete()">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <input type="submit" class="btn btn-danger" value="刪除此產品">
+            </form>
         @endforeach
     </div>
-
     <script>
         var createButton = document.getElementById('createButton');
         createButton.addEventListener('click', function (e) {
@@ -56,5 +60,13 @@
                 alert("庫存量必須為數字");
             }
         });
+        function ConfirmDelete()
+        {
+            var x = confirm("你確定要刪除此產品嗎?");
+            if (x)
+                return true;
+            else
+                return false;
+        }
     </script>
 </div>

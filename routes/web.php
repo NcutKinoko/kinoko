@@ -44,6 +44,7 @@ Route::prefix('product')->group(function (){
     Route::POST('/store','ProductController@store')->name('store.product');
     Route::get('/update/form/{id}','ProductController@edit')->name('show.product.updateForm');
     Route::POST('/update/{id}','ProductController@update')->name('update.product');
+    Route::delete('/destroy/{id}','ProductController@destroy')->name('destroy.product');
 });
 
 Route::prefix('category')->group(function (){

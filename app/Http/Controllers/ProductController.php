@@ -114,13 +114,14 @@ class ProductController extends Controller
         if ($request->hasFile('img')) {
             //取得檔案名稱
             $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
-            $request->file('img')->move(public_path("/img/product"), $file_name);
+            $file_name2 = $file_name;
+            $request->file('img')->move(public_path("/img/product"), $file_name2);
             DB::table('product')->where('id', $id)->update([
                 'category_id' => $request['category'],
                 'name' => $request['name'],
                 'price' => $request['price'],
                 'size' => $request['size'],
-                'img' => $request['img'],
+                'img' => $file_name2,
                 'inventory' => $request['inventory'],
             ]);
         }
@@ -135,6 +136,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $fileName = Product::all()->where('id', $id)->pluck('img');
+        $image_path = public_path("\img\product\\") . $fileName[0];
+        if (File::exists($image_path)) {
+            File::delete($image_path);
+        }
+        DB::table('product')->where('id',$id)->delete();
+        return redirect()->back();
     }
 }
