@@ -64,3 +64,14 @@ Route::prefix('step')->group(function (){
     Route::POST('/destroy','StepController@destroy')->name('destroy.step');
     Route::POST('/update','StepController@update')->name('update.step');
 });
+
+Route::prefix('kinoko')->group(function (){
+    Route::get('/create/form','KinokoController@create')->name('show.kinoko.form');
+    Route::POST('/store','KinokoController@store')->name('store.kinoko');
+    Route::delete('/destroy/{id}','KinokoController@destroy')->name('destroy.kinoko');
+});
+
+Route::prefix('RatingDescription')->group(function (){
+    Route::POST('/store','RatingDescriptionController@store')->name('store.kinoko.RatingDescription');
+    Route::delete('/destroy/{id}','RatingDescriptionController@destroy')->name('destroy.menu');
+});
