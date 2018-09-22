@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Kinoko;
 use App\RatingDescription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class KinokoController extends Controller
 {
@@ -88,6 +89,10 @@ class KinokoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $menu = Kinoko::find($id);
+        $menu->delete();
+        $whereArray = array('KinokoStandard_id' => $id);
+        DB::table('ratingdescription')->where($whereArray)->delete();
+        return redirect()->back();
     }
 }

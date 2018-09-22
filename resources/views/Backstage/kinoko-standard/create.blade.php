@@ -29,7 +29,7 @@
         <p>{{$KinokoLists->item}}</p>
         <p>{{$KinokoLists->distribution}}</p>
         <p>{{$KinokoLists->TestMethod}}</p>
-        <form class="delete" action="{{route('destroy.menu',$KinokoLists->id)}}" method="POST" onsubmit="return ConfirmDelete()">
+        <form class="delete" action="{{route('destroy.kinoko',$KinokoLists->id)}}" method="POST" onsubmit="return ConfirmDelete()">
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             <input type="submit" class="btn btn-danger" value="刪除此評分項目">
@@ -89,7 +89,7 @@
     $(document).on("click", ".delete", function () {
         var id = $(this).attr('data-content');
         $.ajax({
-            url: "{{route('destroy.step')}}",
+            url: "{{route('destroy.kinoko.RatingDescription')}}",
             method: "POST",
             data: {id: id},
         });
@@ -225,7 +225,7 @@
             beforeSend: function () {
                 return checkAll(updateContent);
             },
-            url: "{{route('update.step')}}",
+            url: "{{route('update.kinoko.RatingDescription')}}",
             method: "POST",
             data: {
                 id: id,

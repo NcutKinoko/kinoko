@@ -73,5 +73,6 @@ Route::prefix('kinoko')->group(function (){
 
 Route::prefix('RatingDescription')->group(function (){
     Route::POST('/store','RatingDescriptionController@store')->name('store.kinoko.RatingDescription');
-    Route::delete('/destroy/{id}','RatingDescriptionController@destroy')->name('destroy.menu');
+    Route::POST('/destroy','RatingDescriptionController@destroy')->name('destroy.kinoko.RatingDescription');
+    Route::POST('/update','RatingDescriptionController@update')->name('update.kinoko.RatingDescription');
 });

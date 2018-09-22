@@ -73,9 +73,13 @@ class RatingDescriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $update = RatingDescription::all()->find($request['id']);
+        $update->update([
+            'content' => $request['content']
+        ]);
+        return Response($request);
     }
 
     /**
@@ -84,8 +88,11 @@ class RatingDescriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $RatingDescription = RatingDescription::find($request->input('id'));
+        $RatingDescription->delete();
+
+        return redirect()->back();
     }
 }
