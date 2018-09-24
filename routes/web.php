@@ -69,6 +69,8 @@ Route::prefix('kinoko')->group(function (){
     Route::get('/create/form','KinokoController@create')->name('show.kinoko.form');
     Route::POST('/store','KinokoController@store')->name('store.kinoko');
     Route::delete('/destroy/{id}','KinokoController@destroy')->name('destroy.kinoko');
+    Route::get('/update/form/{id}','KinokoController@edit')->name('show.kinoko.updateForm');
+    Route::POST('/update/{id}','KinokoController@update')->name('update.kinoko');
 });
 
 Route::prefix('RatingDescription')->group(function (){

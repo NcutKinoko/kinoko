@@ -43,7 +43,7 @@
                        required>
             </div>
             <div class="text-left">
-                <button type="submit" class="btn btn-success" id="updateButton">新增</button>
+                <button type="submit" class="btn btn-success" id="updateButton">修改</button>
             </div>
         </form>
     @endforeach

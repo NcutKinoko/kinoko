@@ -66,7 +66,8 @@ class KinokoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $updateKinoko = Kinoko::all()->where('id',$id);
+        return view('Backstage.kinoko-standard.update',compact('updateKinoko'));
     }
 
     /**
@@ -78,7 +79,12 @@ class KinokoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('kinoko_standard')->where('id', $id)->update([
+            'item' => $request['item'],
+            'distribution' => $request['distribution'],
+            'TestMethod' => $request['TestMethod'],
+        ]);
+        return redirect()->route('show.kinoko.form');
     }
 
     /**

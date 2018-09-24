@@ -29,6 +29,7 @@
         <p>{{$KinokoLists->item}}</p>
         <p>{{$KinokoLists->distribution}}</p>
         <p>{{$KinokoLists->TestMethod}}</p>
+        <a href="{{route('show.kinoko.updateForm',$KinokoLists->id)}}" class="btn btn-success">修改</a>
         <form class="delete" action="{{route('destroy.kinoko',$KinokoLists->id)}}" method="POST" onsubmit="return ConfirmDelete()">
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -39,7 +40,7 @@
               role="form" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
-                <label>新增料理步驟</label>
+                <label>新增評分項目內容</label>
                 <input id="kinokoContent{{$KinokoLists->id}}" name="kinoko" class="form-control" placeholder="請輸入步驟" required>
             </div>
             <div class="text-left">
@@ -262,7 +263,7 @@
 
     function ConfirmDelete()
     {
-        var x = confirm("你確定要刪除此菜餚嗎?");
+        var x = confirm("你確定要刪除此評分項目內容嗎?");
         if (x)
             return true;
         else
