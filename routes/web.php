@@ -45,6 +45,7 @@ Route::prefix('product')->group(function (){
     Route::get('/update/form/{id}','ProductController@edit')->name('show.product.updateForm');
     Route::POST('/update/{id}','ProductController@update')->name('update.product');
     Route::delete('/destroy/{id}','ProductController@destroy')->name('destroy.product');
+    Route::get('/list','ProductController@index')->name('product.list');
 });
 
 Route::prefix('category')->group(function (){
@@ -77,4 +78,12 @@ Route::prefix('RatingDescription')->group(function (){
     Route::POST('/store','RatingDescriptionController@store')->name('store.kinoko.RatingDescription');
     Route::POST('/destroy','RatingDescriptionController@destroy')->name('destroy.kinoko.RatingDescription');
     Route::POST('/update','RatingDescriptionController@update')->name('update.kinoko.RatingDescription');
+});
+
+Route::prefix('farmer')->group(function (){
+    Route::get('/create/form','FarmerController@create')->name('show.farmer.form');
+    Route::POST('/store','FarmerController@store')->name('store.farmer');
+    Route::get('/update/form/{id}','FarmerController@edit')->name('show.farmer.updateForm');
+    Route::POST('/update/{id}','FarmerController@update')->name('update.farmer');
+    Route::delete('/destroy/{id}','FarmerController@destroy')->name('destroy.farmer');
 });

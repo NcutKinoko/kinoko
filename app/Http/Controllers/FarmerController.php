@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\Menu;
-use App\Product;
+use App\Farmer;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class FarmerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $productList = Product::all();
-        return view('product.list',compact('productList'));
+        //
     }
 
     /**
@@ -29,9 +26,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $CategoryList = Category::all();
-        $product = Product::all();
-        return view('Backstage.product.create', compact('CategoryList','product'));
+        $farmerList = Farmer::all();
+        return view('Backstage.farmer.create', compact('farmerList'));
     }
 
     /**
@@ -45,17 +41,19 @@ class ProductController extends Controller
         //如果有檔案才做存入
         if ($request->hasFile('img')) {
             //取得檔案名稱
-            $file_name = time().'.'.$request['img']->getClientOriginalExtension();
-            $request->file('img')->move(public_path("/img/product"), $file_name);
-            // save new image $file_name to database
-            // $product->update(['picture' => $file_name]);
-            Product::create([
-                'category_id' => $request['category'],
+            $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
+            $request->file('img')->move(public_path("/img/farmer"), $file_name);
+            Farmer::create([
                 'name' => $request['name'],
-                'price' => $request['price'],
-                'size' => $request['size'],
+                'age' => $request['age'],
+                'phone' => $request['phone'],
+                'area' => $request['area'],
+                'class' => $request['class'],
+                'PlantingArea' => $request['PlantingArea'],
+                'PlantingQuantity' => $request['PlantingQuantity'],
+                'PlantingYear' => $request['PlantingYear'],
+                'result' => $request['result'],
                 'img' => $file_name,
-                'inventory' => $request['inventory']
             ]);
         }
         return redirect()->back();
@@ -80,9 +78,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $updateProduct = Product::all()->where('id',$id);
-        $categoryList = Category::all();
-        return view('Backstage.product.update',compact('updateProduct','categoryList'));
+        $updateList = Farmer::all()->where('id',$id);
+        return view('Backstage.farmer.update',compact('updateList'));
     }
 
     /**
@@ -94,8 +91,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fileName = Product::all()->where('id', $id)->pluck('img');
-        $image_path = public_path("\img\product\\") . $fileName[0];
+        $fileName = Farmer::all()->where('id', $id)->pluck('img');
+        $image_path = public_path("\img\\farmer\\") . $fileName[0];
         if (File::exists($image_path)) {
             File::delete($image_path);
         }
@@ -103,17 +100,21 @@ class ProductController extends Controller
             //取得檔案名稱
             $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
             $file_name2 = $file_name;
-            $request->file('img')->move(public_path("/img/product"), $file_name2);
-            DB::table('product')->where('id', $id)->update([
-                'category_id' => $request['category'],
+            $request->file('img')->move(public_path("/img/farmer"), $file_name2);
+            DB::table('farmer')->where('id', $id)->update([
                 'name' => $request['name'],
-                'price' => $request['price'],
-                'size' => $request['size'],
+                'age' => $request['age'],
+                'phone' => $request['phone'],
+                'area' => $request['area'],
+                'class' => $request['class'],
+                'PlantingArea' => $request['PlantingArea'],
+                'PlantingQuantity' => $request['PlantingQuantity'],
+                'PlantingYear' => $request['PlantingYear'],
+                'result' => $request['result'],
                 'img' => $file_name2,
-                'inventory' => $request['inventory'],
             ]);
         }
-        return redirect()->Route('show.product.form');
+        return redirect()->route('show.farmer.form');
     }
 
     /**
@@ -124,12 +125,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $fileName = Product::all()->where('id', $id)->pluck('img');
-        $image_path = public_path("\img\product\\") . $fileName[0];
+        $fileName = Farmer::all()->where('id', $id)->pluck('img');
+        $image_path = public_path("\img\\farmer\\") . $fileName[0];
         if (File::exists($image_path)) {
             File::delete($image_path);
         }
-        DB::table('product')->where('id',$id)->delete();
+        DB::table('farmer')->where('id',$id)->delete();
         return redirect()->back();
     }
 }

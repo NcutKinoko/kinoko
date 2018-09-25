@@ -20,10 +20,11 @@ class Farmer extends Migration
             $table->string('phone');
             $table->string('area');
             $table->string('class');
-            $table->double('PlantingArea');
-            $table->double('PlantingQuantity');
-            $table->integer('PlantingYear');
+            $table->string('PlantingArea');
+            $table->string('PlantingQuantity');
+            $table->string('PlantingYear');
             $table->string('result',255);
+            $table->string('img',255);
             $table->timestamps();
         });
     }
