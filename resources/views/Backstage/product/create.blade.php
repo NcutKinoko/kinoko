@@ -1,3 +1,6 @@
+<head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
 <div>
     <form action="{{route('store.product')}}" method="POST" role="form" enctype="multipart/form-data">
         {{ csrf_field() }}

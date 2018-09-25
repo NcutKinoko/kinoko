@@ -19,7 +19,7 @@ class ProductController extends Controller
     public function index()
     {
         $productList = Product::all();
-        return view('product.list',compact('productList'));
+        return view('product.list', compact('productList'));
     }
 
     /**
@@ -31,7 +31,7 @@ class ProductController extends Controller
     {
         $CategoryList = Category::all();
         $product = Product::all();
-        return view('Backstage.product.create', compact('CategoryList','product'));
+        return view('Backstage.product.create', compact('CategoryList', 'product'));
     }
 
     /**
@@ -45,7 +45,7 @@ class ProductController extends Controller
         //如果有檔案才做存入
         if ($request->hasFile('img')) {
             //取得檔案名稱
-            $file_name = time().'.'.$request['img']->getClientOriginalExtension();
+            $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
             $request->file('img')->move(public_path("/img/product"), $file_name);
             // save new image $file_name to database
             // $product->update(['picture' => $file_name]);
@@ -80,9 +80,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $updateProduct = Product::all()->where('id',$id);
+        $updateProduct = Product::all()->where('id', $id);
         $categoryList = Category::all();
-        return view('Backstage.product.update',compact('updateProduct','categoryList'));
+        return view('Backstage.product.update', compact('updateProduct', 'categoryList'));
     }
 
     /**
@@ -129,7 +129,12 @@ class ProductController extends Controller
         if (File::exists($image_path)) {
             File::delete($image_path);
         }
-        DB::table('product')->where('id',$id)->delete();
+        DB::table('product')->where('id', $id)->delete();
         return redirect()->back();
+    }
+
+    public function detail($id)
+    {
+        $productDatail = Product::all()->where('id', $id);
     }
 }

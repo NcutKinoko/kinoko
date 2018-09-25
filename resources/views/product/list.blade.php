@@ -23,7 +23,7 @@
                 <img class="group list-group-image" src="{{url('../img/product/' . $productLists->img)}}" alt="此商品尚未有圖片" />
                 <div class="caption">
                     <h4 class="group inner list-group-item-heading">
-                        {{$productLists->name}}</h4>
+                        <a href="{{}}" style="text-decoration: none; color: #000;">{{$productLists->name}}</a></h4>
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <p class="lead">
