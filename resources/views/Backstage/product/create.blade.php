@@ -4,32 +4,36 @@
 <div>
     <form action="{{route('store.product')}}" method="POST" role="form" enctype="multipart/form-data">
         {{ csrf_field() }}
-        <div class="form-group">
+        <div class="form-group" style="width: 50%">
             <label>產品名稱</label>
             <input name="name" class="form-control" placeholder="請輸入產品名稱" required>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width: 50%">
             <label>產品類別</label>
-            <select name="category" required>
+            <select name="category" class="form-control" required>
                 <option value="" disabled="disabled" selected="selected">請選擇產品類別</option>
                 @foreach($CategoryList as $CategoryLists)
                     <option value={{$CategoryLists->id}}>{{$CategoryLists->name}}</option>
                 @endforeach
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width: 50%">
             <label>單價</label>
             <input id="price" name="price" class="form-control" placeholder="請輸入單價" required>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width: 50%">
             <label>庫存量</label>
             <input id="inventory" name="inventory" class="form-control" placeholder="請輸入庫存量" required>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width: 50%">
             <label>大小</label>
             <input name="size" class="form-control" placeholder="請輸入大小" required>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="width: 50%">
+            <label>介紹</label>
+            <textarea name="introduction" class="form-control" placeholder="請輸入介紹" style="width: 50%"></textarea>
+        </div>
+        <div class="form-group" style="width: 50%">
             <label>上傳產品照片</label>
             <input type="file" class="form-control" name="img" value="{{old('img')}}" placeholder="上傳圖片" required>
         </div>

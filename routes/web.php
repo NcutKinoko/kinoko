@@ -49,6 +49,11 @@ Route::prefix('product')->group(function (){
     Route::get('/detail/{id}','ProductController@detail')->name('product.detail');
 });
 
+Route::prefix('cart')->group(function (){
+    Route::get('/','ShoppingCartController@index')->name('show.cart');
+
+});
+
 Route::prefix('category')->group(function (){
     Route::get('/create/form','CategoryController@create')->name('show.category.form');
     Route::POST('/store','CategoryController@store')->name('store.category');

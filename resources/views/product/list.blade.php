@@ -23,14 +23,14 @@
                 <img class="group list-group-image" src="{{url('../img/product/' . $productLists->img)}}" alt="此商品尚未有圖片" />
                 <div class="caption">
                     <h4 class="group inner list-group-item-heading">
-                        <a href="{{}}" style="text-decoration: none; color: #000;">{{$productLists->name}}</a></h4>
+                        <a href="{{route('product.detail', $productLists->id)}}" style="text-decoration: none; color: #000;">{{$productLists->name}}</a></h4>
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <p class="lead">
                                 本店售價:{{$productLists->price}}</p>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" href="http://www.jquery2dotnet.com">加入購物車</a>
+                            <a class="btn btn-success" href="{{route('')}}">加入購物車</a>
                         </div>
                     </div>
                 </div>

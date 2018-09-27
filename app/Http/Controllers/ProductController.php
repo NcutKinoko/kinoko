@@ -55,7 +55,8 @@ class ProductController extends Controller
                 'price' => $request['price'],
                 'size' => $request['size'],
                 'img' => $file_name,
-                'inventory' => $request['inventory']
+                'inventory' => $request['inventory'],
+                'introduction' => $request['introduction'],
             ]);
         }
         return redirect()->back();
@@ -111,6 +112,7 @@ class ProductController extends Controller
                 'size' => $request['size'],
                 'img' => $file_name2,
                 'inventory' => $request['inventory'],
+                'introduction' => $request['introduction'],
             ]);
         }
         return redirect()->Route('show.product.form');
@@ -135,6 +137,7 @@ class ProductController extends Controller
 
     public function detail($id)
     {
-        $productDatail = Product::all()->where('id', $id);
+        $productDetail = Product::all()->where('id', $id);
+        return view('product.detail',compact('productDetail'));
     }
 }

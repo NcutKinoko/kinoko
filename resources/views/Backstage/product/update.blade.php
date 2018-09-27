@@ -1,14 +1,17 @@
+<head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
 <div>
     @foreach($updateProduct as $updateProducts)
         <form action="{{route('update.product',$updateProducts->id)}}" method="POST" role="form"
               enctype="multipart/form-data">
             {{ csrf_field() }}
-            <div class="form-group">
+            <div class="form-group" style="width: 50%">
                 <label>產品名稱</label>
                 <input name="name" class="form-control" placeholder="請輸入產品名稱" value="{{$updateProducts->name}}"
                        required>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="width: 50%">
                 <label>產品類別</label>
                 <select name="category" required>
                     @if($updateProducts->category_id == 0)
@@ -23,21 +26,25 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="width: 50%">
                 <label>單價</label>
                 <input id="price" name="price" class="form-control" placeholder="請輸入單價"
                        value="{{$updateProducts->price}}" required>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="width: 50%">
                 <label>庫存量</label>
                 <input id="inventory" name="inventory" class="form-control" placeholder="請輸入庫存量"
                        value="{{$updateProducts->inventory}}" required>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="width: 50%">
                 <label>大小</label>
                 <input name="size" class="form-control" placeholder="請輸入大小" value="{{$updateProducts->size}}" required>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="width: 50%">
+                <label>介紹</label>
+                <textarea name="introduction" class="form-control" placeholder="請輸入介紹" style="width: 50%">{{$updateProducts->introduction}}</textarea>
+            </div>
+            <div class="form-group" style="width: 50%">
                 <label>上傳產品照片</label>
                 <input type="file" class="form-control" name="img" value="{{$updateProducts->img}}" placeholder="上傳圖片"
                        required>
