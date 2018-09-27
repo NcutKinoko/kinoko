@@ -51,6 +51,7 @@ Route::prefix('product')->group(function (){
 
 Route::prefix('cart')->group(function (){
     Route::get('/','ShoppingCartController@index')->name('show.cart');
+    Route::get('/add/{id}','ShoppingCartController@add')->name('add.cart');
 
 });
 

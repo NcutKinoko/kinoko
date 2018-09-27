@@ -30,7 +30,10 @@
                                 本店售價:{{$productLists->price}}</p>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" href="{{route('')}}">加入購物車</a>
+                            <a class="btn btn-success" href="{{route('add.cart',$productLists->id)}}">加入購物車</a>
+                            <?php foreach(Cart::content() as $row) :?>
+                            <?php echo $row->price; ?>
+                            <?php endforeach;?>
                         </div>
                     </div>
                 </div>

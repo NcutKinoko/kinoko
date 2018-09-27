@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
+
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class ShoppingCartController extends Controller
@@ -80,5 +83,12 @@ class ShoppingCartController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function add($id)
+    {
+        $product = Product::all()->where('id',$id);
+        Cart::add($product);
+        return redirect()->back();
     }
 }
