@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Product;
-
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
@@ -88,7 +87,8 @@ class ShoppingCartController extends Controller
     public function add($id)
     {
         $product = Product::all()->where('id',$id);
-        Cart::add($product);
+        $Cart = Cart::add(array('id' => $id, 'name' => $product[0]['name'], 'qty' => 1, 'price' => $product[0]['price'], 'options' => array('img'=>$product[0]['img'],'size' => $product[0]['size'])));
+        dd($Cart);
         return redirect()->back();
     }
 }

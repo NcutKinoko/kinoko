@@ -16,8 +16,9 @@
                         class="glyphicon glyphicon-th"></span>Grid</a>
         </div>
     </div>
-    @foreach($productList as $productLists)
+
     <div id="products" class="row list-group">
+        @foreach($productList as $productLists)
         <div class="item  col-xs-4 col-lg-4">
             <div class="thumbnail">
                 <img class="group list-group-image" src="{{url('../img/product/' . $productLists->img)}}" alt="此商品尚未有圖片" />
@@ -31,14 +32,11 @@
                         </div>
                         <div class="col-xs-12 col-md-6">
                             <a class="btn btn-success" href="{{route('add.cart',$productLists->id)}}">加入購物車</a>
-                            <?php foreach(Cart::content() as $row) :?>
-                            <?php echo $row->price; ?>
-                            <?php endforeach;?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
         @endforeach
+    </div>
 </div>
