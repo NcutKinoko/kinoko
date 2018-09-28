@@ -47,8 +47,6 @@ class ProductController extends Controller
             //取得檔案名稱
             $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
             $request->file('img')->move(public_path("/img/product"), $file_name);
-            // save new image $file_name to database
-            // $product->update(['picture' => $file_name]);
             Product::create([
                 'category_id' => $request['category'],
                 'name' => $request['name'],

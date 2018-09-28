@@ -94,3 +94,11 @@ Route::prefix('farmer')->group(function (){
     Route::POST('/update/{id}','FarmerController@update')->name('update.farmer');
     Route::delete('/destroy/{id}','FarmerController@destroy')->name('destroy.farmer');
 });
+
+Route::prefix('xinshe')->group(function (){
+    Route::get('/create/form','XinsheController@create')->name('show.xinshe.form');
+    Route::POST('/store','XinsheController@store')->name('store.xinshe');
+    Route::get('/update/form/{id}','XinsheController@edit')->name('show.xinshe.updateForm');
+    Route::POST('/update/{id}','XinsheController@update')->name('update.xinshe');
+    Route::delete('/destroy/{id}','XinsheController@destroy')->name('destroy.xinshe');
+});
