@@ -3,9 +3,6 @@
 @section('title', 'HOME')
 
 @section('content')
-    <div class="padding">
-
-    </div>
     <div class="product">
             <div class="product-list">
                 <h1>產品</h1>
