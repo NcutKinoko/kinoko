@@ -21,9 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/index',function (){
-    return view('index.index');
-});
+Route::get('/index','IndexController@index')->name('show.index');
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('Logout_New');
 

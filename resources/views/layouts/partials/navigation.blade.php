@@ -28,7 +28,7 @@
                 @endif
             </ul>
             <ul class="list">
-                <li class="list-li"><a href="#index" class="list-li-a">首頁</a></li>
+                <li class="list-li"><a href="/index" class="list-li-a">首頁</a></li>
                 <li class="list-li"><a href="#history" class="list-li-a">歷史</a></li>
                 <li class="list-li"><a href="{{route('product.list')}}" class="list-li-a">產品列表</a></li>
             </ul>
