@@ -7,6 +7,11 @@
 {
     background-color: #CCEEFF;
 }
+.title-format
+{
+    background-color: #2ab27b;
+    font-family: '微軟正黑體';
+}
 @media (min-width: 768px) {
 
     /* show 3 items */
@@ -72,4 +77,5 @@
         display: block;
         visibility: visible;
     }
+
 }
