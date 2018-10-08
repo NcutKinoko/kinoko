@@ -100,3 +100,11 @@ Route::prefix('xinshe')->group(function (){
     Route::POST('/update/{id}','XinsheController@update')->name('update.xinshe');
     Route::delete('/destroy/{id}','XinsheController@destroy')->name('destroy.xinshe');
 });
+
+Route::prefix('ProductionProcess')->group(function (){
+    Route::get('/create/form','ProductionProcessController@create')->name('show.process.form');
+    Route::POST('/store','ProductionProcessController@store')->name('store.process');
+    Route::get('/update/form/{id}','ProductionProcessController@edit')->name('show.process.updateForm');
+    Route::POST('/update/{id}','ProductionProcessController@update')->name('update.process');
+    Route::delete('/destroy/{id}','ProductionProcessController@destroy')->name('destroy.process');
+});
