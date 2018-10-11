@@ -106,8 +106,10 @@
             url: "{{route('destroy.category')}}",
             method: "POST",
             data: {id: id},
-            success: function () {
-                $('#categoryTable').load(document.URL + ' #categoryTable');
+            success: function ($sen) {
+                var TrId = $sen['id'];
+                console.log(TrId);
+                $('#tr' + TrId).remove();
             }
         });
         function ConfirmDelete()

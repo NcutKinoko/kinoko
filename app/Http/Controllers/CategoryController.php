@@ -94,6 +94,7 @@ class CategoryController extends Controller
         $category = Category::find($request->input('id'));
         $category->delete();
         DB::table('product')->where('category_id', $request['id'])->update(['category_id' => 0]);
-        return redirect()->back();
+        $sen['id'] = $request['id'];
+        return response($sen);
     }
 }
