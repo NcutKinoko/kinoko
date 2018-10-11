@@ -1,10 +1,10 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
-<div>
+<div class="container-fluid">
     <form action="{{route('store.category')}}" id="createCategory" method="POST" role="form"
           enctype="multipart/form-data">
         {{ csrf_field() }}
@@ -13,19 +13,35 @@
             <input id="categoryName" name="name" class="form-control" placeholder="請輸入產品類別名稱">
         </div>
         <div class="text-left">
-            <button type="submit" class="create" id="createButton">新增</button>
+            <button type="submit" class="create btn btn-success" id="createButton">新增</button>
         </div>
     </form>
-    <table id="categoryTable">
+    <table class="table" id="categoryTable">
+        <thead>
+        <tr>
+            <th scope="col">產品類別</th>
+            <th scope="col">刪除</th>
+        </tr>
+        </thead>
+        <tbody>
         @foreach($categoryList as $categoryLists)
             <tr id="tr{{$categoryLists->id}}">
-                <td>{{$categoryLists->name}}</td>
-                <td>
-                    <button data-content="{{$categoryLists->id}}" id="delete" class="delete">x</button>
-                </td>
+                <td class="align-middle">{{$categoryLists->name}}</td>
+                <td class="align-middle"><button data-content="{{$categoryLists->id}}" id="delete" class="delete btn btn-danger">x</button></td>
             </tr>
         @endforeach
+        </tbody>
     </table>
+    {{--<table id="categoryTable">--}}
+        {{--@foreach($categoryList as $categoryLists)--}}
+            {{--<tr id="tr{{$categoryLists->id}}">--}}
+                {{--<td>{{$categoryLists->name}}</td>--}}
+                {{--<td>--}}
+                    {{--<button data-content="{{$categoryLists->id}}" id="delete" class="delete">x</button>--}}
+                {{--</td>--}}
+            {{--</tr>--}}
+        {{--@endforeach--}}
+    {{--</table>--}}
 </div>
 </body>
 <script type="text/javascript">
@@ -53,16 +69,17 @@
                 tr.setAttribute("id", "tr" + $sen['id']);
                 table.appendChild(tr);
                 var td = document.createElement("td");
+                td.setAttribute('class','align-middle');
                 tr.appendChild(td);
                 td.innerHTML = $sen['result'];
                 var td2 = document.createElement("td");
+                td2.setAttribute('class','align-middle');
                 tr.appendChild(td2);
                 var button = document.createElement("button");
-                button.setAttribute("class", "delete",);
+                button.setAttribute("class", "delete btn btn-danger",);
                 button.setAttribute("data-content", $sen['id']);
                 button.textContent = "x";
                 td2.appendChild(button);
-                console.log(table);
             }
         });
         function checkAll(NameContent) {
@@ -83,12 +100,23 @@
     $(document).on("click", ".delete", function () {
         var id = $(this).attr('data-content');
         $.ajax({
+            beforeSend: function () {
+                return ConfirmDelete();
+            },
             url: "{{route('destroy.category')}}",
             method: "POST",
             data: {id: id},
+            success: function () {
+                $('#categoryTable').load(document.URL + ' #categoryTable');
+            }
         });
-        var TrId = $(this).attr('data-content');
-        console.log(TrId);
-        $('#tr' + TrId).remove();
+        function ConfirmDelete()
+        {
+            var x = confirm("你確定要刪除此產品類別嗎?");
+            if (x)
+                return true;
+            else
+                return false;
+        }
     });
 </script>

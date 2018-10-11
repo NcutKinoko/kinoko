@@ -108,3 +108,27 @@ Route::prefix('ProductionProcess')->group(function (){
     Route::POST('/update/{id}','ProductionProcessController@update')->name('update.process');
     Route::delete('/destroy/{id}','ProductionProcessController@destroy')->name('destroy.process');
 });
+
+Route::prefix('activity')->group(function (){
+    Route::get('/create/form','ActivityController@create')->name('show.activity.form');
+    Route::POST('/store','ActivityController@store')->name('store.activity');
+    Route::get('/update/form/{id}','ActivityController@edit')->name('show.process.updateForm');
+    Route::POST('/update/{id}','ActivityController@update')->name('update.process');
+    Route::delete('/destroy/{id}','ActivityController@destroy')->name('destroy.process');
+});
+
+Route::prefix('subtitle')->group(function (){
+    Route::get('/create/form','SubtitleController@create')->name('show.subtitle.form');
+    Route::POST('/store','SubtitleController@store')->name('store.subtitle');
+    Route::get('/update/form/{id}','SubtitleController@edit')->name('show.subtitle.updateForm');
+    Route::POST('/update/{id}','SubtitleController@update')->name('update.subtitle');
+    Route::delete('/destroy/{id}','SubtitleController@destroy')->name('destroy.subtitle');
+});
+
+Route::prefix('activity_record')->group(function (){
+    Route::get('/create/form','ActivityRecordController@create')->name('show.activity_record.form');
+    Route::POST('/store','ActivityRecordController@store')->name('store.activity_record');
+    Route::get('/update/form/{id}','ActivityRecordController@edit')->name('show.activity_record.updateForm');
+    Route::POST('/update/{id}','ActivityRecordController@update')->name('update.activity_record');
+    Route::delete('/destroy/{id}','ActivityRecordController@destroy')->name('destroy.activity_record');
+});
