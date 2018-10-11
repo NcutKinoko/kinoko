@@ -9,7 +9,10 @@
         <script type="text/javascript" src="{{asset('js/index.js')}}"></script>
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </head>
-    <button id="dd">dd</button>
+    <div class="padding">
+
+    </div>
+    <br>
     <br>
     <div class="container-fluid container-background-color">
         <div class="row">

@@ -10,26 +10,34 @@
     z-index: 1;
 }
 
-.number {
+<!--.number {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: white;
+    background-color: #9E5007;
     text-align: right;
     font-family: DFKai-sb
 }
 
 .number > li {
     display: inline-block;
+    text-decoration: none;
 }
 
-.number > li > a {
-
-    text-decoration: none;
+.number > li > i > a {
     border-radius: 10px;
     padding: 14px 50px;
     display: inline-block;
+    color: white;
+    text-decoration: none;
+}
+
+.number > li > a {
+    border-radius: 10px;
+    padding: 14px 50px;
+    display: inline-block;
+    color: white;
 }
 
 .number > li > a:hover {
@@ -97,7 +105,7 @@
     padding: 0;
     overflow: hidden;
     text-align: center;
-    background-color: #f0f0f0;
+    background-color: white;
     border: solid;
     border-color:#f0f0f0 #f0f0f0 #66b3ff #f0f0f0;
     font-family: DFKai-sb
@@ -153,3 +161,77 @@
     }
 
 }
+
+.headtitle li{
+    text-decoration: none;
+    text-align: center;
+    list-style-type: none;
+
+}
+
+.headtitle li a{
+    color: white;
+    font-size: xx-large;
+    font-family:Microsoft JhengHei;
+    font-weight: bold;
+}
+.headtitle li a:hover{
+    text-decoration: none;
+}
+
+.headstyle{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.headstyle  li {
+    width: 150px;
+    text-decoration: none;
+    text-align: center;
+    list-style-type: none;
+    float: left;
+    background-color: #9E5007;
+
+}
+
+.headstyle li a{
+    color: white;
+    font-family:Microsoft JhengHei;
+    font-size: medium;
+    font-weight: bold;
+    display: block;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.headstyle li a:hover{
+    background-color: #ff9f1a;
+    text-decoration: none;
+}
+
+.headinfo{
+
+}
+
+.headinfo li{
+    width: 100px;
+    text-decoration: none;
+    text-align: center;
+    list-style-type: none;
+    float: right;
+    border-right: 1px solid white;
+}
+
+.headinfo li a{
+    color: white;
+    font-family:Microsoft JhengHei;
+    font-size: medium;
+    font-weight: bold;
+    display: block;
+}
+
+
+
+
+

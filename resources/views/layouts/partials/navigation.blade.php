@@ -1,37 +1,22 @@
-<div class="padding">
+<!--navigation-->
+<script type="text/javascript">
 
-</div>
-<div class="wrapper">
-    <nav style="background-color: #FFFFFF">
-        <!--navigation-->
-        <div class="float-navigation">
-            <ul class="number">
-                <li style="float: left;padding: 14px 50px;font-size: large;">新社香菇</li>
-                @if(Auth::check())
-                    <li class="dropdown-right-top"
-                        style="color: black;text-decoration: none;padding: 14px 50px;border-radius: 10px;">
-                        {{ Auth::user()->name }} <i class="fa fa-caret-down"></i>
-                        <ul>
-                            <li><a href="{{ route('Logout_New') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    登出
-                                </a>
-                            </li>
-                        </ul>
-                        <form id="logout-form" action="{{ route('Logout_New') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </li>
-                @else
-                        <li><a href="{{ route('register') }}" style="color: #AA7700">註冊</a></li>
-                        <li><a href="{{ route('login') }}" style="color: #AA7700">登入</a></li>
-                @endif
+</script>
+    <nav  class="navbar  container-fluid"style="background-color: #9E5007; position: fixed;z-index: 999; border-bottom: 2px solid #FFCC33">
+            <ul class="headtitle">
+                <li><a href="" >新社香菇</a></li>
             </ul>
-            <ul class="list">
-                <li class="list-li"><a href="/index" class="list-li-a">首頁</a></li>
-                <li class="list-li"><a href="#history" class="list-li-a">歷史</a></li>
-                <li class="list-li"><a href="{{route('product.list')}}" class="list-li-a">產品列表</a></li>
+            <ul class="headinfo">
+                <li style="border-right: none"><a href="" title="YotTube"><img alt="YotTube" src="../img/icon/youtube.png" height="25px" width="25px"></a> </li>
+                <li><a href="" title="粉絲專頁連結"><img alt="粉絲專頁連結" src="../img/icon/FB.png" height="25px" width="25px"></a> </li>
+                <li><a href="" title="購物車"><img alt="購物車" src="../img/icon/shoppingcart.png" height="25px" width="25px"></a></li>
+                <li><a href="" title="會員專區"><img alt="會員專區" src="../img/icon/man.png" height="25px" width="25px"></a> </li>
             </ul>
-        </div>
+            <ul class="headstyle">
+                <li><a href="">首頁</a></li>
+                <li><a href="">最新消息</a></li>
+                <li><a href="">產品介紹</a></li>
+                <li><a href="">歷史簡介</a></li>
+                <li><a href="">購物專區</a></li>
+            </ul>
     </nav>
-</div>
