@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Menu;
 use App\Product;
 use App\Step;
@@ -29,7 +30,10 @@ class MenuController extends Controller
     public function create()
     {
         $productList = Product::all();
-        $menuList = Menu::all();
+        $menuList = DB::table('menu')
+            ->leftJoin('product','menu.product_id','=','product.id')
+            ->select('menu.id','menu.name as menuName',DB::raw('(CASE WHEN menu.product_id = "0" THEN "此菜餚未使用產品" ELSE product.name END) AS productName'),'menu.sauce','menu.seasoning','menu.material','menu.img','menu.remark')
+            ->get();
         $stepList = Step::all();
         return view('Backstage.menu.create', compact('productList', 'menuList', 'stepList'));
     }
@@ -85,7 +89,9 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $updateMenu = Menu::all()->where('id',$id);
+        $categoryList = Category::all();
+        return view('Backstage.menu.update',compact('updateMenu','categoryList'));
     }
 
     /**
@@ -97,7 +103,27 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $fileName = Menu::all()->where('id', $id)->pluck('img');
+        $image_path = public_path("\img\menu\\") . $fileName[0];
+        if (File::exists($image_path)) {
+            File::delete($image_path);
+        }
+        if ($request->hasFile('img')) {
+            //取得檔案名稱
+            $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
+            $file_name2 = $file_name;
+            $request->file('img')->move(public_path("/img/menu"), $file_name2);
+            DB::table('menu')->where('id', $id)->update([
+                'product_id' => $request['product'],
+                'sauce' => $request['sauce'],
+                'name' => $request['name'],
+                'seasoning' => $request['seasoning'],
+                'material' => $request['material'],
+                'img' => $file_name2,
+                'remark' => $request['remark']
+            ]);
+        }
+        return redirect()->route('show.menu.form');
     }
 
     /**

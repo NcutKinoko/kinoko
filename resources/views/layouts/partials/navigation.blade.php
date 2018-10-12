@@ -2,7 +2,7 @@
 <script type="text/javascript">
 
 </script>
-    <nav  class="navbar  container-fluid"style="background-color: #9E5007; position: fixed;z-index: 999; border-bottom: 2px solid #FFCC33">
+    <nav  class="navbar  container-fluid" style="background-color: #9E5007; position: fixed;z-index: 999; border-bottom: 2px solid #FFCC33">
             <ul class="headtitle">
                 <li><a href="" >新社香菇</a></li>
             </ul>

@@ -62,6 +62,8 @@ Route::prefix('category')->group(function (){
 Route::prefix('menu')->group(function (){
     Route::get('/create/form','MenuController@create')->name('show.menu.form');
     Route::POST('/store','MenuController@store')->name('store.menu');
+    Route::get('/update/form/{id}','MenuController@edit')->name('show.menu.updateForm');
+    Route::POST('/update/{id}','MenuController@update')->name('update.menu');
     Route::delete('/destroy/{id}','MenuController@destroy')->name('destroy.menu');
 });
 

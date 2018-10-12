@@ -30,7 +30,10 @@ class ProductController extends Controller
     public function create()
     {
         $CategoryList = Category::all();
-        $product = Product::all();
+        $product = DB::table('product')
+            ->join('category','product.category_id','=','category.id')
+            ->select('product.id','product.name','category.name as categoryName','product.price','product.inventory','product.size','product.introduction','product.img')
+        ->get();
         return view('Backstage.product.create', compact('CategoryList', 'product'));
     }
 
@@ -130,6 +133,9 @@ class ProductController extends Controller
             File::delete($image_path);
         }
         DB::table('product')->where('id', $id)->delete();
+        DB::table('menu')->where('product_id',$id)->update([
+            'product_id' => 0
+        ]);
         return redirect()->back();
     }
 

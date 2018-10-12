@@ -32,24 +32,9 @@
         @endforeach
         </tbody>
     </table>
-    {{--<table id="categoryTable">--}}
-        {{--@foreach($categoryList as $categoryLists)--}}
-            {{--<tr id="tr{{$categoryLists->id}}">--}}
-                {{--<td>{{$categoryLists->name}}</td>--}}
-                {{--<td>--}}
-                    {{--<button data-content="{{$categoryLists->id}}" id="delete" class="delete">x</button>--}}
-                {{--</td>--}}
-            {{--</tr>--}}
-        {{--@endforeach--}}
-    {{--</table>--}}
 </div>
 </body>
 <script type="text/javascript">
-    // $.ajaxSetup({
-    //     headers: {
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //     }
-    // });
     var createButton = document.getElementById('createButton');
     createButton.addEventListener('click', function (e) {
         e.preventDefault();
