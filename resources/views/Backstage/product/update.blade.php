@@ -19,7 +19,7 @@
                         <option value="0" selected="selected">此產品未分類</option>
                     @endif
                     @foreach($categoryList as $CategoryLists)
-                        @if($CategoryLists->id = $updateProducts->category_id)
+                        @if($CategoryLists->id == $updateProducts->category_id)
                             <option value="{{$CategoryLists->id}}" selected="selected">{{$CategoryLists->name}}</option>
                         @else
                             <option value="{{$CategoryLists->id}}">{{$CategoryLists->name}}</option>

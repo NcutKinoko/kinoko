@@ -28,7 +28,7 @@
                     <option value="0" selected="selected">此菜餚未使用產品</option>
                 @endif
                 @foreach($categoryList as $categoryLists)
-                    @if($categoryLists->id = $updateMenus->product_id)
+                    @if($categoryLists->id == $updateMenus->product_id)
                         <option value="{{$categoryLists->id}}" selected="selected">{{$categoryLists->name}}</option>
                     @else
                         <option value="{{$categoryLists->id}}">{{$categoryLists->name}}</option>
