@@ -1,12 +1,11 @@
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
-<body>
+@extends('Backstage.layouts.master')
+
+@section('title', 'HOME')
+
+@section('content')
 <div class="container-fluid">
     <h1 style="text-align: center">菜單</h1>
-    <form action="{{route('store.menu')}}" method="POST" role="form" enctype="multipart/form-data">
+    <form action="{{route('store.menu')}}" method="POST" role="form" enctype="multipart/form-data" style="margin-bottom: 16px">
         {{ csrf_field() }}
         <div class="form-group">
             <label>料理名稱</label>
@@ -84,15 +83,15 @@
                     </div>
                 </form>
                 <div class="text-left" style="display: inline-block">
-                    <button data-content="{{$menuLists->id}}" class="createStepButton btn btn-success" id="createStepButton">新增</button>
+                    <button data-content="{{$menuLists->id}}" class="createStepButton btn btn-success" id="createStepButton">新增步驟</button>
                 </div>
                 <div class="text-left" style="display: inline-block">
-                    <a href="{{route('show.menu.updateForm',$menuLists->id)}}" class="btn btn-primary" style="display: inline-block">修改</a>
+                    <a href="{{route('show.menu.updateForm',$menuLists->id)}}" class="btn btn-primary" style="display: inline-block">修改菜餚</a>
                 </div>
                 <form class="delete text-left" action="{{route('destroy.menu',$menuLists->id)}}" method="POST" onsubmit="return ConfirmDelete()" style="display: inline-block">
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                    <input type="submit" class="btn btn-danger" value="刪除">
+                    <input type="submit" class="btn btn-danger" value="刪除菜餚">
                 </form>
             </td>
             <td>
@@ -343,5 +342,5 @@
             return false;
     }
 </script>
-</body>
+@endsection
 

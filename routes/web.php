@@ -57,6 +57,7 @@ Route::prefix('category')->group(function (){
     Route::get('/create/form','CategoryController@create')->name('show.category.form');
     Route::POST('/store','CategoryController@store')->name('store.category');
     Route::POST('/destroy','CategoryController@destroy')->name('destroy.category');
+    Route::POST('/update','CategoryController@update')->name('update.category');
 });
 
 Route::prefix('menu')->group(function (){
@@ -114,9 +115,8 @@ Route::prefix('ProductionProcess')->group(function (){
 Route::prefix('activity')->group(function (){
     Route::get('/create/form','ActivityController@create')->name('show.activity.form');
     Route::POST('/store','ActivityController@store')->name('store.activity');
-    Route::get('/update/form/{id}','ActivityController@edit')->name('show.process.updateForm');
-    Route::POST('/update/{id}','ActivityController@update')->name('update.process');
-    Route::delete('/destroy/{id}','ActivityController@destroy')->name('destroy.process');
+    Route::POST('/update','ActivityController@update')->name('update.activity');
+    Route::POST('/destroy','ActivityController@destroy')->name('destroy.activity');
 });
 
 Route::prefix('subtitle')->group(function (){

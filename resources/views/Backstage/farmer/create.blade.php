@@ -1,10 +1,10 @@
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
-<body>
-<div>
-    <form action="{{route('store.farmer')}}" method="POST" role="form" enctype="multipart/form-data">
+@extends('Backstage.layouts.master')
+
+@section('title', 'HOME')
+
+@section('content')
+<div class="container-fluid">
+    <form action="{{route('store.farmer')}}" method="POST" role="form" enctype="multipart/form-data" style="margin-bottom: 16px">
         {{ csrf_field() }}
         <div class="form-group">
             <label>姓名</label>
@@ -12,7 +12,7 @@
         </div>
         <div class="form-group">
             <label>年齡</label>
-            <input name="age" id="age" class="form-control" placeholder="請輸入年齡">歲
+            <input name="age" id="age" class="form-control" placeholder="請輸入年齡">
         </div>
         <div class="form-group">
             <label>連絡電話</label>
@@ -50,32 +50,53 @@
             <button type="submit" id="createButton" class="btn btn-success">新增</button>
         </div>
     </form>
-</div>
-<div>
 
-    @foreach($farmerList as $farmerLists)
-        <label>姓名:</label><p>{{$farmerLists->name}}</p>
-        <label>年齡:</label><p>{{$farmerLists->age}}</p>
-        <label>連絡電話:</label><p>{{$farmerLists->phone}}</p>
-        <label>農業經營專區:</label><p>{{$farmerLists->area}}</p>
-        <label>班別:</label><p>{{$farmerLists->class}}</p>
-        <label>種植面積:</label><p>{{$farmerLists->PlantingArea}}</p>
-        <label>栽種包數:</label><p>{{$farmerLists->PlantingQuantity}}</p>
-        <label>栽種年資:</label><p>{{$farmerLists->PlantingYear}}</p>
-        <label>經營現況與成果:</label><p>{{$farmerLists->result}}</p>
-        <img src="{{url('../img/farmer/' . $farmerLists->img)}}" alt="Smiley face" height="100" width="100">
-        <a href="{{route('show.farmer.updateForm',$farmerLists->id)}}" class="btn btn-success">修改</a>
-        <form class="delete" action="{{route('destroy.farmer',$farmerLists->id)}}" method="POST"
-              onsubmit="return ConfirmDelete()">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
-            <input type="submit" class="btn btn-danger" value="刪除此評分項目">
-        </form>
-    @endforeach
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">姓名</th>
+            <th scope="col">年齡</th>
+            <th scope="col">連絡電話</th>
+            <th scope="col">農業經營專區</th>
+            <th scope="col">班別</th>
+            <th scope="col">種植面積</th>
+            <th scope="col">栽種包數</th>
+            <th scope="col">栽種年資</th>
+            <th scope="col">經營現況與成果</th>
+            <th scope="col">修改/刪除</th>
+            <th scope="col">圖片</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($farmerList as $farmerLists)
+            <tr>
+                <th class="align-middle" scope="row">{{$farmerLists->name}}</th>
+                <td class="align-middle">{{$farmerLists->age}}</td>
+                <td class="align-middle">{{$farmerLists->phone}}</td>
+                <td class="align-middle">{{$farmerLists->area}}</td>
+                <td class="align-middle">{{$farmerLists->class}}</td>
+                <td class="align-middle">{{$farmerLists->PlantingArea}}</td>
+                <td class="align-middle">{{$farmerLists->PlantingQuantity}}</td>
+                <td class="align-middle">{{$farmerLists->PlantingYear}}</td>
+                <td class="align-middle">{{$farmerLists->result}}</td>
+                <td class="align-middle"><img src="{{url('../img/farmer/' . $farmerLists->img)}}" alt="Smiley face" height="100" width="100"></td>
+                <td class="align-middle">
+                    <a href="{{route('show.farmer.updateForm',$farmerLists->id)}}" class="btn btn-success" style="display: inline-block">修改</a>
+                    <form class="delete" action="{{route('destroy.farmer',$farmerLists->id)}}" method="POST"
+                          onsubmit="return ConfirmDelete()" style="display: inline-block">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+                        <input type="submit" class="btn btn-danger" value="刪除">
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
 </div>
 <script type="text/javascript">
     function ConfirmDelete() {
-        var x = confirm("你確定要刪除此評分項目內容嗎?");
+        var x = confirm("你確定要刪除此菇農資料嗎?");
         if (x)
             return true;
         else
@@ -96,4 +117,4 @@
         }
     });
 </script>
-</body>
+@endsection

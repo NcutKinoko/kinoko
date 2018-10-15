@@ -1,11 +1,11 @@
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
-<body>
-<div>
+@extends('Backstage.layouts.master')
+
+@section('title', 'HOME')
+
+@section('content')
+<div class="container-fluid">
     @foreach($updateList as $updateLists)
-        <form action="{{route('update.farmer',$updateLists->id)}}" method="POST" role="form" enctype="multipart/form-data">
+        <form action="{{route('update.farmer',$updateLists->id)}}" method="POST" role="form" enctype="multipart/form-data" style="margin-bottom: 16px">
             {{ csrf_field() }}
             <div class="form-group">
                 <label>姓名</label>
@@ -13,7 +13,7 @@
             </div>
             <div class="form-group">
                 <label>年齡</label>
-                <input name="age" id="age" class="form-control" value="{{$updateLists->age}}" placeholder="請輸入年齡">歲
+                <input name="age" id="age" class="form-control" value="{{$updateLists->age}}" placeholder="請輸入年齡">
             </div>
             <div class="form-group">
                 <label>連絡電話</label>
@@ -68,4 +68,4 @@
         }
     });
 </script>
-</body>
+@endsection

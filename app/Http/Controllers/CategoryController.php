@@ -78,9 +78,14 @@ class CategoryController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $update = Category::all()->find($request['id']);
+        $update->update([
+            'name' => $request['content']
+        ]);
+        $request['success'] = true;
+        return Response($request);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Activity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ActivityController extends Controller
 {
@@ -72,9 +73,14 @@ class ActivityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $update = Activity::all()->find($request['id']);
+        $update->update([
+            'name' => $request['content']
+        ]);
+        $request['success'] = true;
+        return Response($request);
     }
 
     /**
@@ -83,8 +89,12 @@ class ActivityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $activity = Activity::find($request->input('id'));
+        $activity->delete();
+        DB::table('subtitle')->where('activity_id', $request['id'])->update(['activity_id' => 0]);
+        $sen['id'] = $request['id'];
+        return response($sen);
     }
 }

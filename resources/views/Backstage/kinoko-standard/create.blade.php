@@ -1,10 +1,10 @@
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
-<body>
-<div>
-    <form action="{{route('store.kinoko')}}" method="POST" role="form" enctype="multipart/form-data">
+@extends('Backstage.layouts.master')
+
+@section('title', 'HOME')
+
+@section('content')
+<div class="container-fluid">
+    <form action="{{route('store.kinoko')}}" method="POST" role="form" enctype="multipart/form-data" style="margin-bottom: 16px">
         {{ csrf_field() }}
         <div class="form-group">
             <label>評分項目</label>
@@ -22,64 +22,97 @@
             <button type="submit" id="createButton" class="btn btn-success">新增</button>
         </div>
     </form>
+
+    <table class="table">
+        <thead>
+        <tr style="text-align: center">
+            <th style="width: 50%">菜餚資料</th>
+            <th>步驟資料</th>
+        </tr>
+        </thead>
+        @foreach($KinokoList as $KinokoLists)
+            <tbody>
+            <tr>
+                <td>
+                    <div style="border-bottom: solid 1px;">
+                        <h3 style="font-weight: bold;display: inline-block">評分項目：</h3><h3 style="display: inline-block">{{$KinokoLists->item}}</h3>
+                    </div>
+                    <div style="border-bottom: solid 1px;">
+                        <h3 style="font-weight: bold;display: inline-block">配分：</h3><h3 style="display: inline-block">{{$KinokoLists->distribution}}</h3>
+                    </div>
+                    <div style="border-bottom: solid 1px;">
+                        <h3 style="font-weight: bold; display: inline-block">測定方法：</h3><h3 style="display: inline-block">{{$KinokoLists->TestMethod}}</h3>
+                    </div>
+                    <form action="{{route('store.step')}}" id="createStep{{$KinokoLists->id}}" method="POST"
+                          role="form" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label>新增評分項目內容</label>
+                            <input id="kinokoContent{{$KinokoLists->id}}" name="kinoko" class="form-control" placeholder="請輸入步驟" required>
+                        </div>
+                    </form>
+                    <div class="text-left" style="display: inline-block">
+                        <button data-content="{{$KinokoLists->id}}" class="createKinokoButton btn btn-success" id="createKinokoButton">新增步驟</button>
+                    </div>
+                    <div class="text-left" style="display: inline-block">
+                        <a href="{{route('show.kinoko.updateForm',$KinokoLists->id)}}" class="btn btn-primary" style="display: inline-block">修改評分項目</a>
+                    </div>
+                    <form class="delete" action="{{route('destroy.kinoko',$KinokoLists->id)}}" method="POST" onsubmit="return ConfirmDelete()" style="display: inline-block">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        <input type="submit" class="btn btn-danger" value="刪除評分項目">
+                    </form>
+                </td>
+                <td>
+                    <table style="border: 3px  #cccccc solid;" class="kinoko" id="{{$KinokoLists->id}}">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width: 59px;text-align: center;">編號</th>
+                            <th scope="col">步驟</th>
+                            <th scope="col" style="text-align: center">刪除</th>
+                            <th scope="col" style="text-align: center">修改</th>
+                        </tr>
+                        </thead>
+                        @foreach($KinokoContent as $KinokoContents)
+                            @if($KinokoContents->KinokoStandard_id == $KinokoLists->id)
+                                <tbody>
+                                <tr id="tr{{$KinokoContents->id}}">
+                                    <td class="align-middle">
+                                        <p>{{$KinokoContents->content}}</p>
+                                        <input id="update{{$KinokoContents->id}}" name="kinoko" class="form-control" placeholder="請輸入評分說明"
+                                               style="width: 100%" hidden="hidden" value="{{$KinokoContents->content}}">
+                                    </td>
+                                    <td class="align-middle">
+                                        <button data-content="{{$KinokoContents->id}}" id="delete" class="delete btn btn-danger">x</button>
+                                    </td>
+                                    <td class="align-middle">
+                                        <button data-content="{{$KinokoContents->id}}" id="update" class="update btn btn-success">修改</button>
+                                        <button data-content="{{$KinokoContents->id}}" id="send" class="send btn btn-success" hidden="hidden">送出</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            @endif
+                        @endforeach
+                    </table>
+                    <script>
+                        var tables = document.getElementsByTagName('table');
+                        var table = tables[tables.length - 1];
+                        var rows = table.rows;
+                        for (var i = 1, td; i < rows.length; i++) {
+                            td = document.createElement('td');
+                            td.setAttribute('class','align-middle');
+                            td.setAttribute('style','text-align: center');
+                            td.appendChild(document.createTextNode(i -1 + 1));
+                            rows[i].insertBefore(td, rows[i].firstChild);
+                        }
+                    </script>
+                </td>
+            </tr>
+            </tbody>
+        @endforeach
+    </table>
 </div>
-<div>
 
-    @foreach($KinokoList as $KinokoLists)
-        <p>{{$KinokoLists->item}}</p>
-        <p>{{$KinokoLists->distribution}}</p>
-        <p>{{$KinokoLists->TestMethod}}</p>
-        <a href="{{route('show.kinoko.updateForm',$KinokoLists->id)}}" class="btn btn-success">修改</a>
-        <form class="delete" action="{{route('destroy.kinoko',$KinokoLists->id)}}" method="POST" onsubmit="return ConfirmDelete()">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-            <input type="submit" class="btn btn-danger" value="刪除此評分項目">
-        </form>
-
-        <form action="{{route('store.step')}}" id="createStep{{$KinokoLists->id}}" method="POST"
-              role="form" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            <div class="form-group">
-                <label>新增評分項目內容</label>
-                <input id="kinokoContent{{$KinokoLists->id}}" name="kinoko" class="form-control" placeholder="請輸入步驟" required>
-            </div>
-            <div class="text-left">
-                <button data-content="{{$KinokoLists->id}}" class="createKinokoButton" id="createKinokoButton">新增</button>
-            </div>
-        </form>
-
-        <table style="border: 3px  #cccccc solid;" class="kinoko" id="{{$KinokoLists->id}}">
-            @foreach($KinokoContent as $KinokoContents)
-                @if($KinokoContents->KinokoStandard_id == $KinokoLists->id)
-                    <tr id="tr{{$KinokoContents->id}}">
-                        <td>
-                            <p>{{$KinokoContents->content}}</p>
-                            <input id="update{{$KinokoContents->id}}" name="kinoko" class="form-control" placeholder="請輸入評分說明"
-                                   style="width: 100%" hidden="hidden" value="{{$KinokoContents->content}}">
-                        </td>
-                        <td>
-                            <button data-content="{{$KinokoContents->id}}" id="delete" class="delete">x</button>
-                        </td>
-                        <td>
-                            <button data-content="{{$KinokoContents->id}}" id="update" class="update">修改</button>
-                            <button data-content="{{$KinokoContents->id}}" id="send" class="send" hidden="hidden">送出</button>
-                        </td>
-                    </tr>
-                @endif
-            @endforeach
-        </table>
-        <script>
-            var tables = document.getElementsByTagName('table');
-            var table = tables[tables.length - 1];
-            var rows = table.rows;
-            for (var i = 0, td; i < rows.length; i++) {
-                td = document.createElement('td');
-                td.appendChild(document.createTextNode(i + 1));
-                rows[i].insertBefore(td, rows[i].firstChild);
-            }
-        </script>
-    @endforeach
-</div>
 <script type="text/javascript">
     $.ajaxSetup({//我也不知道這段用來幹嘛的
         headers: {
@@ -101,17 +134,19 @@
 
     //將菜單步驟做重新編號的方法
     function renumberRows() {
-        var tables = document.getElementsByTagName('table');//頁面上所有table物件
+        var tables = document.getElementsByClassName('kinoko');//頁面上所有table物件
         var count;
         [].forEach.call(tables, function (el) {//執行每一張table
             count = 0;
-            [].forEach.call(el.rows, function (ee) {//執行每一列資料
+            for(var i = 1; i < el.rows.length; i++) {//執行每一列資料
                 td = document.createElement('td');
                 count += 1;//每一次都要對編號作累加
                 td.appendChild(document.createTextNode(count));//將編號放入td內
-                ee.replaceChild(td, ee.firstElementChild);//用剛剛的td來取代掉原本資料列內的td
-                console.log(ee.firstElementChild);
-            });
+                td.setAttribute('class','align-middle');
+                td.setAttribute('style','text-align: center');
+                el.rows[i].replaceChild(td, el.rows[i].firstElementChild);//用剛剛的td來取代掉原本資料列內的td
+                console.log(el.rows[i].firstElementChild);
+            }
         });
     }
 
@@ -142,7 +177,7 @@
                 var lastRaws;
                 var lastNumber;
                 //抓取table內的編號
-                if (table.rows.length == 0) {//如果等於0代表這個資料表內目前沒資料
+                if (table.rows.length == 1) {//如果等於0代表這個資料表內目前沒資料
                     lastNumber = 0;
                 } else {
                     lastRaws = table.rows[table.rows.length - 1];//將資料表的最後一列放入lastRaws
@@ -152,12 +187,15 @@
                 tr.setAttribute("id", "tr" + $sen['id']);//setAttribute是用來設定html元件的屬性值的語法
                 table.appendChild(tr);//appendChild是將指定物件加入另一個物件的語法
                 var td = document.createElement("td");
+                td.setAttribute("class","align-middle");
+                td.setAttribute('style','text-align: center');
                 tr.appendChild(td);
                 td.innerHTML = parseInt(lastNumber) + 1;//將文字或數字加入到td內
                 var td2 = document.createElement("td");
                 var p = document.createElement("p");
                 var contentInput = document.createElement("input");
                 contentInput.setAttribute("style", "width: 100%;");
+                contentInput.setAttribute("class","form-control");
                 contentInput.setAttribute("hidden", "hidden");//這邊相當於hidden = "hidden"
                 contentInput.setAttribute("id", "update" + $sen['id']);
                 contentInput.setAttribute("value", $sen['content']);
@@ -166,19 +204,23 @@
                 td2.appendChild(p);
                 td2.appendChild(contentInput);
                 var td3 = document.createElement("td");
+                td3.setAttribute('class','align-middle');
+                td3.setAttribute('style','text-align: center');
                 var button = document.createElement("button");
-                button.setAttribute("class", "delete",);
+                button.setAttribute("class", "delete btn btn-danger",);
                 button.setAttribute("data-content", $sen['id']);
                 button.textContent = "x";
                 td3.appendChild(button);
                 tr.appendChild(td3);
                 var td4 = document.createElement("td");
+                td4.setAttribute('class','align-middle');
+                td4.setAttribute('style','text-align: center');
                 var updateButton = document.createElement("button");
                 var sendButton = document.createElement("button");
-                updateButton.setAttribute("class", "update");
+                updateButton.setAttribute("class", "update btn btn-success");
                 updateButton.setAttribute("data-content", $sen['id']);
                 updateButton.textContent = "修改";//將文字加入到物件的文字內容裡
-                sendButton.setAttribute("class", "send");
+                sendButton.setAttribute("class", "send btn btn-success");
                 sendButton.setAttribute("data-content", $sen['id']);
                 sendButton.setAttribute("hidden", "hidden");
                 sendButton.textContent = "送出";
@@ -278,4 +320,4 @@
         }
     });
 </script>
-</body>
+@endsection

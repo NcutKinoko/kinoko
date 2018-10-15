@@ -29,8 +29,8 @@ class ActivityRecordController extends Controller
     {
         $subtitleList = Subtitle::all();
         $activity_record = DB::table('activity_record')
-            ->join('subtitle','activity_record.subtitle_id','=','subtitle.id')
-            ->select('activity_record.id','activity_record.name as activity_recordName','subtitle.name as subtitleName','activity_record.img')
+            ->leftJoin('subtitle','activity_record.subtitle_id','=','subtitle.id')
+            ->select('activity_record.id','activity_record.name as activity_recordName',DB::raw('(CASE WHEN activity_record.subtitle_id = "0" THEN "此圖片未有所屬的副標" ELSE subtitle.name END) AS subtitleName'),'activity_record.img')
             ->get();
         return view('Backstage.activity_record.create',compact('subtitleList','activity_record'));
     }
@@ -76,7 +76,9 @@ class ActivityRecordController extends Controller
      */
     public function edit($id)
     {
-        //
+        $updateActivity_record = ActivityRecord::all()->where('id',$id);
+        $subtitleList = Subtitle::all();
+        return view('Backstage.activity_record.update',compact("updateActivity_record","subtitleList"));
     }
 
     /**
@@ -99,6 +101,7 @@ class ActivityRecordController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('activity_record')->where('id',$id)->delete();
+        return redirect()->back();
     }
 }

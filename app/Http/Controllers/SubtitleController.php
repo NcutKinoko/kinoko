@@ -28,8 +28,9 @@ class SubtitleController extends Controller
     {
         $activityList = Activity::all();
         $subtitleList = DB::table('subtitle')
-            ->join('activity','subtitle.activity_id','=','activity.id')
-            ->select('subtitle.id','subtitle.name as subtitleName','activity.name as activityName')
+            ->leftJoin('activity','subtitle.activity_id','=','activity.id')
+            ->select('subtitle.id','subtitle.name as subtitleName',DB::raw('(CASE WHEN subtitle.activity_id = "0" THEN "此副標未屬於任何活動" ELSE activity.name END) AS activityName'))
+            ->orderBy("subtitle.id")
             ->get();
         return view('Backstage.subtitle.create',compact('activityList','subtitleList'));
     }
@@ -68,7 +69,9 @@ class SubtitleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $updateSubtitle = Subtitle::all()->where('id',$id);
+        $activityList = Activity::all();
+        return view('Backstage.subtitle.update',compact("updateSubtitle","activityList"));
     }
 
     /**
@@ -80,7 +83,11 @@ class SubtitleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('subtitle')->where('id',$id)->update([
+           'activity_id' => $request['activity_id'],
+            'name' => $request['name'],
+        ]);
+        return redirect()->route('show.subtitle.form');
     }
 
     /**
@@ -91,6 +98,8 @@ class SubtitleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('subtitle')->where('id', $id)->delete();
+        DB::table('activity_record')->where('subtitle_id',$id)->update(['subtitle_id' => 0]);
+        return redirect()->route('show.subtitle.form');
     }
 }
