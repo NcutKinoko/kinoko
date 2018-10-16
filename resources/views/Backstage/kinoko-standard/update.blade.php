@@ -1,4 +1,10 @@
-<div>
+@extends('Backstage.layouts.master')
+
+@section('title', 'HOME')
+
+@section('content')
+<div class="container-fluid">
+    <h1 style="text-align: center">修改香菇評比標準</h1>
     @foreach($updateKinoko as $updateKinokos)
         <form action="{{route('update.kinoko',$updateKinokos->id)}}" method="POST" role="form"
               enctype="multipart/form-data">
@@ -34,3 +40,4 @@
         });
     </script>
 </div>
+    @endsection

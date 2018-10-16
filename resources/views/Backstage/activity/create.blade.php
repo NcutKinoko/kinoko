@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <h1 class="">活動名稱</h1>
+    <h1 style="text-align: center">活動名稱</h1>
     <form action="{{route('store.activity')}}" id="createActivity" method="POST" role="form"
           enctype="multipart/form-data" style="margin-bottom: 16px">
         {{ csrf_field() }}

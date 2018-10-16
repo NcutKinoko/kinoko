@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('Backstage.layouts.master')
 
 @section('content')
 <div class="container">

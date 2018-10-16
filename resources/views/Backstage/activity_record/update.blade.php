@@ -5,6 +5,7 @@
 @section('content')
     @foreach($updateActivity_record as $updateActivity_records)
     <div class="container-fluid">
+        <h1 style="text-align: center">修改活動圖片</h1>
         <form action="{{route('update.activity_record',$updateActivity_records->id)}}" id="updateActivityRecord" method="POST" role="form"
               enctype="multipart/form-data" style="margin-bottom: 16px">
             {{ csrf_field() }}
@@ -32,7 +33,7 @@
                 <input type="file" id="img" name="img" class="form-control" placeholder="請輸選擇圖片" required>
             </div>
             <div class="text-left">
-                <button type="submit" class="create btn btn-success" id="createButton">新增</button>
+                <button type="submit" class="create btn btn-success" id="createButton">修改</button>
             </div>
         </form>
         @endforeach

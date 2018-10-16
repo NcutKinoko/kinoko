@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="container-fluid">
+    <h1 style="text-align: center">香菇評比標準</h1>
     <form action="{{route('store.kinoko')}}" method="POST" role="form" enctype="multipart/form-data" style="margin-bottom: 16px">
         {{ csrf_field() }}
         <div class="form-group">

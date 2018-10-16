@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="container-fluid">
+    <h1 style="text-align: center">修改菇農資料</h1>
     @foreach($updateList as $updateLists)
         <form action="{{route('update.farmer',$updateLists->id)}}" method="POST" role="form" enctype="multipart/form-data" style="margin-bottom: 16px">
             {{ csrf_field() }}

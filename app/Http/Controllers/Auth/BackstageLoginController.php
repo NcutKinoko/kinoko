@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class BackstageLoginController extends Controller
 {
@@ -57,5 +58,12 @@ class BackstageLoginController extends Controller
     public function ShowLoginform()
     {
         return view('BackstageAuth.login');
+    }
+
+    public function logout()
+    {
+        Auth::guard('backstage')->logout();
+        Session::flush();
+        return redirect()->route('Backstage.show.login');
     }
 }

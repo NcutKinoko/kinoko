@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <h1 style="text-align: center">產品修改</h1>
+    <h1 style="text-align: center">修改產品</h1>
     @foreach($updateProduct as $updateProducts)
         <form action="{{route('update.product',$updateProducts->id)}}" method="POST" role="form"
               enctype="multipart/form-data" style="margin-bottom: 16px">

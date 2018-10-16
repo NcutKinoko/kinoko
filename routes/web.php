@@ -11,6 +11,7 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,8 +24,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/index','IndexController@index')->name('show.index');
 
-Route::get('/logout', 'Auth\LoginController@logout')->name('Logout_New');
-
 Route::prefix('Backstage')->group(function (){
     Route::get('/register/form','Auth\BackstageRegisterController@ShowRegisterform')->name('Backstage.show.register');
     Route::get('/login','Auth\BackstageLoginController@ShowLoginform')->name('Backstage.show.login');
@@ -35,6 +34,24 @@ Route::prefix('Backstage')->group(function (){
     Route::POST('/sendmail','Auth\BackstageForgotPasswordController@SendMail')->name('Backstage.sendmail');
     Route::get('/password/reset/{token}','Auth\BackstageResetPasswordController@showResetForm')->name('Backstage.show.reset');
     Route::POST('/password/reset','Auth\BackstageResetPasswordController@reset')->name('Backstage.reset');
+    Route::get('/logout', 'Auth\BackstageLoginController@logout')->name('Logout_New');
+});
+
+Route::group(['middleware' => ['auth:backstage']], function() {
+    Route::prefix('category')->group(function (){
+        Route::get('/create/form','CategoryController@create')->name('show.category.form');
+        Route::POST('/store','CategoryController@store')->name('store.category');
+        Route::POST('/destroy','CategoryController@destroy')->name('destroy.category');
+        Route::POST('/update','CategoryController@update')->name('update.category');
+    });
+
+    Route::prefix('menu')->group(function (){
+        Route::get('/create/form','MenuController@create')->name('show.menu.form');
+        Route::POST('/store','MenuController@store')->name('store.menu');
+        Route::get('/update/form/{id}','MenuController@edit')->name('show.menu.updateForm');
+        Route::POST('/update/{id}','MenuController@update')->name('update.menu');
+        Route::delete('/destroy/{id}','MenuController@destroy')->name('destroy.menu');
+    });
 });
 
 Route::prefix('product')->group(function (){
@@ -47,26 +64,15 @@ Route::prefix('product')->group(function (){
     Route::get('/detail/{id}','ProductController@detail')->name('product.detail');
 });
 
+
+
 Route::prefix('cart')->group(function (){
     Route::get('/','ShoppingCartController@index')->name('show.cart');
     Route::get('/add/{id}','ShoppingCartController@add')->name('add.cart');
 
 });
 
-Route::prefix('category')->group(function (){
-    Route::get('/create/form','CategoryController@create')->name('show.category.form');
-    Route::POST('/store','CategoryController@store')->name('store.category');
-    Route::POST('/destroy','CategoryController@destroy')->name('destroy.category');
-    Route::POST('/update','CategoryController@update')->name('update.category');
-});
 
-Route::prefix('menu')->group(function (){
-    Route::get('/create/form','MenuController@create')->name('show.menu.form');
-    Route::POST('/store','MenuController@store')->name('store.menu');
-    Route::get('/update/form/{id}','MenuController@edit')->name('show.menu.updateForm');
-    Route::POST('/update/{id}','MenuController@update')->name('update.menu');
-    Route::delete('/destroy/{id}','MenuController@destroy')->name('destroy.menu');
-});
 
 Route::prefix('step')->group(function (){
     Route::POST('/store','StepController@store')->name('store.step');

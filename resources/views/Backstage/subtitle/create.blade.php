@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="container-fluid">
+    <h1 style="text-align: center">活動副標</h1>
     <form action="{{route('store.subtitle')}}" id="createSubtitle" method="POST" role="form"
           enctype="multipart/form-data" style="margin-bottom: 16px">
         {{ csrf_field() }}
@@ -27,7 +28,6 @@
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">編號</th>
             <th scope="col">副標題</th>
             <th scope="col">所屬活動</th>
             <th scope="col">修改/刪除</th>
@@ -36,7 +36,6 @@
         <tbody>
         @foreach($subtitleList as $subtitleLists)
             <tr>
-                <th class="align-middle" scope="row">{{$subtitleLists->id}}</th>
                 <td class="align-middle">{{$subtitleLists->subtitleName}}</td>
                 <td class="align-middle">{{$subtitleLists->activityName}}</td>
                 <td class="align-middle">

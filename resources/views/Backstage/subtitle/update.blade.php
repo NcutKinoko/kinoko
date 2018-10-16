@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="container-fluid">
+    <h1 style="text-align: center">修改活動副標</h1>
     @foreach($updateSubtitle as $updateSubtitles)
     <form action="{{route('update.subtitle' , $updateSubtitles->id)}}" id="createSubtitle" method="POST" role="form" enctype="multipart/form-data">
         {{ csrf_field() }}
@@ -14,7 +15,7 @@
         <div class="form-group">
             <label>所屬活動</label>
             <select name="activity_id" class="form-control" required>
-                @if($updateSubtitles->category_id == 0)
+                @if($updateSubtitles->activity_id == 0)
                     <option value="0" selected="selected">此產品未分類</option>
                 @endif
                 @foreach($activityList as $activityLists)

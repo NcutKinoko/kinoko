@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <h1 style="text-align: center">菜單</h1>
+    <h1 style="text-align: center">修改菜單</h1>
     @foreach($updateMenu as $updateMenus)
     <form action="{{route('update.menu',$updateMenus->id)}}" method="POST" role="form" enctype="multipart/form-data" style="margin-bottom: 16px">
         {{ csrf_field() }}

@@ -36,8 +36,28 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <ul class="navbar-nav mr-auto">
+                @if(Auth::guard('backstage')->check())
+                    <li class="dropdown-right-top"
+                        style="color: black;text-decoration: none;padding: 14px 50px;border-radius: 10px;">
+                        {{ Auth::guard('backstage')->user()->name }} <i class="fa fa-caret-down"></i>
+                        <ul>
+                            <li>
+                                <a href="{{ route('Logout_New') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('登出') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('Logout_New') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li class="nav-item"><a class="nav-link" href="{{ route('Backstage.show.register') }}">後台會員註冊</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('Backstage.show.login') }}">後台會員登入</a></li>
+                @endif
+            </ul>
         </form>
     </div>
 </nav>

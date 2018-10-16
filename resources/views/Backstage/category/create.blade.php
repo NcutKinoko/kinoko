@@ -4,6 +4,7 @@
 
 @section('content')
     <div class="container-fluid">
+        <h1 style="text-align: center">產品類別</h1>
         <form action="{{route('store.category')}}" id="createCategory" method="POST" role="form"
               enctype="multipart/form-data" style="margin-bottom: 16px;">
             {{ csrf_field() }}
