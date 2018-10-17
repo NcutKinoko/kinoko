@@ -37,6 +37,5 @@
 </main>
 <!--footer-->
 @include('Backstage.layouts.partials.footer')
-
 </body>
 </html>

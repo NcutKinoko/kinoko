@@ -84,7 +84,6 @@ class CategoryController extends Controller
         $update->update([
             'name' => $request['content']
         ]);
-        $request['success'] = true;
         return Response($request);
     }
 

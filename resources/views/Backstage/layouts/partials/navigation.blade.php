@@ -1,7 +1,4 @@
 <!--navigation-->
-<script type="text/javascript">
-
-</script>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +7,10 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('Backstage.index')}}">首頁</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{route('show.product.form')}}">新增產品</a>
             </li>
             <li class="nav-item">
@@ -43,13 +43,11 @@
                         {{ Auth::guard('backstage')->user()->name }} <i class="fa fa-caret-down"></i>
                         <ul>
                             <li>
-                                <a href="{{ route('Logout_New') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                <a class="nav-item" href="{{ route('Logout_New') }}"
+                                   onclick="event.preventDefault();
+                                                    document.getElementById('logout-backstage').submit();">
                                     {{ __('登出') }}
                                 </a>
-                                <form id="logout-form" action="{{ route('Logout_New') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
                             </li>
                         </ul>
                     </li>
@@ -58,6 +56,9 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('Backstage.show.login') }}">後台會員登入</a></li>
                 @endif
             </ul>
+        </form>
+        <form id="logout-backstage" action="{{ route('Logout_New') }}" method="POST" style="display: none;">
+            @csrf
         </form>
     </div>
 </nav>

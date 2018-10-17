@@ -11,10 +11,10 @@ class BackstageController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth:backstage');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth:backstage');
+//    }
 
     /**
      * Show the application dashboard.
@@ -23,6 +23,11 @@ class BackstageController extends Controller
      */
     public function index()
     {
-        return view('Backstagehome');
+        return view('BackstageHome');
+    }
+
+    public function ShowIndex()
+    {
+        return view('Backstage.index.index');
     }
 }

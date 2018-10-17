@@ -20,8 +20,7 @@
             <thead>
             <tr>
                 <th scope="col">產品類別</th>
-                <th scope="col">刪除</th>
-                <th scope="col">修改</th>
+                <th scope="col">修改/刪除</th>
             </tr>
             </thead>
             <tbody>
@@ -32,10 +31,10 @@
                         <input id="update{{$categoryLists->id}}" name="name" class="form-control" placeholder="請輸入產品類別"
                                style="width: 100%" hidden="hidden" value="{{$categoryLists->name}}">
                     </td>
-                    <td class="align-middle"><button data-content="{{$categoryLists->id}}" id="delete" class="delete btn btn-danger">刪除</button></td>
                     <td class="align-middle">
-                        <button data-content="{{$categoryLists->id}}" id="update" class="update btn btn-success">修改</button>
                         <button data-content="{{$categoryLists->id}}" id="send" class="send btn btn-success" hidden="hidden">送出</button>
+                        <button data-content="{{$categoryLists->id}}" id="update" class="update btn btn-success">修改</button>
+                        <button data-content="{{$categoryLists->id}}" id="delete" class="delete btn btn-danger">刪除</button>
                     </td>
                 </tr>
             @endforeach
@@ -43,6 +42,11 @@
         </table>
     </div>
 <script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     var createButton = document.getElementById('createButton');
     createButton.addEventListener('click', function (e) {
         e.preventDefault();
@@ -56,11 +60,13 @@
             method: "POST",
             dataType: "json",
             data: $("#createCategory").serialize(),
+
             success: function ($sen) {
                 var table = document.getElementById('categoryTable');
+                var tbody = table.children[table.children.length - 1]
                 var tr = document.createElement("tr");
                 tr.setAttribute("id", "tr" + $sen['id']);
-                table.appendChild(tr);
+                tbody.appendChild(tr);
                 var td = document.createElement("td");
                 td.setAttribute('class','align-middle');
                 tr.appendChild(td);
@@ -78,14 +84,12 @@
                 var td2 = document.createElement("td");
                 td2.setAttribute('class','align-middle');
                 tr.appendChild(td2);
-                var button = document.createElement("button");
-                button.setAttribute("class", "delete btn btn-danger",);
-                button.setAttribute("data-content", $sen['id']);
-                button.textContent = "刪除";
-                td2.appendChild(button);
-                var td3 = document.createElement("td");
-                td3.setAttribute("class","align-middle");
-                tr.appendChild(td3);
+                var deleteButton = document.createElement("button");
+                deleteButton.setAttribute("data-content", $sen['id']);
+                deleteButton.setAttribute("id","delete");
+                deleteButton.setAttribute("class", "delete btn btn-danger",);
+                deleteButton.setAttribute("style","margin-left: 5px");
+                deleteButton.textContent = "刪除";
                 var updateButton = document.createElement("button");
                 var sendButton = document.createElement("button");
                 updateButton.setAttribute("data-content",$sen['id']);
@@ -97,8 +101,9 @@
                 sendButton.setAttribute("class","send btn btn-success");
                 sendButton.setAttribute("hidden","hidden");
                 sendButton.textContent = "發送";
-                td3.appendChild(updateButton);
-                td3.appendChild(sendButton);
+                td2.appendChild(sendButton);
+                td2.appendChild(updateButton);
+                td2.appendChild(deleteButton);
             }
         });
         function checkAll(NameContent) {
@@ -111,25 +116,20 @@
             }
         }
     });
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+
     //準備修改
     $(document).on("click", ".update", function () {
         console.log(true);
         var id = $(this).attr('data-content');
         var tr = document.getElementById('tr' + id);
-        var deleteTd = tr.children[tr.children.length - 2];
-        var deleteButton = deleteTd.children[deleteTd.children.length - 1];
+        var editTd = tr.children[tr.children.length - 1];
+        var deleteButton = editTd.children[editTd.children.length - 1];
         deleteButton.setAttribute("disabled", "");
-        var updateTd = tr.children[tr.children.length - 1];
-        var updateButton = updateTd.children[updateTd.children.length - 2];
-        var sendButton = updateTd.children[updateTd.children.length - 1];
+        var updateButton = editTd.children[editTd.children.length - 2];
+        var sendButton = editTd.children[editTd.children.length - 3];
         updateButton.setAttribute("hidden", "hidden");
         sendButton.removeAttribute("hidden");
-        var contentTd = tr.children[tr.children.length - 3];
+        var contentTd = tr.children[tr.children.length - 2];
         var contentP = contentTd.children[contentTd.children.length - 2];
         var contentInput = contentTd.children[contentTd.children.length - 1];
         contentP.setAttribute("hidden", "hidden");
@@ -149,21 +149,21 @@
             data: {
                 id: id,
                 content: updateContent,
+                _token: '{{csrf_token()}}',
             },
             success: function ($request) {
                 var tr = document.getElementById('tr' + $request['id']);
-                var contentTd = tr.children[tr.children.length - 3];
+                var contentTd = tr.children[tr.children.length - 2];
                 var contentP = contentTd.children[contentTd.children.length - 2];
                 var contentInput = contentTd.children[contentTd.children.length - 1];
                 contentP.removeAttribute("hidden");
                 contentP.innerHTML = $request['content'];
                 contentInput.setAttribute("hidden", "hidden");
-                var deleteTd = tr.children[tr.children.length - 2];
-                var deleteButton = deleteTd.children[deleteTd.children.length - 1];
+                var editTd = tr.children[tr.children.length - 1];
+                var deleteButton = editTd.children[editTd.children.length - 1];
                 deleteButton.removeAttribute("disabled");
-                var updateTd = tr.children[tr.children.length - 1];
-                var updateButton = updateTd.children[updateTd.children.length - 2];
-                var sendButton = updateTd.children[updateTd.children.length - 1];
+                var updateButton = editTd.children[editTd.children.length - 2];
+                var sendButton = editTd.children[editTd.children.length - 3];
                 updateButton.removeAttribute("hidden");
                 sendButton.setAttribute("hidden", "hidden");
             }
@@ -187,7 +187,10 @@
             },
             url: "{{route('destroy.category')}}",
             method: "POST",
-            data: {id: id},
+            data: {
+                id: id,
+                _token: '{{csrf_token()}}',
+            },
             success: function ($sen) {
                 var TrId = $sen['id'];
                 console.log(TrId);

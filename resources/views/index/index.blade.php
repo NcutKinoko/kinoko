@@ -29,11 +29,11 @@
                     <?php $count += 1?>
                     @if($count == 1)
                 <div class="carousel-item col-md-3 active">
-                    <img class="img-fluid mx-auto d-block" src="//placehold.it/600x400/000/fff?text={{$count}}" alt="slide {{$count}}">
+                    <img class="img-fluid mx-auto d-block" src="{{url('../img/product/' . $productLists->img)}}" style="height: 300px;width: 500px" alt="slide {{$count}}">
                 </div>
                         @else
                 <div class="carousel-item col-md-3">
-                    <img class="img-fluid mx-auto d-block" src="//placehold.it/600x400?text={{$count}}" alt="slide {{$count}}">
+                    <img class="img-fluid mx-auto d-block" src="{{url('../img/product/' . $productLists->img)}}" style="height: 300px;width: 500px" alt="slide {{$count}}">
                 </div>
                         @endif
                     @endforeach

@@ -81,6 +81,7 @@
             data: {
                 id: id,
                 content: updateContent,
+                _token: '{{csrf_token()}}'
             },
             success: function ($request) {
                 console.log($request);
