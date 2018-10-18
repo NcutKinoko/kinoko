@@ -155,7 +155,10 @@
         $.ajax({
             url: "{{route('destroy.step')}}",
             method: "POST",
-            data: {id: id},
+            data: {
+                id: id,
+                _token: '{{csrf_token()}}'
+            },
         });
         var TrId = $(this).attr('data-content');
         $('#tr' + TrId).remove();
@@ -198,6 +201,7 @@
             data: {
                 step: stepContent,
                 id: id,
+                _token: '{{csrf_token()}}'
             },
             //存入成功後執行的code
             success: function ($sen) {//$sen為controller的response回傳值
@@ -303,6 +307,7 @@
             data: {
                 id: id,
                 content: updateContent,
+                _token: '{{csrf_token()}}'
             },
             success: function ($request) {
                 var tr = document.getElementById('tr' + $request['id']);

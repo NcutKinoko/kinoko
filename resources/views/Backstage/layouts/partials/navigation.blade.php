@@ -34,6 +34,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route('show.kinoko.form')}}">新增香菇評比標準</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('show.announcement_category.form')}}">新增公告類別</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('show.announcement.form')}}">新增公告</a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav mr-auto">

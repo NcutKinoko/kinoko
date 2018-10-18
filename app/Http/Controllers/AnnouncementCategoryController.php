@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\RatingDescription;
+use App\AnnouncementCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class RatingDescriptionController extends Controller
+class AnnouncementCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +25,8 @@ class RatingDescriptionController extends Controller
      */
     public function create()
     {
-        //
+        $announcementCategoryList =  AnnouncementCategory::all();
+        return view('Backstage.announcement_category.create',compact('announcementCategoryList'));
     }
 
     /**
@@ -35,12 +37,13 @@ class RatingDescriptionController extends Controller
      */
     public function store(Request $request)
     {
-        RatingDescription::create([
-            'KinokoStandard_id' =>$request['id'],
-            'content' => $request['content']
+        AnnouncementCategory::create([
+            'name' => $request->input('name')
         ]);
-
-        $sen = RatingDescription::all()->last();
+        $category = AnnouncementCategory::all()->last();
+        $sen['success'] = true;
+        $sen['result'] = $category['name'];
+        $sen['id'] = $category['id'];
         return response($sen);
     }
 
@@ -75,9 +78,9 @@ class RatingDescriptionController extends Controller
      */
     public function update(Request $request)
     {
-        $update = RatingDescription::all()->find($request['id']);
+        $update = AnnouncementCategory::all()->find($request['id']);
         $update->update([
-            'content' => $request['content']
+            'name' => $request['content']
         ]);
         return Response($request);
     }
@@ -90,8 +93,9 @@ class RatingDescriptionController extends Controller
      */
     public function destroy(Request $request)
     {
-        $RatingDescription = RatingDescription::find($request->input('id'));
-        $RatingDescription->delete();
+        $category = AnnouncementCategory::find($request->input('id'));
+        $category->delete();
+        DB::table('announcement')->where('announcement_category_id	', $request['id'])->update(['announcement_category_id' => 0]);
         $sen['id'] = $request['id'];
         return response($sen);
     }

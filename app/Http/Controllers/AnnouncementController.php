@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Activity;
-use App\ActivityRecord;
-use App\Subtitle;
+use App\Announcement;
+use App\AnnouncementCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class ActivityRecordController extends Controller
+class AnnouncementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,12 +27,12 @@ class ActivityRecordController extends Controller
      */
     public function create()
     {
-        $subtitleList = Subtitle::all();
-        $activity_record = DB::table('activity_record')
-            ->leftJoin('subtitle','activity_record.subtitle_id','=','subtitle.id')
-            ->select('activity_record.id','activity_record.name as activity_recordName',DB::raw('(CASE WHEN activity_record.subtitle_id = "0" THEN "此圖片未有所屬的副標" ELSE subtitle.name END) AS subtitleName'),'activity_record.img')
+        $AnnouncementCategoryList = AnnouncementCategory::all();
+        $Announcement = DB::table('announcement')
+            ->leftJoin('announcementcategory','announcement.announcement_category_id','=','announcementcategory.id')
+            ->select('announcement.id','announcement.title',DB::raw('(CASE WHEN announcement.announcement_category_id = "0" THEN "此公告未分類" ELSE announcementcategory.name END) AS AnnouncementCategoryName'),'announcement.content','announcement.img')
             ->get();
-        return view('Backstage.activity_record.create',compact('subtitleList','activity_record'));
+        return view('Backstage.announcement.create',compact('Announcement','AnnouncementCategoryList'));
     }
 
     /**
@@ -48,10 +47,11 @@ class ActivityRecordController extends Controller
         if ($request->hasFile('img')) {
             //取得檔案名稱
             $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
-            $request->file('img')->move(public_path("/img/activity_record"), $file_name);
-            ActivityRecord::create([
-                'name' => $request['name'],
-                'subtitle_id' => $request['subtitle_id'],
+            $request->file('img')->move(public_path("/img/announcement"), $file_name);
+            Announcement::create([
+                'title' => $request['title'],
+                'announcement_category_id' => $request['announcement_category_id'],
+                'content' => $request['content'],
                 'img' => $file_name,
             ]);
         }
@@ -77,9 +77,9 @@ class ActivityRecordController extends Controller
      */
     public function edit($id)
     {
-        $updateActivity_record = ActivityRecord::all()->where('id',$id);
-        $subtitleList = Subtitle::all();
-        return view('Backstage.activity_record.update',compact("updateActivity_record","subtitleList"));
+        $updateAnnouncement = Announcement::all()->where('id',$id);
+        $AnnouncementCategoryList = AnnouncementCategory::all();
+        return view('Backstage.announcement.update',compact('updateAnnouncement','AnnouncementCategoryList'));
     }
 
     /**
@@ -91,8 +91,8 @@ class ActivityRecordController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fileName = ActivityRecord::all()->where('id', $id)->pluck('img');
-        $image_path = public_path("\img\activity_record\\") . $fileName[0];
+        $fileName = Announcement::all()->where('id', $id)->pluck('img');
+        $image_path = public_path("\img\announcement\\") . $fileName[0];
         if (File::exists($image_path)) {
             File::delete($image_path);
         }
@@ -100,14 +100,15 @@ class ActivityRecordController extends Controller
             //取得檔案名稱
             $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
             $file_name2 = $file_name;
-            $request->file('img')->move(public_path("/img/activity_record"), $file_name2);
-            DB::table('activity_record')->where('id', $id)->update([
-                'subtitle_id' => $request['subtitle_id'],
-                'name' => $request['name'],
+            $request->file('img')->move(public_path("/img/announcement"), $file_name2);
+            DB::table('announcement')->where('id', $id)->update([
+                'title' => $request['title'],
+                'announcement_category_id' => $request['announcement_category_id'],
+                'content' => $request['content'],
                 'img' => $file_name2,
             ]);
         }
-        return redirect()->Route('show.activity_record.form');
+        return redirect()->Route('show.announcement.form');
     }
 
     /**
@@ -118,7 +119,12 @@ class ActivityRecordController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('activity_record')->where('id',$id)->delete();
+        $fileName = Announcement::all()->where('id', $id)->pluck('img');
+        $image_path = public_path("\img\announcement\\") . $fileName[0];
+        if (File::exists($image_path)) {
+            File::delete($image_path);
+        }
+        DB::table('announcement')->where('id', $id)->delete();
         return redirect()->back();
     }
 }

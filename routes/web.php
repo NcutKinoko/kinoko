@@ -128,6 +128,21 @@ Route::group(['middleware' => ['auth:backstage']], function() {
         Route::POST('/update/{id}','ActivityRecordController@update')->name('update.activity_record');
         Route::delete('/destroy/{id}','ActivityRecordController@destroy')->name('destroy.activity_record');
     });
+
+    Route::prefix('announcement')->group(function (){
+        Route::get('/create/form','AnnouncementController@create')->name('show.announcement.form');
+        Route::POST('/store','AnnouncementController@store')->name('store.announcement');
+        Route::get('/update/form/{id}','AnnouncementController@edit')->name('show.announcement.updateForm');
+        Route::POST('/update/{id}','AnnouncementController@update')->name('update.announcement');
+        Route::delete('/destroy/{id}','AnnouncementController@destroy')->name('destroy.announcement');
+    });
+
+    Route::prefix('announcement_category')->group(function (){
+        Route::get('/create/form','AnnouncementCategoryController@create')->name('show.announcement_category.form');
+        Route::POST('/store','AnnouncementCategoryController@store')->name('store.announcement_category');
+        Route::POST('/update','AnnouncementCategoryController@update')->name('update.announcement_category');
+        Route::POST('/destroy','AnnouncementCategoryController@destroy')->name('destroy.announcement_category');
+    });
 });
 
 Route::prefix('product')->group(function (){

@@ -63,7 +63,7 @@
 
             success: function ($sen) {
                 var table = document.getElementById('categoryTable');
-                var tbody = table.children[table.children.length - 1]
+                var tbody = table.children[table.children.length - 1];
                 var tr = document.createElement("tr");
                 tr.setAttribute("id", "tr" + $sen['id']);
                 tbody.appendChild(tr);

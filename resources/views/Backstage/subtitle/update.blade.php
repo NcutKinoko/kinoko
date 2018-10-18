@@ -16,7 +16,7 @@
             <label>所屬活動</label>
             <select name="activity_id" class="form-control" required>
                 @if($updateSubtitles->activity_id == 0)
-                    <option value="0" selected="selected">此產品未分類</option>
+                    <option value="0" selected="selected">此副標屬於任何活動</option>
                 @endif
                 @foreach($activityList as $activityLists)
                     @if($activityLists->id == $updateSubtitles->activity_id)

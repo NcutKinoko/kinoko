@@ -32,7 +32,6 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">編號</th>
                 <th scope="col">標題</th>
                 <th scope="col">所屬副標題</th>
                 <th scope="col">圖片</th>
@@ -42,7 +41,6 @@
             <tbody>
             @foreach($activity_record as $activity_records)
                 <tr>
-                    <th class="align-middle" scope="row">{{$activity_records->id}}</th>
                     <td class="align-middle">{{$activity_records->activity_recordName}}</td>
                     <td class="align-middle">{{$activity_records->subtitleName}}</td>
                     <td class="align-middle"><img src="{{url('../img/activity_record/' . $activity_records->img)}}" alt="Smiley face" height="100" width="100"></td>

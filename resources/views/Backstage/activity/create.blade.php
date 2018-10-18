@@ -20,8 +20,7 @@
         <thead>
         <tr>
             <th scope="col">活動名稱</th>
-            <th>刪除</th>
-            <th>修改</th>
+            <th>修改/刪除</th>
         </tr>
         </thead>
         <tbody>
@@ -32,10 +31,10 @@
                     <input id="update{{$activityLists->id}}" name="name" class="form-control" placeholder="請輸入活動名稱"
                            style="width: 100%" hidden="hidden" value="{{$activityLists->name}}">
                 </td>
-                <td class="align-middle"><button data-content="{{$activityLists->id}}" id="delete" class="delete btn btn-danger">刪除</button></td>
                 <td class="align-middle">
-                    <button data-content="{{$activityLists->id}}" id="update" class="update btn btn-success">修改</button>
                     <button data-content="{{$activityLists->id}}" id="send" class="send btn btn-success" hidden="hidden">送出</button>
+                    <button data-content="{{$activityLists->id}}" id="update" class="update btn btn-success">修改</button>
+                    <button data-content="{{$activityLists->id}}" id="delete" class="delete btn btn-danger">刪除</button>
                 </td>
             </tr>
         @endforeach
@@ -53,15 +52,14 @@
         console.log(true);
         var id = $(this).attr('data-content');
         var tr = document.getElementById('tr' + id);
-        var deleteTd = tr.children[tr.children.length - 2];
-        var deleteButton = deleteTd.children[deleteTd.children.length - 1];
+        var editTd = tr.children[tr.children.length - 1];
+        var deleteButton = editTd.children[editTd.children.length - 1];
         deleteButton.setAttribute("disabled", "");
-        var updateTd = tr.children[tr.children.length - 1];
-        var updateButton = updateTd.children[updateTd.children.length - 2];
-        var sendButton = updateTd.children[updateTd.children.length - 1];
+        var updateButton = editTd.children[editTd.children.length - 2];
+        var sendButton = editTd.children[editTd.children.length - 3];
         updateButton.setAttribute("hidden", "hidden");
         sendButton.removeAttribute("hidden");
-        var contentTd = tr.children[tr.children.length - 3];
+        var contentTd = tr.children[tr.children.length - 2];
         var contentP = contentTd.children[contentTd.children.length - 2];
         var contentInput = contentTd.children[contentTd.children.length - 1];
         contentP.setAttribute("hidden", "hidden");
@@ -86,18 +84,17 @@
             success: function ($request) {
                 console.log($request);
                 var tr = document.getElementById('tr' + $request['id']);
-                var contentTd = tr.children[tr.children.length - 3];
+                var contentTd = tr.children[tr.children.length - 2];
                 var contentP = contentTd.children[contentTd.children.length - 2];
                 var contentInput = contentTd.children[contentTd.children.length - 1];
                 contentP.removeAttribute("hidden");
                 contentP.innerHTML = $request['content'];
                 contentInput.setAttribute("hidden", "hidden");
-                var deleteTd = tr.children[tr.children.length - 2];
-                var deleteButton = deleteTd.children[deleteTd.children.length - 1];
+                var editTd = tr.children[tr.children.length - 1];
+                var deleteButton = editTd.children[editTd.children.length - 1];
                 deleteButton.removeAttribute("disabled");
-                var updateTd = tr.children[tr.children.length - 1];
-                var updateButton = updateTd.children[updateTd.children.length - 2];
-                var sendButton = updateTd.children[updateTd.children.length - 1];
+                var updateButton = editTd.children[editTd.children.length - 2];
+                var sendButton = editTd.children[editTd.children.length - 3];
                 updateButton.removeAttribute("hidden");
                 sendButton.setAttribute("hidden", "hidden");
             }
@@ -122,7 +119,10 @@
             },
             url: "{{route('destroy.activity')}}",
             method: "POST",
-            data: {id: id},
+            data: {
+                id: id,
+                _token: '{{csrf_token()}}'
+            },
             success: function ($sen) {
                 var TrId = $sen['id'];
                 console.log(TrId);
