@@ -34,6 +34,7 @@
             </div>
             <div class="text-left">
                 <button type="submit" class="create btn btn-success" id="createButton">修改</button>
+                <a href="{{route('show.activity_record.form')}}" class="btn btn-danger">返回</a>
             </div>
         </form>
         @endforeach

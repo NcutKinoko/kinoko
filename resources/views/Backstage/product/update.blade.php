@@ -54,6 +54,7 @@
             </div>
             <div class="text-left">
                 <button type="submit" class="btn btn-success" id="updateButton">修改</button>
+                <a href="{{route('show.product.form')}}" class="btn btn-danger">返回</a>
             </div>
         </form>
     @endforeach

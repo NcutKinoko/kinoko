@@ -50,6 +50,7 @@
             </div>
             <div class="text-left">
                 <button type="submit" id="updateButton" class="btn btn-success">修改</button>
+                <a href="{{route('show.farmer.form')}}" class="btn btn-danger">返回</a>
             </div>
         </form>
     @endforeach
