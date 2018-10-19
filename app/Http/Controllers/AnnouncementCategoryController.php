@@ -95,7 +95,7 @@ class AnnouncementCategoryController extends Controller
     {
         $category = AnnouncementCategory::find($request->input('id'));
         $category->delete();
-        DB::table('announcement')->where('announcement_category_id	', $request['id'])->update(['announcement_category_id' => 0]);
+        DB::table('announcement')->where('announcement_category_id', $request['id'])->update(['announcement_category_id' => 0]);
         $sen['id'] = $request['id'];
         return response($sen);
     }
