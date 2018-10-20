@@ -9,20 +9,58 @@
         <script type="text/javascript" src="{{asset('js/index.js')}}"></script>
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </head>
-    <div class="padding">
-
-    </div>
-    <br>
-    <br>
+    <div class="padding"></div>
     <div class="container-fluid container-background-color">
-        <div class="row">
+        <!--<div class="row">
             <div class="col-md-12 text-center title-format">
                 <h1>產品</h1>
                 <h1>PRODUCT</h1>
             </div>
+        </div>-->
+        <div class="imageslider">
+            <a href=""><img style="width: 100%; height: 50% " src="../img/Test.jpg" alt="Test" /></a>
+            <a href=""><img style="width: 100%; height: 50% " src="../img/Test2.jpg" alt="Test" /></a>
+            <a href=""><img style="width: 100%; height: 50% " src="../img/Test.jpg" alt="Test" /></a>
+            <a href=""><img style="width: 100%; height: 50% " src="../img/Test2.jpg" alt="Test" /></a>
+            <a href=""><img style="width: 100%; height: 50% " src="../img/Test.jpg" alt="Test" /></a>
         </div>
         <br>
-        <div id="carouselProduct" class="carousel slide" data-ride="carousel" data-interval="9000">
+        <div style="text-align: center;padding-top: 50%; font-size: medium;  font-weight: bold;font-family: '微軟正黑體', serif; font-size: xx-large">
+            <a style="color: #1e7e34">最新消息</a><a style="color: darksalmon">News</a>
+        </div>
+
+        <hr>
+
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 10%">
+                    <a href="#">休閒趣事</a>
+                </td>
+                <td style="width: 80%">
+                    <a href="#">今日公告事項</a>
+                </td>
+                <td style="text-align: right;">
+                    <span><a style="color: white" href="#">2018/10/18</a></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%">
+                    <a href="#">休閒趣事</a>
+                </td>
+                <td style="width: 80%">
+                    <a href="#">今日公告事項</a>
+                </td>
+                <td style="text-align: right;">
+                    <span><a style="color: white" href="#">2018/10/18</a></span>
+                </td>
+            </tr>
+        </table>
+        <p></p>
+        <div style="text-align: right">
+            <button>更多最新消息</button>
+        </div>
+
+        <!--<div id="carouselProduct" class="carousel slide" data-ride="carousel" data-interval="9000">
             <div class="carousel-inner row w-100 mx-auto" role="listbox">
                 <?php $count = 0?>
                 @foreach($productList as $productLists)
@@ -79,7 +117,7 @@
                 <i class="fa fa-chevron-right fa-lg text-muted"></i>
                 <span class="sr-only">Next</span>
             </a>
-        </div>
+        </div>-->
     </div>
 <br>
 @endsection
