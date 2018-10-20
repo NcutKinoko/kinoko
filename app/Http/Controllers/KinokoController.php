@@ -95,10 +95,8 @@ class KinokoController extends Controller
      */
     public function destroy($id)
     {
-        $menu = Kinoko::find($id);
-        $menu->delete();
-        $whereArray = array('KinokoStandard_id' => $id);
-        DB::table('ratingdescription')->where($whereArray)->delete();
+        DB::table('kinoko_standard')->where('id' , $id)->delete();
+        DB::table('ratingdescription')->where('KinokoStandard_id' , $id)->delete();
         return redirect()->back();
     }
 }

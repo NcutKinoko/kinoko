@@ -92,7 +92,7 @@ class RatingDescriptionController extends Controller
     {
         $RatingDescription = RatingDescription::find($request->input('id'));
         $RatingDescription->delete();
-
-        return redirect()->back();
+        $sen['id'] = $request['id'];
+        return response($sen);
     }
 }

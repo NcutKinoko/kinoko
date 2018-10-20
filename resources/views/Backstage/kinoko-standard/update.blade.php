@@ -1,4 +1,10 @@
-<div>
+@extends('Backstage.layouts.master')
+
+@section('title', 'HOME')
+
+@section('content')
+<div class="container-fluid">
+    <h1 style="text-align: center">修改香菇評比標準</h1>
     @foreach($updateKinoko as $updateKinokos)
         <form action="{{route('update.kinoko',$updateKinokos->id)}}" method="POST" role="form"
               enctype="multipart/form-data">
@@ -20,6 +26,7 @@
             </div>
             <div class="text-left">
                 <button type="submit" class="btn btn-success" id="updateButton">修改</button>
+                <a href="{{route('show.kinoko.form')}}" class="btn btn-danger">返回</a>
             </div>
         </form>
     @endforeach
@@ -34,3 +41,4 @@
         });
     </script>
 </div>
+    @endsection

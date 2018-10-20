@@ -1,49 +1,70 @@
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-</head>
-<body>
-<form action="{{route('store.activity_record')}}" id="createActivityRecord" method="POST" role="form"
-      enctype="multipart/form-data">
-    {{ csrf_field() }}
-    <div class="form-group">
-        <label>標題</label>
-        <input id="name" name="name" class="form-control" placeholder="請輸入標題" required>
-    </div>
-    <div class="form-group">
-        <label>所屬副標題</label>
-        <select name="subtitle_id" class="form-control" required>
-            <option value="" disabled="disabled" selected="selected">請選擇副標題</option>
-            @foreach($subtitleList as $subtitleLists)
-                <option value={{$subtitleLists->id}}>{{$subtitleLists->name}}</option>
+@extends('Backstage.layouts.master')
+
+@section('title', 'HOME')
+
+@section('content')
+    <div class="container-fluid">
+        <h1 style="text-align: center">活動圖片</h1>
+        <form action="{{route('store.activity_record')}}" id="createActivityRecord" method="POST" role="form"
+              enctype="multipart/form-data" style="margin-bottom: 16px">
+            {{ csrf_field() }}
+            <div class="form-group">
+                <label>標題</label>
+                <input id="name" name="name" class="form-control" placeholder="請輸入標題" required>
+            </div>
+            <div class="form-group">
+                <label>所屬副標題</label>
+                <select name="subtitle_id" class="form-control" required>
+                    <option value="" disabled="disabled" selected="selected">請選擇副標題</option>
+                    @foreach($subtitleList as $subtitleLists)
+                        <option value={{$subtitleLists->id}}>{{$subtitleLists->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label>圖片</label>
+                <input type="file" id="img" name="img" class="form-control" placeholder="請輸選擇圖片" required>
+            </div>
+            <div class="text-left">
+                <button type="submit" class="create btn btn-success" id="createButton">新增</button>
+            </div>
+        </form>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">標題</th>
+                <th scope="col">所屬副標題</th>
+                <th scope="col">圖片</th>
+                <th scope="col">修改/刪除</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($activity_record as $activity_records)
+                <tr>
+                    <td class="align-middle">{{$activity_records->activity_recordName}}</td>
+                    <td class="align-middle">{{$activity_records->subtitleName}}</td>
+                    <td class="align-middle"><img src="{{url('../img/activity_record/' . $activity_records->img)}}" alt="Smiley face" height="100" width="100"></td>
+                    <td class="align-middle">
+                        <a href="{{route('show.activity_record.updateForm',$activity_records->id)}}" class="btn btn-success" style="display: inline-block">修改</a>
+                        <form class="delete" action="{{route('destroy.activity_record',$activity_records->id)}}" method="POST" onsubmit="return ConfirmDelete()" style="display: inline-block; margin: 0;">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                            <input type="submit" class="btn btn-danger" value="刪除">
+                        </form>
+                    </td>
+                </tr>
             @endforeach
-        </select>
+            </tbody>
+        </table>
     </div>
-    <div class="form-group">
-        <label>圖片</label>
-        <input type="file" id="img" name="img" class="form-control" placeholder="請輸選擇圖片" required>
-    </div>
-    <div class="text-left">
-        <button type="submit" class="create btn btn-success" id="createButton">新增</button>
-    </div>
-</form>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">編號</th>
-        <th scope="col">標題</th>
-        <th scope="col">所屬副標題</th>
-        <th scope="col">圖片</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach($activity_record as $activity_records)
-    <tr>
-        <th class="align-middle" scope="row">{{$activity_records->id}}</th>
-        <td class="align-middle">{{$activity_records->activity_recordName}}</td>
-        <td class="align-middle">{{$activity_records->subtitleName}}</td>
-        <td class="align-middle"><img src="{{url('../img/activity_record/' . $activity_records->img)}}" alt="Smiley face" height="100" width="100"></td>
-    </tr>
-    @endforeach
-    </tbody>
-</table>
-</body>
+    <script type="text/javascript">
+        function ConfirmDelete()
+        {
+            var x = confirm("你確定要刪除此活動圖片嗎?");
+            if (x)
+                return true;
+            else
+                return false;
+        }
+    </script>
+@endsection

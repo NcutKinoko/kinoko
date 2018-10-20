@@ -1,13 +1,12 @@
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
-<body>
+@extends('Backstage.layouts.master')
+
+@section('title', 'HOME')
+
+@section('content')
 <div class="container-fluid">
-    <h1 style="text-align: center">菜單</h1>
+    <h1 style="text-align: center">修改菜單</h1>
     @foreach($updateMenu as $updateMenus)
-    <form action="{{route('update.menu',$updateMenus->id)}}" method="POST" role="form" enctype="multipart/form-data">
+    <form action="{{route('update.menu',$updateMenus->id)}}" method="POST" role="form" enctype="multipart/form-data" style="margin-bottom: 16px">
         {{ csrf_field() }}
         <div class="form-group">
             <label>料理名稱</label>
@@ -28,7 +27,7 @@
                     <option value="0" selected="selected">此菜餚未使用產品</option>
                 @endif
                 @foreach($categoryList as $categoryLists)
-                    @if($categoryLists->id = $updateMenus->product_id)
+                    @if($categoryLists->id == $updateMenus->product_id)
                         <option value="{{$categoryLists->id}}" selected="selected">{{$categoryLists->name}}</option>
                     @else
                         <option value="{{$categoryLists->id}}">{{$categoryLists->name}}</option>
@@ -50,7 +49,9 @@
         </div>
         <div class="text-left">
             <button type="submit" class="btn btn-success">修改</button>
+            <a href="{{route('show.menu.form')}}" class="btn btn-danger">返回</a>
         </div>
     </form>
         @endforeach
 </div>
+    @endsection

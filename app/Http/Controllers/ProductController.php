@@ -31,8 +31,8 @@ class ProductController extends Controller
     {
         $CategoryList = Category::all();
         $product = DB::table('product')
-            ->join('category','product.category_id','=','category.id')
-            ->select('product.id','product.name','category.name as categoryName','product.price','product.inventory','product.size','product.introduction','product.img')
+            ->leftJoin('category','product.category_id','=','category.id')
+            ->select('product.id','product.name',DB::raw('(CASE WHEN product.category_id = "0" THEN "此產品未分類" ELSE category.name END) AS categoryName'),'product.price','product.inventory','product.size','product.introduction','product.img')
         ->get();
         return view('Backstage.product.create', compact('CategoryList', 'product'));
     }

@@ -1,11 +1,13 @@
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-</head>
+@extends('Backstage.layouts.master')
+
+@section('title', 'HOME')
+
+@section('content')
 <div class="container-fluid">
-    <h1 style="text-align: center">產品修改</h1>
+    <h1 style="text-align: center">修改產品</h1>
     @foreach($updateProduct as $updateProducts)
         <form action="{{route('update.product',$updateProducts->id)}}" method="POST" role="form"
-              enctype="multipart/form-data">
+              enctype="multipart/form-data" style="margin-bottom: 16px">
             {{ csrf_field() }}
             <div class="form-group">
                 <label>產品名稱</label>
@@ -19,7 +21,7 @@
                         <option value="0" selected="selected">此產品未分類</option>
                     @endif
                     @foreach($categoryList as $CategoryLists)
-                        @if($CategoryLists->id = $updateProducts->category_id)
+                        @if($CategoryLists->id == $updateProducts->category_id)
                             <option value="{{$CategoryLists->id}}" selected="selected">{{$CategoryLists->name}}</option>
                         @else
                             <option value="{{$CategoryLists->id}}">{{$CategoryLists->name}}</option>
@@ -52,6 +54,7 @@
             </div>
             <div class="text-left">
                 <button type="submit" class="btn btn-success" id="updateButton">修改</button>
+                <a href="{{route('show.product.form')}}" class="btn btn-danger">返回</a>
             </div>
         </form>
     @endforeach
@@ -71,3 +74,4 @@
         });
     </script>
 </div>
+    @endsection
