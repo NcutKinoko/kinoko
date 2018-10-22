@@ -32,6 +32,23 @@
                 <button type="submit" class="btn btn-success" id="createButton">新增</button>
             </div>
         </form>
+
+        <form action="{{route('search.announcement')}}" method="POST" class="card card-sm" style="margin-bottom: 16px;">
+            {{ csrf_field() }}
+            <div class="card-body row no-gutters align-items-center">
+                <!--end of col-->
+                <div class="col">
+                    <input class="form-control form-control-lg form-control-borderless" name="search" type="search"
+                           placeholder="搜尋公告名稱" required>
+                </div>
+                <!--end of col-->
+                <div class="col-auto">
+                    <button class="btn btn-lg btn-success" type="submit">搜尋</button>
+                </div>
+                <!--end of col-->
+            </div>
+        </form>
+
         <table class="table" id="categoryTable">
             <thead>
             <tr>

@@ -99,4 +99,10 @@ class AnnouncementCategoryController extends Controller
         $sen['id'] = $request['id'];
         return response($sen);
     }
+
+    public function search(Request $request)
+    {
+        $announcementCategoryList = DB::table('announcementcategory')->where('name','like',"%{$request['search']}%")->get();
+        return view('Backstage.announcement_category.create',compact('announcementCategoryList'));
+    }
 }

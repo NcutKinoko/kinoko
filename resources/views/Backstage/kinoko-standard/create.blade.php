@@ -27,7 +27,7 @@
     <table class="table">
         <thead>
         <tr style="text-align: center">
-            <th style="width: 50%">菜餚資料</th>
+            <th style="width: 50%">評分項目/配分/測定方法 資料</th>
             <th>步驟資料</th>
         </tr>
         </thead>

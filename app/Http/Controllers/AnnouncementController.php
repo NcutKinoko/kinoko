@@ -127,4 +127,15 @@ class AnnouncementController extends Controller
         DB::table('announcement')->where('id', $id)->delete();
         return redirect()->back();
     }
+
+    public function search(Request $request)
+    {
+        $AnnouncementCategoryList = AnnouncementCategory::all();
+        $Announcement = DB::table('announcement')
+            ->leftJoin('announcementcategory','announcement.announcement_category_id','=','announcementcategory.id')
+            ->select('announcement.id','announcement.title',DB::raw('(CASE WHEN announcement.announcement_category_id = "0" THEN "此公告未分類" ELSE announcementcategory.name END) AS AnnouncementCategoryName'),'announcement.content','announcement.img')
+            ->where('announcement.title','like',"%{$request['search']}%")
+            ->get();
+        return view('Backstage.announcement.create',compact('Announcement','AnnouncementCategoryList'));
+    }
 }

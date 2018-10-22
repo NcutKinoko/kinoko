@@ -101,4 +101,12 @@ class CategoryController extends Controller
         $sen['id'] = $request['id'];
         return response($sen);
     }
+
+    public function search(Request $request)
+    {
+        $categoryList = DB::table('category')
+            ->where('name','like',"%{$request['search']}%")
+            ->get();
+        return view('Backstage.category.create',compact('categoryList'));
+    }
 }

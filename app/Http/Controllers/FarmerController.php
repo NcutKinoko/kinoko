@@ -133,4 +133,10 @@ class FarmerController extends Controller
         DB::table('farmer')->where('id',$id)->delete();
         return redirect()->back();
     }
+
+    public function search(Request $request)
+    {
+        $farmerList = DB::table('farmer')->where('name','like',"%{$request['search']}%")->get();
+        return view('Backstage.farmer.create', compact('farmerList'));
+    }
 }

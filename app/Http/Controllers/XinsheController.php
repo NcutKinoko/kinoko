@@ -118,4 +118,10 @@ class XinsheController extends Controller
         DB::table('xinshe')->where('id', $id)->delete();
         return redirect()->back();
     }
+
+    public function search(Request $request)
+    {
+        $XinsheList = DB::table('xinshe')->where('title','like',"%{$request['search']}%")->get();
+        return view('Backstage.xinshe.create',compact('XinsheList'));
+    }
 }

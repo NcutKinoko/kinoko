@@ -145,4 +145,16 @@ class MenuController extends Controller
         DB::table('step')->where($whereArray)->delete();
         return redirect()->back();
     }
+
+    public function search(Request $request)
+    {
+        $productList = Product::all();
+        $menuList = DB::table('menu')
+            ->leftJoin('product','menu.product_id','=','product.id')
+            ->select('menu.id','menu.name as menuName',DB::raw('(CASE WHEN menu.product_id = "0" THEN "此菜餚未使用產品" ELSE product.name END) AS productName'),'menu.sauce','menu.seasoning','menu.material','menu.img','menu.remark')
+            ->where('menu.name','like',"%{$request['search']}%")
+            ->get();
+        $stepList = Step::all();
+        return view('Backstage.menu.create',compact('productList','menuList','stepList'));
+    }
 }

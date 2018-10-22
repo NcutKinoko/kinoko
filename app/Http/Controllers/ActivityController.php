@@ -97,4 +97,10 @@ class ActivityController extends Controller
         $sen['id'] = $request['id'];
         return response($sen);
     }
+
+    public function search(Request $request)
+    {
+        $activityList = DB::table('activity')->where('name','like',"%{$request['search']}%")->get();
+        return view('Backstage.activity.create',compact('activityList'));
+    }
 }

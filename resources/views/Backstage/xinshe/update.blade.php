@@ -1,9 +1,10 @@
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
-<body>
-<div>
+@extends('Backstage.layouts.master')
+
+@section('title', 'HOME')
+
+@section('content')
+<div class="container-fluid">
+    <h1 style="text-align: center">修改關於新社農會</h1>
     @foreach($updateXinshe as $updateXinshes)
     <form action="{{route('update.xinshe',$updateXinshes->id)}}" method="POST" role="form" enctype="multipart/form-data">
         {{ csrf_field() }}
@@ -25,4 +26,4 @@
     </form>
         @endforeach
 </div>
-</body>
+@endsection

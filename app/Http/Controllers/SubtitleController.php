@@ -102,4 +102,16 @@ class SubtitleController extends Controller
         DB::table('activity_record')->where('subtitle_id',$id)->update(['subtitle_id' => 0]);
         return redirect()->route('show.subtitle.form');
     }
+
+    public function search(Request $request)
+    {
+        $activityList = Activity::all();
+        $subtitleList = DB::table('subtitle')
+            ->leftJoin('activity','subtitle.activity_id','=','activity.id')
+            ->select('subtitle.id','subtitle.name as subtitleName',DB::raw('(CASE WHEN subtitle.activity_id = "0" THEN "此副標未屬於任何活動" ELSE activity.name END) AS activityName'))
+            ->where('subtitle.name','like',"%{$request['search']}%")
+            ->orderBy("subtitle.id")
+            ->get();
+        return view('Backstage.subtitle.create',compact('activityList','subtitleList'));
+    }
 }

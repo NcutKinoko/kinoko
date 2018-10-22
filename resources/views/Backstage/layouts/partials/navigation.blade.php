@@ -42,6 +42,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('show.announcement.form')}}">新增公告</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('show.xinshe.form')}}">關於新社農會</a>
+                </li>
             @else
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('Backstage.index')}}">首頁</a>

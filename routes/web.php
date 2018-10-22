@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth:backstage']], function() {
         Route::POST('/store','CategoryController@store')->name('store.category');
         Route::POST('/destroy','CategoryController@destroy')->name('destroy.category');
         Route::POST('/update','CategoryController@update')->name('update.category');
+        Route::POST('/search','CategoryController@search')->name('search.category');
     });
 
     Route::prefix('menu')->group(function (){
@@ -52,6 +53,7 @@ Route::group(['middleware' => ['auth:backstage']], function() {
         Route::get('/update/form/{id}','MenuController@edit')->name('show.menu.updateForm');
         Route::POST('/update/{id}','MenuController@update')->name('update.menu');
         Route::delete('/destroy/{id}','MenuController@destroy')->name('destroy.menu');
+        Route::POST('/search','MenuController@search')->name('search.menu');
     });
 
     Route::prefix('product')->group(function (){
@@ -60,6 +62,7 @@ Route::group(['middleware' => ['auth:backstage']], function() {
         Route::get('/update/form/{id}','ProductController@edit')->name('show.product.updateForm');
         Route::POST('/update/{id}','ProductController@update')->name('update.product');
         Route::delete('/destroy/{id}','ProductController@destroy')->name('destroy.product');
+        Route::POST('/search','ProductController@search')->name('search.product');
     });
 
     Route::prefix('step')->group(function (){
@@ -88,6 +91,7 @@ Route::group(['middleware' => ['auth:backstage']], function() {
         Route::get('/update/form/{id}','FarmerController@edit')->name('show.farmer.updateForm');
         Route::POST('/update/{id}','FarmerController@update')->name('update.farmer');
         Route::delete('/destroy/{id}','FarmerController@destroy')->name('destroy.farmer');
+        Route::POST('/search','FarmerController@search')->name('search.farmer');
     });
 
     Route::prefix('xinshe')->group(function (){
@@ -96,6 +100,7 @@ Route::group(['middleware' => ['auth:backstage']], function() {
         Route::get('/update/form/{id}','XinsheController@edit')->name('show.xinshe.updateForm');
         Route::POST('/update/{id}','XinsheController@update')->name('update.xinshe');
         Route::delete('/destroy/{id}','XinsheController@destroy')->name('destroy.xinshe');
+        Route::POST('/search','XinsheController@search')->name('search.xinshe');
     });
 
     Route::prefix('ProductionProcess')->group(function (){
@@ -111,6 +116,7 @@ Route::group(['middleware' => ['auth:backstage']], function() {
         Route::POST('/store','ActivityController@store')->name('store.activity');
         Route::POST('/update','ActivityController@update')->name('update.activity');
         Route::POST('/destroy','ActivityController@destroy')->name('destroy.activity');
+        Route::POST('/search','ActivityController@search')->name('search.menu');
     });
 
     Route::prefix('subtitle')->group(function (){
@@ -119,6 +125,7 @@ Route::group(['middleware' => ['auth:backstage']], function() {
         Route::get('/update/form/{id}','SubtitleController@edit')->name('show.subtitle.updateForm');
         Route::POST('/update/{id}','SubtitleController@update')->name('update.subtitle');
         Route::delete('/destroy/{id}','SubtitleController@destroy')->name('destroy.subtitle');
+        Route::POST('/search','SubtitleController@search')->name('search.subtitle');
     });
 
     Route::prefix('activity_record')->group(function (){
@@ -127,6 +134,7 @@ Route::group(['middleware' => ['auth:backstage']], function() {
         Route::get('/update/form/{id}','ActivityRecordController@edit')->name('show.activity_record.updateForm');
         Route::POST('/update/{id}','ActivityRecordController@update')->name('update.activity_record');
         Route::delete('/destroy/{id}','ActivityRecordController@destroy')->name('destroy.activity_record');
+        Route::POST('/search','ActivityRecordController@search')->name('search.activity_record');
     });
 
     Route::prefix('announcement')->group(function (){
@@ -135,6 +143,7 @@ Route::group(['middleware' => ['auth:backstage']], function() {
         Route::get('/update/form/{id}','AnnouncementController@edit')->name('show.announcement.updateForm');
         Route::POST('/update/{id}','AnnouncementController@update')->name('update.announcement');
         Route::delete('/destroy/{id}','AnnouncementController@destroy')->name('destroy.announcement');
+        Route::POST('/search','AnnouncementController@search')->name('search.announcement');
     });
 
     Route::prefix('announcement_category')->group(function (){
@@ -142,6 +151,7 @@ Route::group(['middleware' => ['auth:backstage']], function() {
         Route::POST('/store','AnnouncementCategoryController@store')->name('store.announcement_category');
         Route::POST('/update','AnnouncementCategoryController@update')->name('update.announcement_category');
         Route::POST('/destroy','AnnouncementCategoryController@destroy')->name('destroy.announcement_category');
+        Route::POST('/search','AnnouncementCategoryController@search')->name('search.announcement_category');
     });
 });
 

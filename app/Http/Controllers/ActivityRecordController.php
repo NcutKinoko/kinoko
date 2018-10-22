@@ -121,4 +121,15 @@ class ActivityRecordController extends Controller
         DB::table('activity_record')->where('id',$id)->delete();
         return redirect()->back();
     }
+
+    public function search(Request $request)
+    {
+        $subtitleList = Subtitle::all();
+        $activity_record = DB::table('activity_record')
+            ->leftJoin('subtitle','activity_record.subtitle_id','=','subtitle.id')
+            ->select('activity_record.id','activity_record.name as activity_recordName',DB::raw('(CASE WHEN activity_record.subtitle_id = "0" THEN "此圖片未有所屬的副標" ELSE subtitle.name END) AS subtitleName'),'activity_record.img')
+            ->where('activity_record.name','like',"%{$request['search']}%")
+            ->get();
+        return view('Backstage.activity_record.create',compact('subtitleList','activity_record'));
+    }
 }
