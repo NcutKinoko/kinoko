@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class BackstageUsersTable extends Migration
+class Level extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,9 @@ class BackstageUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('Backstage_users', function (Blueprint $table) {
+        Schema::create('level', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('account')->unique();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->boolean('IsCancel')->default(0);
-            $table->integer('level_id')->default(2);
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ class BackstageUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Backstage_users');
+        Schema::dropIfExists('level');
     }
 }

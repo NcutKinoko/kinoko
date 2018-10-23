@@ -153,6 +153,14 @@ Route::group(['middleware' => ['auth:backstage']], function() {
         Route::POST('/destroy','AnnouncementCategoryController@destroy')->name('destroy.announcement_category');
         Route::POST('/search','AnnouncementCategoryController@search')->name('search.announcement_category');
     });
+
+    Route::prefix('BackstageAuth')->group(function (){
+        Route::get('/management','BackstageController@ShowManagement')->name('management.BackstageAuth');
+        Route::get('/open/{id}','BackstageController@open')->name('open.BackstageAuth');
+        Route::get('/close/{id}','BackstageController@close')->name('close.BackstageAuth');
+        Route::delete('/destroy/{id}','BackstageController@destroy')->name('destroy.BackstageAuth');
+        Route::POST('/update/{id}','BackstageController@update')->name('update.BackstageAuth');
+    });
 });
 
 Route::prefix('product')->group(function (){

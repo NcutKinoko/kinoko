@@ -27,7 +27,7 @@ class ProductionProcessController extends Controller
     public function create()
     {
         $ProductionProcess = ProductionProcess::all();
-        return view('ProductionProcess.create',compact('ProductionProcess'));
+        return view('Backstage.ProductionProcess.create',compact('ProductionProcess'));
     }
 
     /**
@@ -70,7 +70,7 @@ class ProductionProcessController extends Controller
     public function edit($id)
     {
         $updateProductionProcess = ProductionProcess::all()->where('id',$id);
-        return view('ProductionProcess.update',compact('updateProductionProcess'));
+        return view('Backstage.ProductionProcess.update',compact('updateProductionProcess'));
     }
 
     /**

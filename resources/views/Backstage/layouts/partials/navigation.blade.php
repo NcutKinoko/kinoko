@@ -45,6 +45,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('show.xinshe.form')}}">關於新社農會</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('show.process.form')}}">產品生產流程</a>
+                </li>
+                @if(\Illuminate\Support\Facades\Auth::guard('backstage')->user()->level_id == 1)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('management.BackstageAuth')}}">會員管理</a>
+                    </li>
+                @endif
             @else
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('Backstage.index')}}">首頁</a>
@@ -56,7 +64,8 @@
                 @if(\Illuminate\Support\Facades\Auth::guard('backstage')->check())
                     <li class="dropdown-right-top"
                         style="color: black;text-decoration: none;padding: 14px 50px;border-radius: 10px;">
-                        {{ \Illuminate\Support\Facades\Auth::guard('backstage')->user()->name }} <i class="fa fa-caret-down"></i>
+                        {{ \Illuminate\Support\Facades\Auth::guard('backstage')->user()->name }} <i
+                                class="fa fa-caret-down"></i>
                         <ul>
                             <li>
                                 <a class="nav-item" href="{{ route('Logout_New') }}"

@@ -26,7 +26,7 @@ class BackstageResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/index';
+    protected $redirectTo = 'Backstage/index';
 
     /**
      * Create a new controller instance.

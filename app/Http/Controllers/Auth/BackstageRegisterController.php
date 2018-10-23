@@ -7,6 +7,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -67,6 +68,17 @@ class BackstageRegisterController extends Controller
      */
     protected function create(Request $request)
     {
+
+        if (Backstage::all()->where('account',$request['account'])->isNotEmpty())
+        {
+            return back()->with('error','此帳號已被使用');
+        };
+
+        if (Backstage::all()->where('email',$request['email'])->isNotEmpty())
+        {
+            return back()->with('error','此email已被使用');
+        };
+
         Backstage::create([
             'name' => $request['name'],
             'account' => $request['account'],

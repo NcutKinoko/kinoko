@@ -67,7 +67,7 @@ class BackstageForgotPasswordController extends Controller
      */
     protected function sendResetLinkResponse($response)
     {
-        return back()->with('status', trans($response));
+        return back()->with('status', "系統已發送修改密碼email至您的信箱中!");
     }
     /**
      * Get the response for a failed password reset link.
