@@ -4,6 +4,7 @@
 
 @section('content')
     <div class="container-fluid">
+        <h1 style="text-align: center">會員管理</h1>
         <table class="table" id="productTable">
             <thead>
             <tr>
@@ -25,9 +26,9 @@
                     <td class="align-middle">{{$AuthLists->LevelName}}</td>
                     <td class="align-middle">
                         <form action="{{route('update.BackstageAuth',$AuthLists->id)}}" method="POST" role="form"
-                              enctype="multipart/form-data">
+                              enctype="multipart/form-data" onsubmit="return ConfirmIsCancel()">
                             {{ csrf_field() }}
-                            <div class="form-group" style="display: inline-block">
+                            <div class="form-group" style="display: inline-block; margin:0;">
                                 <select class="form-control" name="level" required>
                                     @foreach($LevelList as $LevelLists)
                                         @if($LevelLists->id == $AuthLists->level_id)
@@ -48,10 +49,10 @@
                     <td class="align-middle">
                         @if($AuthLists->IsCancel == "已開啟")
                             <a href="{{route('close.BackstageAuth',$AuthLists->id)}}" class="btn btn-primary"
-                               style="display: inline-block">關閉</a>
+                               style="display: inline-block" onclick="return ConfirmClose()">關閉</a>
                         @elseif($AuthLists->IsCancel == "未開啟")
                             <a href="{{route('open.BackstageAuth',$AuthLists->id)}}" class="btn btn-primary"
-                               style="display: inline-block">開啟</a>
+                               style="display: inline-block" onclick="return ConfirmOpen()">開啟</a>
                         @endif
                         <form class="delete" action="{{route('destroy.BackstageAuth',$AuthLists->id)}}" method="POST"
                               onsubmit="return ConfirmDelete()" style="display: inline-block; margin: 0;">
@@ -68,6 +69,27 @@
     <script type="text/javascript">
         function ConfirmDelete() {
             var x = confirm("你確定要刪除此會員嗎?");
+            if (x)
+                return true;
+            else
+                return false;
+        }
+        function ConfirmIsCancel() {
+            var x = confirm("你確定要變更此會員權限嗎?");
+            if (x)
+                return true;
+            else
+                return false;
+        }
+        function ConfirmOpen() {
+            var x = confirm("你確定要開起此會員使用權嗎?");
+            if (x)
+                return true;
+            else
+                return false;
+        }
+        function ConfirmClose() {
+            var x = confirm("你確定要關閉此會員使用權嗎?");
             if (x)
                 return true;
             else

@@ -6,7 +6,11 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('後台會員登入') }}</div>
-
+                @if(session('success'))
+                    <div class="alert alert-success">{{session('success')}}</div>
+                @elseif(session('error'))
+                    <div class="alert alert-danger">{{session('error')}}</div>
+                @endif
                 <div class="card-body">
                     <form method="POST" action="{{ route('Backstage.login') }}" aria-label="{{ __('Login') }}">
                         @csrf

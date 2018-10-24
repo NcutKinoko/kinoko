@@ -161,6 +161,15 @@ Route::group(['middleware' => ['auth:backstage']], function() {
         Route::delete('/destroy/{id}','BackstageController@destroy')->name('destroy.BackstageAuth');
         Route::POST('/update/{id}','BackstageController@update')->name('update.BackstageAuth');
     });
+
+    Route::prefix('slide')->group(function (){
+        Route::get('/create/form','SlideController@create')->name('show.slide.form');
+        Route::POST('/store','SlideController@store')->name('store.slide');
+        Route::get('/update/form/{id}','SlideController@edit')->name('show.slide.updateForm');
+        Route::POST('/update/{id}','SlideController@update')->name('update.slide');
+        Route::delete('/destroy/{id}','SlideController@destroy')->name('destroy.slide');
+        Route::POST('/search','SlideController@search')->name('search.slide');
+    });
 });
 
 Route::prefix('product')->group(function (){
