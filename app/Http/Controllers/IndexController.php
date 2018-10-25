@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Menu;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
@@ -17,7 +18,8 @@ class IndexController extends Controller
     {
         $productList = Product::all();
         $menuList = Menu::all();
-        return view('index.index',compact('productList','menuList'));
+        $slideList = DB::table('slide')->get();
+        return view('index.index',compact('productList','menuList','slideList'));
     }
 
     /**

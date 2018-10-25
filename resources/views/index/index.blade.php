@@ -18,11 +18,9 @@
             </div>
         </div>-->
         <div class="imageslider">
-            <a href=""><img style="width: 100%; height: 50% " src="../img/Test.jpg" alt="Test"/></a>
-            <a href=""><img style="width: 100%; height: 50% " src="../img/Test2.jpg" alt="Test"/></a>
-            <a href=""><img style="width: 100%; height: 50% " src="../img/Test.jpg" alt="Test"/></a>
-            <a href=""><img style="width: 100%; height: 50% " src="../img/Test2.jpg" alt="Test"/></a>
-            <a href=""><img style="width: 100%; height: 50% " src="../img/Test.jpg" alt="Test"/></a>
+            @foreach($slideList as $slideLists)
+                <a href=""><img style="width: 100%; height: 50% " src="{{url('../img/slide/' . $slideLists->img)}}" alt="Test"/></a>
+            @endforeach
         </div>
         <br>
         <div style="text-align: center;padding-top: 50%; font-size: medium;  font-weight: bold;font-family: '微軟正黑體', serif; font-size: xx-large">
@@ -123,13 +121,46 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var slide = document.getElementsByClassName('imageslider');//取得幻燈片的htmlcollection物件
-            var SlideNumber = 0;
+            var SlideDelayNumber = 0;
+            var SlideTotalNumber = 0;
+            var SlideFirstNumber = 0;
+            var SlideMiddleNumber = 0;
+            var SlideLastNumber = 0;
             [].forEach.call(slide, function (el) {//取得幻燈片的html物件
                 var a = el.getElementsByTagName('a');//取得幻燈片內各別項目的htmlcollection物件
-                SlideNumber = (a.length - 1) * 5;//計算總共需要的animation延遲秒數
+                SlideDelayNumber = (a.length - 1) * 5;//計算總共需要的animation延遲秒數
+                SlideTotalNumber = a.length * 5;//animation需要的秒數
+                SlideFirstNumber = 1 / SlideTotalNumber * 100;//計算animation淡入需要的設定值
+                SlideMiddleNumber = 5 / SlideTotalNumber * 100;//計算animation顯示需要的設定值
+                SlideLastNumber = 6 / SlideTotalNumber * 100;//計算animation淡出需要的設定值
+                //在head裡面建立style標籤
+                var style = (function () {
+                    // Create the <style> tag
+                    var style = document.createElement("style");
+
+                    // WebKit hack
+                    style.appendChild(document.createTextNode(""));
+
+                    // Add the <style> element to the page
+                    document.head.appendChild(style);
+
+                    console.log(style.sheet.cssRules); // length is 0, and no rules
+
+                    return style;
+                })();
+                //在style標籤內建立animation需要的rule
+                style.sheet.insertRule('\
+			@keyframes round {\
+				' + SlideFirstNumber + '% { opacity: 1; filter: alpha(opacity=100); }\
+				' + SlideMiddleNumber + '% { opacity: 1; filter: alpha(opacity=100); }\
+				' + SlideLastNumber + '% { opacity: 0; filter: alpha(opacity=0); }\
+			}'
+                );
+                console.log(style.sheet.cssRules);
                 [].forEach.call(a, function (NewOne) {//取得幻燈片內各別物件的html物件
-                    NewOne.setAttribute('style', '-webkit-animation-delay: ' + SlideNumber + 's;');//設定幻燈片內html物件的animation-delay屬性
-                    SlideNumber -= 5;//每換一個物件delay時間就-5秒
+                    // NewOne.style.animation = '-webkit-animation: round ' + SlideTotalNumber + 's linear infinite; -webkit-animation-delay: ' + SlideDelayNumber + 's;';
+                    NewOne.setAttribute('style', '-webkit-animation: round ' + SlideTotalNumber + 's linear infinite; animation: round ' + SlideTotalNumber + 's linear infinite; -webkit-animation-delay: ' + SlideDelayNumber + 's; animation-delay: ' + SlideDelayNumber + 's;');
+                    SlideDelayNumber -= 5;//每換一個物件delay時間就-5秒
                 });
             });
         });
