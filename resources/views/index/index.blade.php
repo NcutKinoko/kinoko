@@ -18,11 +18,11 @@
             </div>
         </div>-->
         <div class="imageslider">
-            <a href=""><img style="width: 100%; height: 50% " src="../img/Test.jpg" alt="Test" /></a>
-            <a href=""><img style="width: 100%; height: 50% " src="../img/Test2.jpg" alt="Test" /></a>
-            <a href=""><img style="width: 100%; height: 50% " src="../img/Test.jpg" alt="Test" /></a>
-            <a href=""><img style="width: 100%; height: 50% " src="../img/Test2.jpg" alt="Test" /></a>
-            <a href=""><img style="width: 100%; height: 50% " src="../img/Test.jpg" alt="Test" /></a>
+            <a href=""><img style="width: 100%; height: 50% " src="../img/Test.jpg" alt="Test"/></a>
+            <a href=""><img style="width: 100%; height: 50% " src="../img/Test2.jpg" alt="Test"/></a>
+            <a href=""><img style="width: 100%; height: 50% " src="../img/Test.jpg" alt="Test"/></a>
+            <a href=""><img style="width: 100%; height: 50% " src="../img/Test2.jpg" alt="Test"/></a>
+            <a href=""><img style="width: 100%; height: 50% " src="../img/Test.jpg" alt="Test"/></a>
         </div>
         <br>
         <div style="text-align: center;padding-top: 50%; font-size: medium;  font-weight: bold;font-family: '微軟正黑體', serif; font-size: xx-large">
@@ -60,21 +60,21 @@
             <button>更多最新消息</button>
         </div>
 
-        <!--<div id="carouselProduct" class="carousel slide" data-ride="carousel" data-interval="9000">
+    <!--<div id="carouselProduct" class="carousel slide" data-ride="carousel" data-interval="9000">
             <div class="carousel-inner row w-100 mx-auto" role="listbox">
                 <?php $count = 0?>
-                @foreach($productList as $productLists)
-                    <?php $count += 1?>
-                    @if($count == 1)
-                <div class="carousel-item col-md-3 active">
-                    <img class="img-fluid mx-auto d-block" src="{{url('../img/product/' . $productLists->img)}}" style="height: 300px;width: 500px" alt="slide {{$count}}">
+    @foreach($productList as $productLists)
+        <?php $count += 1?>
+        @if($count == 1)
+            <div class="carousel-item col-md-3 active">
+                <img class="img-fluid mx-auto d-block" src="{{url('../img/product/' . $productLists->img)}}" style="height: 300px;width: 500px" alt="slide {{$count}}">
                 </div>
                         @else
-                <div class="carousel-item col-md-3">
-                    <img class="img-fluid mx-auto d-block" src="{{url('../img/product/' . $productLists->img)}}" style="height: 300px;width: 500px" alt="slide {{$count}}">
+            <div class="carousel-item col-md-3">
+                <img class="img-fluid mx-auto d-block" src="{{url('../img/product/' . $productLists->img)}}" style="height: 300px;width: 500px" alt="slide {{$count}}">
                 </div>
                         @endif
-                    @endforeach
+    @endforeach
             </div>
             <a class="carousel-control-prev" href="#carouselProduct" role="button" data-slide="prev">
                 <i class="fa fa-chevron-left fa-lg text-muted"></i>
@@ -96,18 +96,18 @@
         <div id="carouselMenu" class="carousel slide" data-ride="carousel" data-interval="9000">
             <div class="carousel-inner row w-100 mx-auto" role="listbox">
                 <?php $count = 0?>
-                @foreach($menuList as $menuLists)
-                    <?php $count += 1?>
-                    @if($count == 1)
-                        <div class="carousel-item col-md-3 active">
-                            <img class="img-fluid mx-auto d-block" src="//placehold.it/600x400/000/fff?text={{$count}}" style="height: 300px;width: 500px" alt="slide 1">
+    @foreach($menuList as $menuLists)
+        <?php $count += 1?>
+        @if($count == 1)
+            <div class="carousel-item col-md-3 active">
+                <img class="img-fluid mx-auto d-block" src="//placehold.it/600x400/000/fff?text={{$count}}" style="height: 300px;width: 500px" alt="slide 1">
                         </div>
                     @else
-                        <div class="carousel-item col-md-3">
-                            <img class="img-fluid mx-auto d-block" src="//placehold.it/600x400/000/fff?text={{$count}}" style="height: 300px;width: 500px" alt="slide 2">
+            <div class="carousel-item col-md-3">
+                <img class="img-fluid mx-auto d-block" src="//placehold.it/600x400/000/fff?text={{$count}}" style="height: 300px;width: 500px" alt="slide 2">
                         </div>
                     @endif
-                @endforeach
+    @endforeach
             </div>
             <a class="carousel-control-prev" href="#carouselMenu" role="button" data-slide="prev">
                 <i class="fa fa-chevron-left fa-lg text-muted"></i>
@@ -119,5 +119,19 @@
             </a>
         </div>-->
     </div>
-<br>
+    <br>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var slide = document.getElementsByClassName('imageslider');//取得幻燈片的htmlcollection物件
+            var SlideNumber = 0;
+            [].forEach.call(slide, function (el) {//取得幻燈片的html物件
+                var a = el.getElementsByTagName('a');//取得幻燈片內各別項目的htmlcollection物件
+                SlideNumber = (a.length - 1) * 5;//計算總共需要的animation延遲秒數
+                [].forEach.call(a, function (NewOne) {//取得幻燈片內各別物件的html物件
+                    NewOne.setAttribute('style', '-webkit-animation-delay: ' + SlideNumber + 's;');//設定幻燈片內html物件的animation-delay屬性
+                    SlideNumber -= 5;//每換一個物件delay時間就-5秒
+                });
+            });
+        });
+    </script>
 @endsection
