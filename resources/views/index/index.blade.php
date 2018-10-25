@@ -9,7 +9,6 @@
         <script type="text/javascript" src="{{asset('js/index.js')}}"></script>
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     </head>
-    <div class="padding"></div>
     <div class="container-fluid container-background-color">
         <!--<div class="row">
             <div class="col-md-12 text-center title-format">

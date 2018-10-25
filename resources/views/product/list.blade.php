@@ -5,43 +5,30 @@
 @section('content')
     <head>
         <!-- Bootstrap CSS -->
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <link href="{{asset('css/Product-List.css')}}" rel="stylesheet">
         <script src="{{asset('js/Product-List.js')}}"></script>
     </head>
     <!------ Include the above in your HEAD tag ---------->
-    <div class="container">
-        <div class="well well-sm">
-            <strong>Category Title</strong>
-            <div class="btn-group">
-                <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
-            </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
-                            class="glyphicon glyphicon-th"></span>Grid</a>
+    <div class="container-fluid">
+        <div class="d-flex title-bar justify-content-center align-items-center">
+            <h3>產品列表</h3>
+        </div>
+        <div class="row content-bar">
+            <ul class="col-md-3 list-group category-list">
+                @foreach($categoryList as $categoryLists)
+                <li><a href="">{{$categoryLists->name}}</a></li>
+                @endforeach
+            </ul>
+            <div id="products" class="row col-md-9">
+                @foreach($productList as $productLists)
+                    <div class="card  col-xs-4 col-lg-4">
+                        <div class="card-header">{{$productLists->name}}</div>
+                        <div class="card-body"></div>
+                        <div class="card-footer">Footer</div>
+                    </div>
+                @endforeach
             </div>
         </div>
-        <div id="products" class="row list-group">
-            @foreach($productList as $productLists)
-                <div class="item  col-xs-4 col-lg-4">
-                    <div class="thumbnail">
-                        <img class="group list-group-image" src="{{url('../img/product/' . $productLists->img)}}" alt="" style="width: 400px;height: 250px;" />
-                        <div class="caption">
-                            <h4 class="group inner list-group-item-heading">
-                                <a href="{{route('product.detail', $productLists->id)}}" style="text-decoration: none; color: #000;">{{$productLists->name}}</a></h4>
-                            <div class="row">
-                                <div class="col-xs-12 col-md-6">
-                                    <p class="lead">
-                                        本店售價:{{$productLists->price}}</p>
-                                </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-success" href="{{route('add.cart',$productLists->id)}}">加入購物車</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
+
     </div>
 @endsection

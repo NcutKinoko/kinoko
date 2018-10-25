@@ -55,3 +55,41 @@
 {
     margin: 0 0 11px;
 }
+
+.title-bar
+{
+    background-color: #9E5007;
+    border-radius: 50px;
+    border: solid #ff9f1a;
+    font-family: '微軟正黑體', serif;
+    color: #FFFFFF;
+    height: 100px;
+    margin-bottom: 16px;
+}
+
+.content-bar
+{
+    margin: 0;
+}
+.category-list
+{
+    padding: 0;
+    background-color: #9E5007;
+    border-radius: 50px;
+    border: solid #ff9f1a;
+    font-family: '微軟正黑體', serif;
+    color: #FFFFFF;
+    text-align: center;
+    list-style: none;
+}
+
+.category-list li
+{
+    line-height: 50px;
+}
+
+.category-list li a
+{
+    display: block;
+    text-decoration: none;
+}
