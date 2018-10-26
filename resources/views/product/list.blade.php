@@ -10,21 +10,28 @@
     </head>
     <!------ Include the above in your HEAD tag ---------->
     <div class="container-fluid">
-        <div class="d-flex title-bar justify-content-center align-items-center">
-            <h3>產品列表</h3>
+        <div class="row title-bar justify-content-center align-items-center">
+            <h2>產品列表</h2>
         </div>
         <div class="row content-bar">
-            <ul class="col-md-3 list-group category-list">
-                @foreach($categoryList as $categoryLists)
-                <li><a href="">{{$categoryLists->name}}</a></li>
-                @endforeach
-            </ul>
-            <div id="products" class="row col-md-9">
+            <div class="col-md-3">
+                <h3 class="category-title">產品類別</h3>
+                <ul class="list-group category-list">
+                    @foreach($categoryList as $categoryLists)
+                        <li><a href="{{route('product.group.list',$categoryLists->id)}}">{{$categoryLists->name}}</a></li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="row col-md-9 product-list">
                 @foreach($productList as $productLists)
-                    <div class="card  col-xs-4 col-lg-4">
-                        <div class="card-header">{{$productLists->name}}</div>
-                        <div class="card-body"></div>
-                        <div class="card-footer">Footer</div>
+                    <div class="col-xs-4 col-lg-4" style="padding-bottom: 30px">
+                        <div class="card product">
+                            <div class="card-header">{{$productLists->name}}</div>
+                            <div class="card-body thumbnail" style="margin: 20px 0;"><img src="{{url('../img/product/' . $productLists->img)}}" alt="此商品尚未有圖片" style="width: 100%;height: 100%"></div>
+                            <div class="card-footer">
+                                <button class="detail-button" onclick="window.location='{{ route("product.detail",$productLists->id) }}'">詳細資訊</button>
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>

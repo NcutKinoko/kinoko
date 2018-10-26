@@ -20,7 +20,7 @@ class ProductController extends Controller
     {
         $productList = Product::all();
         $categoryList = DB::table('category')->get();
-        return view('product.list', compact('productList','categoryList'));
+        return view('product.list', compact('productList', 'categoryList'));
     }
 
     /**
@@ -32,9 +32,9 @@ class ProductController extends Controller
     {
         $CategoryList = Category::all();
         $product = DB::table('product')
-            ->leftJoin('category','product.category_id','=','category.id')
-            ->select('product.id','product.name',DB::raw('(CASE WHEN product.category_id = "0" THEN "此產品未分類" ELSE category.name END) AS categoryName'),'product.price','product.inventory','product.size','product.introduction','product.img')
-        ->get();
+            ->leftJoin('category', 'product.category_id', '=', 'category.id')
+            ->select('product.id', 'product.name', DB::raw('(CASE WHEN product.category_id = "0" THEN "此產品未分類" ELSE category.name END) AS categoryName'), 'product.price', 'product.inventory', 'product.size', 'product.introduction', 'product.img')
+            ->get();
         return view('Backstage.product.create', compact('CategoryList', 'product'));
     }
 
@@ -134,7 +134,7 @@ class ProductController extends Controller
             File::delete($image_path);
         }
         DB::table('product')->where('id', $id)->delete();
-        DB::table('menu')->where('product_id',$id)->update([
+        DB::table('menu')->where('product_id', $id)->update([
             'product_id' => 0
         ]);
         return redirect()->back();
@@ -143,17 +143,24 @@ class ProductController extends Controller
     public function detail($id)
     {
         $productDetail = Product::all()->where('id', $id);
-        return view('product.detail',compact('productDetail'));
+        return view('product.detail', compact('productDetail'));
     }
 
     public function search(Request $request)
     {
         $CategoryList = DB::table('category')->get();
         $product = DB::table('product')
-            ->leftJoin('category','product.category_id','=','category.id')
-            ->select('product.id','product.name',DB::raw('(CASE WHEN product.category_id = "0" THEN "此產品未分類" ELSE category.name END) AS categoryName'),'product.price','product.inventory','product.size','product.introduction','product.img')
-            ->where("product.name","like","%{$request['search']}%")
+            ->leftJoin('category', 'product.category_id', '=', 'category.id')
+            ->select('product.id', 'product.name', DB::raw('(CASE WHEN product.category_id = "0" THEN "此產品未分類" ELSE category.name END) AS categoryName'), 'product.price', 'product.inventory', 'product.size', 'product.introduction', 'product.img')
+            ->where("product.name", "like", "%{$request['search']}%")
             ->get();
-        return view('Backstage.product.create',compact('product','CategoryList'));
+        return view('Backstage.product.create', compact('product', 'CategoryList'));
+    }
+
+    public function category($id)
+    {
+        $categoryList = DB::table('category')->get();
+        $productList = DB::table('product')->where('category_id', $id)->get();
+        return view('product.list',compact('productList','categoryList'));
     }
 }

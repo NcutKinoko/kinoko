@@ -175,6 +175,7 @@ Route::group(['middleware' => ['auth:backstage']], function() {
 Route::prefix('product')->group(function (){
     Route::get('/list','ProductController@index')->name('product.list');
     Route::get('/detail/{id}','ProductController@detail')->name('product.detail');
+    Route::get('/list/{id}','ProductController@category')->name('product.group.list');
 });
 
 Route::prefix('cart')->group(function (){

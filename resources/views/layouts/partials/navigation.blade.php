@@ -18,7 +18,7 @@
     <ul class="headstyle">
         <li><a href="">首頁</a></li>
         <li><a href="">最新消息</a></li>
-        <li><a href="">產品介紹</a></li>
+        <li><a href="{{route('product.list')}}">產品介紹</a></li>
         <li><a href="">歷史簡介</a></li>
         <li><a href="">購物專區</a></li>
     </ul>

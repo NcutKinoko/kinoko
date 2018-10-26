@@ -71,16 +71,27 @@
 {
     margin: 0;
 }
+
+.category-title
+{
+    color: #9E5007;
+    text-align: center;
+    box-shadow:0 0 20px #ff9f1a;
+    border: #FFFFFF;
+    border-radius: 50px;
+    margin-bottom: 16px;
+    line-height: 50px;
+}
+
 .category-list
 {
-    padding: 0;
+    padding:16px 0;
     background-color: #9E5007;
     border-radius: 50px;
     border: solid #ff9f1a;
-    font-family: '微軟正黑體', serif;
-    color: #FFFFFF;
     text-align: center;
     list-style: none;
+    margin: 0;
 }
 
 .category-list li
@@ -92,4 +103,75 @@
 {
     display: block;
     text-decoration: none;
+    color: #FFFFFF;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.category-list li a:hover
+{
+    color: #000;
+    border-radius: 50px;
+    background-color: #ff9f1a;
+}
+
+.detail-button
+{
+    background-color: #9E5007;
+    border-radius: 50px;
+    border-style: none;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(20%,20%,40%,0.5);
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.detail-button:hover
+{
+    background-color: #ff9f1a;
+    color: #000;
+    cursor: pointer;
+}
+
+.detail-button:active
+{
+    margin-top: 4px;
+    margin-bottom: -4px;
+    box-shadow: none;
+}
+
+.detail-button:focus
+{
+    outline: 0;
+}
+
+.product-list
+{
+    margin: 0;
+}
+
+.product
+{
+    margin-bottom: 16px;
+    padding: 0;
+    border: solid #9E5007;
+    height: 100%;
+}
+
+.product div:nth-child(1)
+{
+    font-weight: bold;
+    text-align: center;
+}
+
+.product div:nth-child(3)
+{
+    text-align: center;
+}
+
+*
+{
+    font-family: '微軟正黑體', serif;
 }
