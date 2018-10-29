@@ -15,7 +15,7 @@ class Xinshe extends Migration
     {
         Schema::create('xinshe', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('AboutXinshe',255);
+            $table->longText('AboutXinshe');
             $table->string('title',255);
             $table->string('img');
             $table->timestamps();

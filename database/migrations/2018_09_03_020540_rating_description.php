@@ -16,7 +16,7 @@ class RatingDescription extends Migration
         Schema::create('RatingDescription', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('KinokoStandard_id');
-            $table->string('content');
+            $table->longText('content');
             $table->timestamps();
         });
     }

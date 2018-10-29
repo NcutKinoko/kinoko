@@ -44,7 +44,7 @@
             <thead>
             <tr>
                 <th scope="col">標題</th>
-                <th scope="col">關於新社</th>
+                <th scope="col" style="width: 60%">關於新社</th>
                 <th scope="col">照片</th>
                 <th scope="col">修改/刪除</th>
             </tr>

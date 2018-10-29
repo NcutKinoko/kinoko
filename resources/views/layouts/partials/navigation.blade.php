@@ -5,7 +5,7 @@
 <nav class="navbar  container-fluid"
      style="background-color: #9E5007; position: fixed;z-index: 999; border-bottom: 2px solid #FFCC33">
     <ul class="headtitle">
-        <li><a href="">新社香菇</a></li>
+        <li><a href="{{route('show.index')}}">新社香菇</a></li>
     </ul>
     <ul class="headinfo">
         <li style="border-right: none"><a href="" title="YotTube"><img alt="YotTube" src="{{url('../img/icon/youtube.png')}}"
@@ -19,7 +19,7 @@
         <li><a href="{{route('show.index')}}">首頁</a></li>
         <li><a href="">最新消息</a></li>
         <li><a href="{{route('product.list')}}">產品介紹</a></li>
-        <li><a href="">歷史簡介</a></li>
+        <li><a href="{{route('show.introduction')}}">關於農會</a></li>
         <li><a href="">購物專區</a></li>
     </ul>
 </nav>

@@ -142,7 +142,11 @@ class ProductController extends Controller
 
     public function detail($id)
     {
-        $productDetail = Product::all()->where('id', $id);
+        $productDetail = DB::table('product')
+            ->leftJoin('category', 'product.category_id', 'category.id')
+            ->select('product.id', 'product.name as productName', DB::raw('(CASE WHEN product.category_id = "0" THEN "此產品未分類" ELSE category.name END) AS categoryName'), 'product.price', 'product.inventory', 'product.size', 'product.introduction', 'product.img')
+            ->where('product.id', $id)
+            ->get();
         return view('product.detail', compact('productDetail'));
     }
 
@@ -161,6 +165,6 @@ class ProductController extends Controller
     {
         $categoryList = DB::table('category')->get();
         $productList = DB::table('product')->where('category_id', $id)->get();
-        return view('product.list',compact('productList','categoryList'));
+        return view('product.list', compact('productList', 'categoryList'));
     }
 }

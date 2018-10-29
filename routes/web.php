@@ -182,3 +182,7 @@ Route::prefix('cart')->group(function (){
     Route::get('/','ShoppingCartController@index')->name('show.cart');
     Route::get('/add/{id}','ShoppingCartController@add')->name('add.cart');
 });
+
+Route::prefix('xinshe')->group(function (){
+    Route::get('/introduction','XinsheController@introduction')->name('show.introduction');
+});

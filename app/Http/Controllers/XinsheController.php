@@ -124,4 +124,11 @@ class XinsheController extends Controller
         $XinsheList = DB::table('xinshe')->where('title','like',"%{$request['search']}%")->get();
         return view('Backstage.xinshe.create',compact('XinsheList'));
     }
+
+    public function introduction()
+    {
+        $introductionList = DB::table('xinshe')->get();
+        $count = count($introductionList);
+        return view('xinshe.list',compact('introductionList','count'));
+    }
 }

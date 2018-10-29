@@ -21,7 +21,7 @@ class Products extends Migration
             $table->string('size',255);
             $table->string('img',255);
             $table->integer('inventory');
-            $table->string('introduction',255);
+            $table->longText('introduction');
             $table->timestamps();
         });
     }

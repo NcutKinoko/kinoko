@@ -15,7 +15,7 @@ class Step extends Migration
         Schema::create('step', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('menu_id');
-            $table->string('step')->nullable();
+            $table->longText('step')->nullable();
             $table->timestamps();
         });
     }

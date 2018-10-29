@@ -23,7 +23,7 @@ class Farmer extends Migration
             $table->string('PlantingArea');
             $table->string('PlantingQuantity');
             $table->string('PlantingYear');
-            $table->string('result',255);
+            $table->longText('result');
             $table->string('img',255);
             $table->timestamps();
         });

@@ -81,7 +81,7 @@
                         <td class="align-middle">{{$products->price}}</td>
                         <td class="align-middle">{{$products->inventory}}</td>
                         <td class="align-middle">{{$products->size}}</td>
-                        <td class="align-middle">{{$products->introduction}}</td>
+                        <td class="align-middle" style="width: 500px; height: auto">{{$products->introduction}}</td>
                         <td class="align-middle"><img src="{{url('../img/product/' . $products->img)}}"
                                                       alt="Smiley face" height="100" width="100"></td>
                         <td class="align-middle">
