@@ -24,9 +24,7 @@
                         @foreach($farmerDetail as $farmerDetails)
                             <div class="preview col-md-6">
                                 <div class="preview-pic tab-content">
-                                    <div class="tab-pane active" id="pic-1"><img
-                                                src="{{url('../img/farmer/' . $farmerDetails->img)}}"/></div>
-                                </div>
+                                    <img src="{{url('../img/farmer/' . $farmerDetails->img)}}"/></div>
                             </div>
                             <div class="details col-md-6">
                                 <h3 class="farmer-name">{{$farmerDetails->name}}</h3>
