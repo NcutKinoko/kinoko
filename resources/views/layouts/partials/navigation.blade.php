@@ -20,6 +20,7 @@
         <li><a href="">最新消息</a></li>
         <li><a href="{{route('product.list')}}">產品介紹</a></li>
         <li><a href="{{route('show.introduction')}}">關於農會</a></li>
+        <li><a href="{{route('farmer.list')}}">菇農介紹</a></li>
         <li><a href="">購物專區</a></li>
     </ul>
 </nav>

@@ -23,6 +23,7 @@
 .introduction-content
 {
     margin: 0;
+    padding: 0 8%;
 }
 
 .panel-design
@@ -31,12 +32,18 @@
     border: solid #9E5007;
     border-radius: 10px;
     padding-bottom: 18px;
+    background-color: #f0f0f0;
 }
 
 .introduction-img
 {
     padding: 10px;
     text-align: center;
+}
+
+.introduction-text
+{
+    text-align: justify;
 }
 
 hr.style-two {

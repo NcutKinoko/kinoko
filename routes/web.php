@@ -186,3 +186,8 @@ Route::prefix('cart')->group(function (){
 Route::prefix('xinshe')->group(function (){
     Route::get('/introduction','XinsheController@introduction')->name('show.introduction');
 });
+
+Route::prefix('farmer')->group(function (){
+    Route::get('/list','FarmerController@index')->name('farmer.list');
+    Route::get('/detail/{id}','FarmerController@detail')->name('farmer.detail');
+});

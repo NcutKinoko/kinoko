@@ -16,7 +16,8 @@ class FarmerController extends Controller
      */
     public function index()
     {
-        //
+        $farmerList = DB::table('farmer')->get();
+        return view('farmer.list',compact('farmerList'));
     }
 
     /**
@@ -138,5 +139,12 @@ class FarmerController extends Controller
     {
         $farmerList = DB::table('farmer')->where('name','like',"%{$request['search']}%")->get();
         return view('Backstage.farmer.create', compact('farmerList'));
+    }
+
+    public function detail($id)
+    {
+        $farmerDetail = DB::table('farmer')->where('id',$id)->get();
+
+        return view('farmer.detail',compact('farmerDetail'));
     }
 }

@@ -1,0 +1,70 @@
+*
+{
+    font-family: '微軟正黑體', serif;
+}
+
+.title-bar
+{
+    background-color: #9E5007;
+    border-radius: 50px;
+    border: solid #ff9f1a;
+    color: #FFFFFF;
+    height: 100px;
+    margin: 15px 0 16px 0;
+}
+
+.detail-button
+{
+    background-color: #9E5007;
+    border-radius: 50px;
+    border-style: none;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(20%,20%,40%,0.5);
+    -webkit-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.detail-button:hover
+{
+    background-color: #ff9f1a;
+    color: #000;
+    cursor: pointer;
+}
+
+.detail-button:active
+{
+    margin-top: 4px;
+    margin-bottom: -4px;
+    box-shadow: none;
+}
+
+.detail-button:focus
+{
+    outline: 0;
+}
+
+.farmer
+{
+    margin-bottom: 16px;
+    padding: 0;
+    border: solid #9E5007;
+    height: 100%;
+}
+
+.farmer div:nth-child(1)
+{
+    font-weight: bold;
+    text-align: center;
+}
+
+.farmer div:nth-child(3)
+{
+    text-align: center;
+}
+
+.farmer-list
+{
+    margin: 0;
+}

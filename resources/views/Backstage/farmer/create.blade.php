@@ -95,7 +95,7 @@
                 <td class="align-middle">{{$farmerLists->PlantingArea}}</td>
                 <td class="align-middle">{{$farmerLists->PlantingQuantity}}</td>
                 <td class="align-middle">{{$farmerLists->PlantingYear}}</td>
-                <td class="align-middle">{{$farmerLists->result}}</td>
+                <td class="align-middle" style="width: 300px; height: auto">{{$farmerLists->result}}</td>
                 <td class="align-middle"><img src="{{url('../img/farmer/' . $farmerLists->img)}}" alt="Smiley face" height="100" width="100"></td>
                 <td class="align-middle">
                     <a href="{{route('show.farmer.updateForm',$farmerLists->id)}}" class="btn btn-success" style="display: inline-block">修改</a>
