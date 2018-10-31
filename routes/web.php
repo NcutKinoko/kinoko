@@ -191,3 +191,12 @@ Route::prefix('farmer')->group(function (){
     Route::get('/list','FarmerController@index')->name('farmer.list');
     Route::get('/detail/{id}','FarmerController@detail')->name('farmer.detail');
 });
+
+Route::prefix('kinoko')->group(function (){
+    Route::get('/standard','KinokoController@index')->name('show.kinoko.standard');
+});
+
+Route::prefix('menu')->group(function (){
+    Route::get('/list','MenuController@index')->name('menu.list');
+    Route::get('/detail/{id}','MenuController@detail')->name('menu.detail');
+});

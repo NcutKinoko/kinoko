@@ -1,0 +1,14 @@
+*
+{
+    font-family: '微軟正黑體', serif;
+}
+
+.title-bar
+{
+    background-color: #9E5007;
+    border-radius: 50px;
+    border: solid #ff9f1a;
+    color: #FFFFFF;
+    height: 100px;
+    margin: 15px 0 16px 0;
+}

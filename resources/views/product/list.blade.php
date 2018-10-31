@@ -27,7 +27,7 @@
                     <div class="col-xs-4 col-lg-4" style="padding-bottom: 30px">
                         <div class="card product">
                             <div class="card-header">{{$productLists->name}}</div>
-                            <div class="card-body thumbnail" style="margin: 20px 0;"><img src="{{url('../img/product/' . $productLists->img)}}" alt="此商品尚未有圖片" style="width: 100%;height: 100%"></div>
+                            <div class="card-body" style="margin: 20px 0;"><img class="img-thumbnail" src="{{url('../img/product/' . $productLists->img)}}" alt="此商品尚未有圖片" style="width: 100%;height: 100%"></div>
                             <div class="card-footer">
                                 <button class="detail-button" onclick="window.location='{{ route("product.detail",$productLists->id) }}'">詳細資訊</button>
                             </div>
