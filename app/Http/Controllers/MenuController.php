@@ -164,7 +164,7 @@ class MenuController extends Controller
     {
         $DetailMenu = DB::table('menu')
             ->leftJoin('product','menu.product_id','=','product.id')
-            ->select('menu.id','menu.name as MenuName',DB::raw('(CASE WHEN menu.product_id = "0" THEN "此菜餚未使用產品" ELSE product.name END) AS productName'),'menu.sauce','menu.seasoning','menu.material','menu.img','menu.remark')
+            ->select('menu.id','menu.name as MenuName',DB::raw('(CASE WHEN menu.product_id = "0" THEN "此菜餚未使用產品" ELSE product.name END) AS ProductName'),'menu.sauce','menu.seasoning','menu.material','menu.img','menu.remark')
             ->where('menu.id',$id)
             ->get();
         $DetailStep = DB::table('step')->where('menu_id',$id)->get();

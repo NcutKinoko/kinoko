@@ -79,6 +79,9 @@
                     <h3 style="font-weight: bold;display: inline-block">調味料：</h3><h3 style="display: inline-block">{{$menuLists->seasoning}}</h3>
                 </div>
                 <div style="border-bottom: solid 1px;">
+                    <h3 style="font-weight: bold;display: inline-block">材料：</h3><h3 style="display: inline-block">{{$menuLists->material}}</h3>
+                </div>
+                <div style="border-bottom: solid 1px;">
                     <h3 style="font-weight: bold;display: inline-block">使用產品：</h3><h3 style="display: inline-block">{{$menuLists->productName}}</h3>
                 </div>
                 <div style="border-bottom: solid 1px;">
