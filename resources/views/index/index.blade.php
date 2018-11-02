@@ -29,28 +29,20 @@
         <hr>
 
         <table style="width: 100%">
-            <tr>
-                <td style="width: 10%">
-                    <a href="#">休閒趣事</a>
-                </td>
-                <td style="width: 80%">
-                    <a href="#">今日公告事項</a>
-                </td>
-                <td style="text-align: right;">
-                    <span><a style="color: white" href="#">2018/10/18</a></span>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 10%">
-                    <a href="#">休閒趣事</a>
-                </td>
-                <td style="width: 80%">
-                    <a href="#">今日公告事項</a>
-                </td>
-                <td style="text-align: right;">
-                    <span><a style="color: white" href="#">2018/10/18</a></span>
-                </td>
-            </tr>
+            @foreach($AnnouncementList as $AnnouncementLists)
+                <tr>
+                    <td style="width: 10%">
+                        <a href="#">{{$AnnouncementLists->announcementCategoryName}}</a>
+                    </td>
+                    <td style="width: 80%">
+                        <a href="#">{{$AnnouncementLists->title}}</a>
+                    </td>
+                    <?php $NewDate = explode(' ',$AnnouncementLists->created_at)?>
+                    <td style="text-align: right;">
+                        <span><a style="color: white" href="#">{{$NewDate['0']}}</a></span>
+                    </td>
+                </tr>
+            @endforeach
         </table>
         <p></p>
         <div style="text-align: right">

@@ -1,0 +1,53 @@
+@extends('layouts.master')
+
+@section('title', 'HOME')
+
+@section('content')
+    <head>
+        <link href="{{asset('css/activity.css')}}" rel="stylesheet">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>eCommerce Product Detail</title>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+    </head>
+    <div class="container-fluid">
+        <div class="row title-bar justify-content-center align-items-center">
+            <h2>農會活動</h2>
+        </div>
+        <div class="container">
+            @foreach($ActivityList as $ActivityLists)
+                <div class="row justify-content-center align-items-center">
+                    <h2>{{$ActivityLists->name}}</h2>
+                </div>
+                <div class="row panel-design">
+                    @foreach($SubtitleList as $SubtitleLists)
+                        @if($ActivityLists->id == $SubtitleLists->activity_id)
+                            <div class="col-12">
+                                <div class="row subtitle justify-content-center align-items-center">
+                                    <h3 style="font-weight: bold">{{$SubtitleLists->name}}</h3>
+                                </div>
+                                <div class="row activity-content justify-content-center align-items-center">
+                                    @foreach($ActivityRecordList as $ActivityRecordLists)
+                                        @if($SubtitleLists->id == $ActivityRecordLists->subtitle_id)
+                                            <div class="col-xs-6 col-lg-6 thumbnail introduction-img">
+                                                <img src="{{url('../img/activity_record/' . $ActivityRecordLists->img)}}"
+                                                     alt="此介紹尚未有圖片"
+                                                     style="width: 80%;height: 80%">
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                                <hr class="style-two"/>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+@endsection
+

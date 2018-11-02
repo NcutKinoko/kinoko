@@ -18,7 +18,11 @@ class ActivityRecordController extends Controller
      */
     public function index()
     {
-        //
+        $ActivityList = DB::table('activity')->get();
+        $SubtitleList = DB::table('subtitle')->get();
+        $ActivityRecordList = DB::table('activity_record')->get();
+
+        return view('activity.list',compact('ActivityList','SubtitleList','ActivityRecordList'));
     }
 
     /**

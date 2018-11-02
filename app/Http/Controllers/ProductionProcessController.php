@@ -16,7 +16,9 @@ class ProductionProcessController extends Controller
      */
     public function index()
     {
-        //
+        $ProductionProcessList = DB::table('productionprocess')->get();
+
+        return view('product-process.product-process',compact('ProductionProcessList'));
     }
 
     /**

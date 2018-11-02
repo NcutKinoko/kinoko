@@ -200,3 +200,11 @@ Route::prefix('menu')->group(function (){
     Route::get('/list','MenuController@index')->name('menu.list');
     Route::get('/detail/{id}','MenuController@detail')->name('menu.detail');
 });
+
+Route::prefix('ProductionProcess')->group(function (){
+    Route::get('/list','ProductionProcessController@index')->name('process.list');
+});
+
+Route::prefix('activity_record')->group(function (){
+    Route::get('/list','ActivityRecordController@index')->name('activity_record.list');
+});
