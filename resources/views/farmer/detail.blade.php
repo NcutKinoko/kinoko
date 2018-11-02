@@ -17,7 +17,6 @@
         <div class="row title-bar justify-content-center align-items-center">
             <h2>菇農詳細資訊</h2>
         </div>
-        <div class="container">
             <div class="card">
                 <div class="container-fluid">
                     <div class="wrapper row">
@@ -57,7 +56,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
 @endsection

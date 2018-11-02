@@ -1,3 +1,152 @@
+body {
+    font-family: 'open sans';
+    overflow-x: hidden; }
+
+img {
+    max-width: 100%; }
+
+.preview {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+@media screen and (max-width: 996px) {
+    .preview {
+        margin-bottom: 20px; } }
+
+.preview-pic {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1; }
+
+.tab-content {
+    overflow: hidden; }
+.tab-content img {
+    width: 100%;
+    -webkit-animation-name: opacity;
+    animation-name: opacity;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s; }
+
+.card {
+    margin-top: 50px;
+    background: #eee;
+    padding: 3em;
+    line-height: 1.5em;
+    border: solid #9E5007;
+    margin-bottom: 50px; }
+
+@media screen and (min-width: 997px) {
+    .wrapper {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex; } }
+
+.details {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column; }
+
+.colors {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1; }
+
+.menu-title, .product, .seasoning, .material, .sauce, .step, .remark{
+    text-transform: UPPERCASE;
+    font-weight: bold; }
+
+.menu-title span, .seasoning span, .material span, .sauce span, .remark span{
+    font-weight: lighter; }
+
+.checked, .product span {
+    color: #ff9f1a; }
+
+.menu-title, .product, .seasoning, .material, .sauce, .step, .remark{
+    margin-bottom: 15px; }
+
+.menu-title {
+    margin-top: 0;
+    color: #9E5007;
+}
+
+/*.size {*/
+/*margin-right: 10px; }*/
+/*.size:first-of-type {*/
+/*margin-left: 40px; }*/
+
+.color {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    height: 2em;
+    width: 2em;
+    border-radius: 2px; }
+.color:first-of-type {
+    margin-left: 20px; }
+
+.add-to-cart, .like {
+    background: #ff9f1a;
+    padding: 1.2em 1.5em;
+    border: none;
+    text-transform: UPPERCASE;
+    font-weight: bold;
+    color: #fff;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease; }
+.add-to-cart:hover, .like:hover {
+    background: #b36800;
+    color: #fff; }
+
+.not-available {
+    text-align: center;
+    line-height: 2em; }
+.not-available:before {
+    font-family: fontawesome;
+    content: "\f00d";
+    color: #fff; }
+
+.orange {
+    background: #ff9f1a; }
+
+.green {
+    background: #85ad00; }
+
+.blue {
+    background: #0076ad; }
+
+.tooltip-inner {
+    padding: 1.3em; }
+
+@-webkit-keyframes opacity {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3); }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1); } }
+
+@keyframes opacity {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(3);
+        transform: scale(3); }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1); } }
+
 *
 {
     font-family: '微軟正黑體', serif;
@@ -13,45 +162,29 @@
     margin: 15px 0 16px 0;
 }
 
-.panel-design
+.card
 {
-    margin: 30px 0 30px 0;
     border: solid #9E5007;
-    border-radius: 10px;
-    background-color: #f0f0f0;
-    text-align: center;
-    padding: 10px;
+    margin-bottom: 50px;
 }
 
-.Name, .Seasoning-Product-Sauce, .Img, .Remark-Material
+.cover
 {
-    border-bottom: solid #9d9d9d 1px;
+    position: relative;
 }
 
-.NameTitle h4, .SeasoningTitle h4, .SauceTitle h4, .ProductTitle h4, .ImgTitle h4, .RemarkTitle h4, .MaterialTitle h4, .StepTitle h4
-{
-    font-weight: 900;
+.cover:after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    box-shadow:0 0 50px 30px #ffffff inset;
 }
 
-.Menu-Img
+.step-list
 {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
-}
-
-.NameTitle, .SeasoningTitle, .ProductTitle, .SauceTitle, .ImgTitle, .RemarkTitle, .MaterialTitle, .StepTitle
-{
-    height: 50px;
-}
-
-.SeasoningContent, .SauceContent, .RemarkContent, .MaterialContent
-{
-    text-align: justify;
-}
-
-.NameContent, .SeasoningContent, .ProductContent, .SauceContent, .ImgContent, .RemarkContent, .MaterialContent, .StepContent
-{
-
+    display: block;
+    margin-bottom: 10px;
 }
