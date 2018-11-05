@@ -21,8 +21,11 @@ class ActivityRecordController extends Controller
         $ActivityList = DB::table('activity')->get();
         $SubtitleList = DB::table('subtitle')->get();
         $ActivityRecordList = DB::table('activity_record')->get();
-
-        return view('activity.list',compact('ActivityList','SubtitleList','ActivityRecordList'));
+        $countSubtitle = DB::table('subtitle')
+            ->select(DB::raw('count(subtitle.name) as count'),'subtitle.activity_id')
+            ->groupBy('subtitle.activity_id')
+            ->get();
+        return view('activity.list',compact('ActivityList','SubtitleList','ActivityRecordList','countSubtitle'));
     }
 
     /**
