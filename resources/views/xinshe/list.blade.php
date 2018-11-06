@@ -4,6 +4,7 @@
 
 @section('content')
 <head>
+    <title>關於農會</title>
     <link href="{{asset('css/Xinshe-List.css')}}" rel="stylesheet">
 </head>
 

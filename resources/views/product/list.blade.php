@@ -5,6 +5,7 @@
 @section('content')
     <head>
         <!-- Bootstrap CSS -->
+        <title>產品列表</title>
         <link href="{{asset('css/Product-List.css')}}" rel="stylesheet">
         <script src="{{asset('js/Product-List.js')}}"></script>
     </head>

@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label>上傳公告圖片：</label>
-                <input type="file" class="form-control" name="img" value="{{old('img')}}" placeholder="上傳圖片" required>
+                <input type="file" class="form-control" name="img" value="{{old('img')}}" placeholder="上傳圖片">
             </div>
             <div class="text-left">
                 <button type="submit" class="btn btn-success" id="createButton">新增</button>
@@ -65,7 +65,7 @@
                     <td class="align-middle">{{$Announcements->title}}</td>
                     <td class="align-middle">{{$Announcements->AnnouncementCategoryName}}</td>
                     <td class="align-middle">{{$Announcements->content}}</td>
-                    <td class="align-middle"><img src="{{url('../img/announcement/' . $Announcements->img)}}" alt="Smiley face" height="100" width="100"></td>
+                    <td class="align-middle"><img src="{{url('../img/announcement/' . $Announcements->img)}}" alt="此公告沒圖片" height="100" width="100"></td>
                     <td class="align-middle">
                         <a href="{{route('show.announcement.updateForm',$Announcements->id)}}" class="btn btn-success" style="display: inline-block">修改</a>
                         <form class="delete" action="{{route('destroy.announcement',$Announcements->id)}}" method="POST" onsubmit="return ConfirmDelete()" style="display: inline-block; margin: 0;">

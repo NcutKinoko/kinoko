@@ -29,16 +29,16 @@ class AnnouncementController extends Controller
     {
         $AnnouncementCategoryList = AnnouncementCategory::all();
         $Announcement = DB::table('announcement')
-            ->leftJoin('announcementcategory','announcement.announcement_category_id','=','announcementcategory.id')
-            ->select('announcement.id','announcement.title',DB::raw('(CASE WHEN announcement.announcement_category_id = "0" THEN "此公告未分類" ELSE announcementcategory.name END) AS AnnouncementCategoryName'),'announcement.content','announcement.img')
+            ->leftJoin('announcementcategory', 'announcement.announcement_category_id', '=', 'announcementcategory.id')
+            ->select('announcement.id', 'announcement.title', DB::raw('(CASE WHEN announcement.announcement_category_id = "0" THEN "此公告未分類" ELSE announcementcategory.name END) AS AnnouncementCategoryName'), 'announcement.content', 'announcement.img')
             ->get();
-        return view('Backstage.announcement.create',compact('Announcement','AnnouncementCategoryList'));
+        return view('Backstage.announcement.create', compact('Announcement', 'AnnouncementCategoryList'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -55,13 +55,21 @@ class AnnouncementController extends Controller
                 'img' => $file_name,
             ]);
         }
+        else{
+            Announcement::create([
+                'title' => $request['title'],
+                'announcement_category_id' => $request['announcement_category_id'],
+                'content' => $request['content'],
+            ]);
+        }
+
         return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -72,21 +80,21 @@ class AnnouncementController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $updateAnnouncement = Announcement::all()->where('id',$id);
+        $updateAnnouncement = Announcement::all()->where('id', $id);
         $AnnouncementCategoryList = AnnouncementCategory::all();
-        return view('Backstage.announcement.update',compact('updateAnnouncement','AnnouncementCategoryList'));
+        return view('Backstage.announcement.update', compact('updateAnnouncement', 'AnnouncementCategoryList'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -95,6 +103,9 @@ class AnnouncementController extends Controller
         $image_path = public_path("\img\announcement\\") . $fileName[0];
         if (File::exists($image_path)) {
             File::delete($image_path);
+            DB::table('announcement')->where('id', $id)->update([
+                'img' => null,
+            ]);
         }
         if ($request->hasFile('img')) {
             //取得檔案名稱
@@ -102,19 +113,21 @@ class AnnouncementController extends Controller
             $file_name2 = $file_name;
             $request->file('img')->move(public_path("/img/announcement"), $file_name2);
             DB::table('announcement')->where('id', $id)->update([
-                'title' => $request['title'],
-                'announcement_category_id' => $request['announcement_category_id'],
-                'content' => $request['content'],
                 'img' => $file_name2,
             ]);
         }
+        DB::table('announcement')->where('id', $id)->update([
+            'title' => $request['title'],
+            'announcement_category_id' => $request['announcement_category_id'],
+            'content' => $request['content'],
+        ]);
         return redirect()->Route('show.announcement.form');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -132,10 +145,16 @@ class AnnouncementController extends Controller
     {
         $AnnouncementCategoryList = AnnouncementCategory::all();
         $Announcement = DB::table('announcement')
-            ->leftJoin('announcementcategory','announcement.announcement_category_id','=','announcementcategory.id')
-            ->select('announcement.id','announcement.title',DB::raw('(CASE WHEN announcement.announcement_category_id = "0" THEN "此公告未分類" ELSE announcementcategory.name END) AS AnnouncementCategoryName'),'announcement.content','announcement.img')
-            ->where('announcement.title','like',"%{$request['search']}%")
+            ->leftJoin('announcementcategory', 'announcement.announcement_category_id', '=', 'announcementcategory.id')
+            ->select('announcement.id', 'announcement.title', DB::raw('(CASE WHEN announcement.announcement_category_id = "0" THEN "此公告未分類" ELSE announcementcategory.name END) AS AnnouncementCategoryName'), 'announcement.content', 'announcement.img')
+            ->where('announcement.title', 'like', "%{$request['search']}%")
             ->get();
-        return view('Backstage.announcement.create',compact('Announcement','AnnouncementCategoryList'));
+        return view('Backstage.announcement.create', compact('Announcement', 'AnnouncementCategoryList'));
+    }
+
+    public function detail($id)
+    {
+        $announcementDetail = DB::table('announcement')->where('id', $id)->get();
+        return view('announcement.detail', compact('announcementDetail'));
     }
 }

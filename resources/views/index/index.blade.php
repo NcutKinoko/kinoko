@@ -8,6 +8,7 @@
         <link href="{{asset('css/index.css')}}" rel="stylesheet">
         <script type="text/javascript" src="{{asset('js/index.js')}}"></script>
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+        <title>首頁</title>
     </head>
     <div class="container-fluid container-background-color">
         <!--<div class="row">
@@ -32,10 +33,10 @@
             @foreach($AnnouncementList as $AnnouncementLists)
                 <tr>
                     <td style="width: 10%">
-                        <a href="#">{{$AnnouncementLists->announcementCategoryName}}</a>
+                        <a href="{{route('announcement.detail',$AnnouncementLists->id)}}">{{$AnnouncementLists->announcementCategoryName}}</a>
                     </td>
                     <td style="width: 80%">
-                        <a href="#">{{$AnnouncementLists->title}}</a>
+                        <a href="{{route('announcement.detail',$AnnouncementLists->id)}}">{{$AnnouncementLists->title}}</a>
                     </td>
                     <?php $NewDate = explode(' ',$AnnouncementLists->created_at)?>
                     <td style="text-align: right;">

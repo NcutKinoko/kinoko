@@ -4,6 +4,7 @@
 
 @section('content')
     <head>
+        <title>菇農列表</title>
         <!-- Bootstrap CSS -->
         <link href="{{asset('css/Farmer-List.css')}}" rel="stylesheet">
     </head>

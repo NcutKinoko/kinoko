@@ -4,6 +4,7 @@
 
 @section('content')
     <head>
+        <title>菜餚列表</title>
         <!-- Bootstrap CSS -->
         <link href="{{asset('css/Menu-List.css')}}" rel="stylesheet">
     </head>

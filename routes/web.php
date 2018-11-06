@@ -208,3 +208,7 @@ Route::prefix('ProductionProcess')->group(function (){
 Route::prefix('activity_record')->group(function (){
     Route::get('/list','ActivityRecordController@index')->name('activity_record.list');
 });
+
+Route::prefix('announcement')->group(function (){
+    Route::get('/detail/{id}','AnnouncementController@detail')->name('announcement.detail');
+});

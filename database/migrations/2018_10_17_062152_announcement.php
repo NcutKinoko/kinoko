@@ -18,7 +18,7 @@ class Announcement extends Migration
             $table->integer('announcement_category_id');
             $table->String('title');
             $table->String('content');
-            $table->String('img',255);
+            $table->String('img',255)->nullable();
             $table->timestamps();
         });
     }
