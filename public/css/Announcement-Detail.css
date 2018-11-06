@@ -81,15 +81,20 @@ img {
     -ms-flex-positive: 1;
     flex-grow: 1; }
 
-.announcement-title, .announcement-content{
+.announcement-title, .announcement-content, .announcement-title-NoImg, .announcement-content-NoImg{
     text-transform: UPPERCASE;
     font-weight: bold; }
 
-.announcement-title, .announcement-content{
+.announcement-title, .announcement-content, .announcement-title-NoImg{
     margin-bottom: 15px; }
 
-.announcement-title {
+.announcement-title, .announcement-title-NoImg, .announcement-content-NoImg{
     margin-top: 0; }
+
+.announcement-title-NoImg
+{
+    text-align: center;
+}
 
 /*.size {*/
 /*margin-right: 10px; }*/

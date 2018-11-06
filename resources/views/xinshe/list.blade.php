@@ -23,8 +23,8 @@
             </div>
             <div class="row introduction-content justify-content-center align-items-center">
                 @if($add % 2 == 1)
-                <div class="col-xs-6 col-lg-6 thumbnail introduction-img">
-                    <img src="{{url('../img/Xinshe/' . $introductionLists->img)}}" alt="此介紹尚未有圖片" style="width: 80%;height: 80%">
+                <div class="col-xs-6 col-lg-6 introduction-img">
+                    <img class="img-thumbnail" src="{{url('../img/Xinshe/' . $introductionLists->img)}}" alt="此介紹尚未有圖片" style="width: 80%;height: 80%">
                 </div>
                 <div class="col-xs-6 col-lg-6 introduction-text">
                     {{$introductionLists->AboutXinshe}}
@@ -33,8 +33,8 @@
                     <div class="col-xs-6 col-lg-6 introduction-text">
                         {{$introductionLists->AboutXinshe}}
                     </div>
-                    <div class="col-xs-6 col-lg-6 thumbnail introduction-img">
-                        <img src="{{url('../img/Xinshe/' . $introductionLists->img)}}" alt="此介紹尚未有圖片" style="width: 80%;height: 80%">
+                    <div class="col-xs-6 col-lg-6 introduction-img">
+                        <img class="img-thumbnail" src="{{url('../img/Xinshe/' . $introductionLists->img)}}" alt="此介紹尚未有圖片" style="width: 80%;height: 80%">
                     </div>
                 @endif
             </div>

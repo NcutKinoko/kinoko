@@ -16,6 +16,7 @@ class Slide extends Migration
         Schema::create('slide', function (Blueprint $table) {
             $table->increments('id');
             $table->string('img');
+            $table->longText('url')->nullable();
             $table->timestamps();
         });
     }

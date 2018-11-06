@@ -46,6 +46,7 @@ class SlideController extends Controller
             $request->file('img')->move(public_path("/img/slide"), $file_name);
             Slide::create([
                 'img' => $file_name,
+                'url' => $request['url'],
             ]);
         }
         return redirect()->back();
@@ -96,6 +97,7 @@ class SlideController extends Controller
             $request->file('img')->move(public_path("/img/slide"), $file_name2);
             DB::table('slide')->where('id', $id)->update([
                 'img' => $file_name2,
+                'url' => $request['url'],
             ]);
         }
         return redirect()->route('show.slide.form');

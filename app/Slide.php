@@ -8,5 +8,5 @@ class Slide extends Model
 {
     protected $table='slide';
 
-    protected $fillable=['id','img'];
+    protected $fillable=['id','img','url'];
 }

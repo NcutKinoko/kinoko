@@ -14,6 +14,10 @@
                     <input type="file" class="form-control" name="img" value="{{old('img')}}" placeholder="上傳圖片"
                            required>
                 </div>
+                <div class="form-group">
+                    <label>圖片網址</label>
+                    <input class="form-control" name="url" value="{{$updateSlides->url}}" placeholder="請輸入圖片鏈結">
+                </div>
                 <div class="text-left">
                     <button type="submit" class="btn btn-success" id="updateButton">修改</button>
                     <a href="{{route('show.slide.form')}}" class="btn btn-danger">返回</a>
