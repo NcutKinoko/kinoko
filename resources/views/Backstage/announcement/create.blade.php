@@ -54,7 +54,7 @@
             <tr>
                 <th scope="col">標題</th>
                 <th scope="col">公告類別</th>
-                <th scope="col">內文</th>
+                <th scope="col" style="width: 50%;">內文</th>
                 <th scope="col">圖片</th>
                 <th scope="col">修改/刪除</th>
             </tr>

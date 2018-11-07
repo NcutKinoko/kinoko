@@ -170,6 +170,14 @@ Route::group(['middleware' => ['auth:backstage']], function() {
         Route::delete('/destroy/{id}','SlideController@destroy')->name('destroy.slide');
         Route::POST('/search','SlideController@search')->name('search.slide');
     });
+
+    Route::prefix('footer')->group(function (){
+        Route::get('/create/form','FooterController@create')->name('show.footer.form');
+        Route::POST('/store','FooterController@store')->name('store.footer');
+        Route::get('/update/form/{id}','FooterController@edit')->name('show.footer.updateForm');
+        Route::POST('/update/{id}','FooterController@update')->name('update.footer');
+        Route::delete('/destroy/{id}','FooterController@destroy')->name('destroy.footer');
+    });
 });
 
 Route::prefix('product')->group(function (){

@@ -56,6 +56,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('show.slide.form')}}">新增幻燈片</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('show.footer.form')}}">footer資料</a>
+                </li>
                 @if(\Illuminate\Support\Facades\Auth::guard('backstage')->user()->level_id == 1)
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('management.BackstageAuth')}}">會員管理</a>
