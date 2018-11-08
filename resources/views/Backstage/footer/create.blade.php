@@ -5,8 +5,8 @@
 @section('content')
     <div class="container-fluid">
         <h1 style="text-align: center">Footer資訊</h1>
-        <form action="{{route('store.footer')}}" method="POST" role="form" enctype="multipart/form-data"
-              style="margin-bottom: 16px">
+        <form action="{{route('store.footer')}}" id="FooterForm" method="POST" role="form" enctype="multipart/form-data"
+              style="margin-bottom: 16px" onsubmit="return validateForm()">
             {{ csrf_field() }}
             <div class="form-group">
                 <label>電話：</label>
@@ -70,6 +70,21 @@
             </tbody>
         </table>
         <script>
+
+
+            function validateForm() {
+                var phone = document.forms["FooterForm"]["phone"].value;
+                var address = document.forms["FooterForm"]["address"].value;
+                var ProductionYear = document.forms["FooterForm"]["ProductionYear"].value;
+                var AssistingUnit = document.forms["FooterForm"]["AssistingUnit"].value;
+                var ProvidingUnit = document.forms["FooterForm"]["ProvidingUnit"].value;
+                if (phone == "" && address == "" && ProductionYear == "" && AssistingUnit == "" && ProvidingUnit == "") {
+                    alert("請至少填一項資料在送出");
+                    return false;
+                }
+            }
+
+
             function ConfirmDelete() {
                 var x = confirm("你確定要刪除此footer資訊嗎?");
                 if (x)
