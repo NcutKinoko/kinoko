@@ -21,6 +21,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link href="{{asset('css/navigation.css')}}" rel="stylesheet" type="text/css" media="all">
+    <link href="{{asset('css/footer.css')}}" rel="stylesheet" type="text/css" media="all">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -29,16 +30,13 @@
 </head>
 
 <body>
+
 {{--navigation--}}
 @include('layouts.partials.navigation')
 {{--content--}}
 @yield('content')
 <!--footer-->
 @include('layouts.partials.footer')
-
-
-
-
-
 </body>
+
 </html>

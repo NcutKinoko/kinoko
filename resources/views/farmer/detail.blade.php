@@ -28,7 +28,7 @@
                             <div class="details col-md-6">
                                 <h3 class="farmer-name">{{$farmerDetails->name}}</h3>
                                 <h4 class="age">年齡：
-                                    <span data-toggle="tooltip" title="small">{{$farmerDetails->age}}</span>
+                                    <span data-toggle="tooltip" title="small">{{$farmerDetails->age}}歲</span>
                                 </h4>
                                 <h4 class="phone">連絡電話：
                                     <span data-toggle="tooltip" title="small">{{$farmerDetails->phone}}</span>

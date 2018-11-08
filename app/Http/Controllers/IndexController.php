@@ -23,7 +23,8 @@ class IndexController extends Controller
             ->leftJoin('announcementcategory','announcement.announcement_category_id','=','announcementcategory.id')
             ->select('announcement.id','announcement.title','announcement.content',DB::raw('(CASE WHEN announcement.announcement_category_id = "0" THEN "此公告未分類" ELSE announcementcategory.name END) AS announcementCategoryName'),'announcement.created_at')
             ->get();
-        return view('index.index',compact('productList','menuList','slideList','AnnouncementList'));
+        $FooterList = DB::table('footer')->get();
+        return view('index.index',compact('productList','menuList','slideList','AnnouncementList','FooterList'));
     }
 
     /**

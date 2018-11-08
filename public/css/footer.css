@@ -1,0 +1,50 @@
+.footer-panel
+{
+    margin-top: 30px;
+    background-color: #9E5007;
+    border-top: solid #FFCC33;
+}
+
+.footer-information
+{
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer-title, .footer-information
+{
+    color: #FFFFFF;
+    font-family: '微軟正黑體', serif;
+}
+
+.footer-title
+{
+    font-weight: bolder;
+}
+
+.footer-row
+{
+    padding-top: 16px;
+}
+
+.footer-bottom
+{
+    height: 50px;
+    background-color: #844200;
+}
+
+.footer-copyright
+{
+    color: #FFFFFF;
+}
+
+.footer-copyright a
+{
+    color: #000000;
+}
+
+.footer-copyright a:hover
+{
+    text-decoration: none;
+    color: #000;
+}

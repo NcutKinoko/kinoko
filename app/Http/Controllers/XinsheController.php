@@ -129,6 +129,7 @@ class XinsheController extends Controller
     {
         $introductionList = DB::table('xinshe')->get();
         $count = count($introductionList);
-        return view('xinshe.list',compact('introductionList','count'));
+        $FooterList = DB::table('footer')->get();
+        return view('xinshe.list',compact('introductionList','count','FooterList'));
     }
 }

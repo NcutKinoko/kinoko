@@ -155,6 +155,7 @@ class AnnouncementController extends Controller
     public function detail($id)
     {
         $announcementDetail = DB::table('announcement')->where('id', $id)->get();
-        return view('announcement.detail', compact('announcementDetail'));
+        $FooterList = DB::table('footer')->get();
+        return view('announcement.detail', compact('announcementDetail','FooterList'));
     }
 }

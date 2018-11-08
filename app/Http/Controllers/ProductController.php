@@ -20,7 +20,8 @@ class ProductController extends Controller
     {
         $productList = Product::all();
         $categoryList = DB::table('category')->get();
-        return view('product.list', compact('productList', 'categoryList'));
+        $FooterList = DB::table('footer')->get();
+        return view('product.list', compact('productList', 'categoryList','FooterList'));
     }
 
     /**
@@ -147,7 +148,8 @@ class ProductController extends Controller
             ->select('product.id', 'product.name as productName', DB::raw('(CASE WHEN product.category_id = "0" THEN "此產品未分類" ELSE category.name END) AS categoryName'), 'product.price', 'product.inventory', 'product.size', 'product.introduction', 'product.img')
             ->where('product.id', $id)
             ->get();
-        return view('product.detail', compact('productDetail'));
+        $FooterList = DB::table('footer')->get();
+        return view('product.detail', compact('productDetail','FooterList'));
     }
 
     public function search(Request $request)

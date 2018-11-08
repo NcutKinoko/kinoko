@@ -20,8 +20,9 @@ class MenuController extends Controller
     public function index()
     {
         $MenuList = DB::table('menu')->get();
+        $FooterList = DB::table('footer')->get();
 
-        return view('menu.list',compact('MenuList'));
+        return view('menu.list',compact('MenuList','FooterList'));
     }
 
     /**
@@ -168,7 +169,8 @@ class MenuController extends Controller
             ->where('menu.id',$id)
             ->get();
         $DetailStep = DB::table('step')->where('menu_id',$id)->get();
+        $FooterList = DB::table('footer')->get();
 
-        return view('menu.detail',compact('DetailMenu','DetailStep'));
+        return view('menu.detail',compact('DetailMenu','DetailStep','FooterList'));
     }
 }

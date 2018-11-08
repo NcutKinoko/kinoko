@@ -18,7 +18,8 @@ class KinokoController extends Controller
     {
         $KinokoStandard = DB::table('kinoko_standard')->get();
         $RatingDescription = DB::table('ratingdescription')->get();
-        return view('kinoko-standard.kinoko-standard',compact('KinokoStandard','RatingDescription'));
+        $FooterList = DB::table('footer')->get();
+        return view('kinoko-standard.kinoko-standard',compact('KinokoStandard','RatingDescription','FooterList'));
     }
 
     /**
