@@ -24,7 +24,8 @@ class IndexController extends Controller
             ->select('announcement.id','announcement.title','announcement.content',DB::raw('(CASE WHEN announcement.announcement_category_id = "0" THEN "此公告未分類" ELSE announcementcategory.name END) AS announcementCategoryName'),'announcement.created_at')
             ->get();
         $FooterList = DB::table('footer')->get();
-        return view('index.index',compact('productList','menuList','slideList','AnnouncementList','FooterList'));
+        $NewProduct = DB::table('product')->take(10)->get();
+        return view('index.index',compact('productList','menuList','slideList','AnnouncementList','FooterList','NewProduct'));
     }
 
     /**

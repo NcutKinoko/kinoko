@@ -167,6 +167,7 @@ class ProductController extends Controller
     {
         $categoryList = DB::table('category')->get();
         $productList = DB::table('product')->where('category_id', $id)->get();
-        return view('product.list', compact('productList', 'categoryList'));
+        $FooterList = DB::table('footer')->get();
+        return view('product.list', compact('productList', 'categoryList','FooterList'));
     }
 }
