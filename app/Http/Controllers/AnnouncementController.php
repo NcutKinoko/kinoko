@@ -156,6 +156,19 @@ class AnnouncementController extends Controller
     {
         $announcementDetail = DB::table('announcement')->where('id', $id)->get();
         $FooterList = DB::table('footer')->get();
-        return view('announcement.detail', compact('announcementDetail','FooterList'));
+        $OutSiteLink = DB::table('outsitelink')->get();
+
+        return view('announcement.detail', compact('announcementDetail','FooterList','OutSiteLink'));
+    }
+
+    public function list()
+    {
+        $AnnouncementList = DB::table('announcement')
+            ->leftJoin('announcementcategory','announcement.announcement_category_id','=','announcementcategory.id')
+            ->select('announcement.id','announcement.title','announcement.content',DB::raw('(CASE WHEN announcement.announcement_category_id = "0" THEN "此公告未分類" ELSE announcementcategory.name END) AS announcementCategoryName'),'announcement.created_at')
+            ->get();
+        $FooterList = DB::table('footer')->get();
+        $OutSiteLink = DB::table('outsitelink')->get();
+        return view('announcement.list', compact('AnnouncementList','FooterList','OutSiteLink'));
     }
 }

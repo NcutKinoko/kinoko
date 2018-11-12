@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Menu;
-use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class IndexController extends Controller
+class OutSiteLinkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,19 +14,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $productList = Product::all();
-        $menuList = Menu::all();
-        $slideList = DB::table('slide')->get();
-        $AnnouncementList = DB::table('announcement')
-            ->leftJoin('announcementcategory','announcement.announcement_category_id','=','announcementcategory.id')
-            ->select('announcement.id','announcement.title','announcement.content',DB::raw('(CASE WHEN announcement.announcement_category_id = "0" THEN "此公告未分類" ELSE announcementcategory.name END) AS announcementCategoryName'),'announcement.created_at')
-            ->take(5)
-            ->get();
-        $FooterList = DB::table('footer')->get();
-        $NewProduct = DB::table('product')->take(10)->get();
-        $NewMenu = DB::table('menu')->take(10)->get();
-        $OutSiteLink = DB::table('outsitelink')->get();
-        return view('index.index',compact('productList','menuList','slideList','AnnouncementList','FooterList','NewProduct','NewMenu','OutSiteLink'));
+        //
     }
 
     /**
@@ -38,7 +24,9 @@ class IndexController extends Controller
      */
     public function create()
     {
-        //
+        $OutSiteLink = DB::table('outsitelink')->get();
+
+        return view('Backstage.OutSiteLink.create',compact('OutSiteLink'));
     }
 
     /**
@@ -49,7 +37,12 @@ class IndexController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table('outsitelink')->insert([
+            'Facebook' => $request['Facebook'],
+            'Youtube' => $request['Youtube'],
+        ]);
+
+        return redirect()->back();
     }
 
     /**
@@ -71,7 +64,9 @@ class IndexController extends Controller
      */
     public function edit($id)
     {
-        //
+        $UpdateOutSiteLink = DB::table('outsitelink')->where('id',$id)->get();
+
+        return view('Backstage.OutSiteLink.update',compact('UpdateOutSiteLink'));
     }
 
     /**
@@ -83,7 +78,13 @@ class IndexController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('outsitelink')->where('id',$id)
+            ->update([
+               'Facebook' =>  $request['Facebook'],
+                'Youtube' =>  $request['Youtube'],
+            ]);
+
+        return redirect()->route('show.OutSiteLink.form');
     }
 
     /**
@@ -94,6 +95,8 @@ class IndexController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('outsitelink')->where('id',$id)->delete();
+
+        return redirect()->back();
     }
 }

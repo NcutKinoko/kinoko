@@ -18,7 +18,8 @@ class ProductionProcessController extends Controller
     {
         $ProductionProcessList = DB::table('productionprocess')->get();
         $FooterList = DB::table('footer')->get();
-        return view('product-process.product-process',compact('ProductionProcessList','FooterList'));
+        $OutSiteLink = DB::table('outsitelink')->get();
+        return view('product-process.product-process',compact('ProductionProcessList','FooterList','OutSiteLink'));
     }
 
     /**

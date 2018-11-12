@@ -21,7 +21,8 @@ class ProductController extends Controller
         $productList = Product::all();
         $categoryList = DB::table('category')->get();
         $FooterList = DB::table('footer')->get();
-        return view('product.list', compact('productList', 'categoryList','FooterList'));
+        $OutSiteLink = DB::table('outsitelink')->get();
+        return view('product.list', compact('productList', 'categoryList','FooterList','OutSiteLink'));
     }
 
     /**
@@ -149,7 +150,8 @@ class ProductController extends Controller
             ->where('product.id', $id)
             ->get();
         $FooterList = DB::table('footer')->get();
-        return view('product.detail', compact('productDetail','FooterList'));
+        $OutSiteLink = DB::table('outsitelink')->get();
+        return view('product.detail', compact('productDetail','FooterList','OutSiteLink'));
     }
 
     public function search(Request $request)
@@ -168,6 +170,7 @@ class ProductController extends Controller
         $categoryList = DB::table('category')->get();
         $productList = DB::table('product')->where('category_id', $id)->get();
         $FooterList = DB::table('footer')->get();
-        return view('product.list', compact('productList', 'categoryList','FooterList'));
+        $OutSiteLink = DB::table('outsitelink')->get();
+        return view('product.list', compact('productList', 'categoryList','FooterList','OutSiteLink'));
     }
 }

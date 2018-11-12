@@ -18,7 +18,8 @@ class FarmerController extends Controller
     {
         $farmerList = DB::table('farmer')->get();
         $FooterList = DB::table('footer')->get();
-        return view('farmer.list',compact('farmerList','FooterList'));
+        $OutSiteLink = DB::table('outsitelink')->get();
+        return view('farmer.list',compact('farmerList','FooterList','OutSiteLink'));
     }
 
     /**
@@ -146,7 +147,8 @@ class FarmerController extends Controller
     {
         $farmerDetail = DB::table('farmer')->where('id',$id)->get();
         $FooterList = DB::table('footer')->get();
+        $OutSiteLink = DB::table('outsitelink')->get();
 
-        return view('farmer.detail',compact('farmerDetail','FooterList'));
+        return view('farmer.detail',compact('farmerDetail','FooterList','OutSiteLink'));
     }
 }

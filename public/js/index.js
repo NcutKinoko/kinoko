@@ -45,24 +45,49 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $("#carouselExample").on("slide.bs.carousel", function (e) {
+    $("#carouselProduct").on("slide.bs.carousel", function (e) {
         var $e = $(e.relatedTarget);
         var idx = $e.index();
         var itemsPerSlide = 3;
-        var totalItems = $(".carousel-item").length;
+        var totalItems = $("#carouselProduct > .carousel-inner > .carousel-item").length;
 
         if (idx >= totalItems - (itemsPerSlide - 1)) {
             var it = itemsPerSlide - (totalItems - idx);
             for (var i = 0; i < it; i++) {
                 // append slides to end
                 if (e.direction == "left") {
-                    $(".carousel-item")
+                    $("#carouselProduct > .carousel-inner > .carousel-item")
                         .eq(i)
-                        .appendTo(".carousel-inner");
+                        .appendTo("#carouselProduct > .carousel-inner");
                 } else {
-                    $(".carousel-item")
+                    $("#carouselProduct > .carousel-inner > .carousel-item")
                         .eq(0)
-                        .appendTo(".carousel-inner");
+                        .appendTo("#carouselProduct > .carousel-inner");
+                }
+            }
+        }
+    });
+});
+
+$(document).ready(function () {
+    $("#carouselMenu").on("slide.bs.carousel", function (e) {
+        var $e = $(e.relatedTarget);
+        var idx = $e.index();
+        var itemsPerSlide = 3;
+        var totalItems = $("#carouselMenu > .carousel-inner > .carousel-item").length;
+
+        if (idx >= totalItems - (itemsPerSlide - 1)) {
+            var it = itemsPerSlide - (totalItems - idx);
+            for (var i = 0; i < it; i++) {
+                // append slides to end
+                if (e.direction == "left") {
+                    $("#carouselMenu > .carousel-inner > .carousel-item")
+                        .eq(i)
+                        .appendTo("#carouselMenu > .carousel-inner");
+                } else {
+                    $("#carouselMenu > .carousel-inner > .carousel-item")
+                        .eq(0)
+                        .appendTo("#carouselMenu > .carousel-inner");
                 }
             }
         }

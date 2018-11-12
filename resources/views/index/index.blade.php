@@ -35,17 +35,17 @@
                     </td>
                     <?php $NewDate = explode(' ', $AnnouncementLists->created_at)?>
                     <td style="text-align: right;">
-                        <span><a style="color: white" href="#">{{$NewDate['0']}}</a></span>
+                        <span><a style="color: white" href="{{route('announcement.detail',$AnnouncementLists->id)}}">{{$NewDate['0']}}</a></span>
                     </td>
                 </tr>
             @endforeach
         </table>
         <p></p>
         <div style="text-align: right">
-            <button>更多最新消息</button>
+            <a href="{{route('announcement.list')}}"><button class="MoreButton">更多最新消息</button></a>
         </div>
 
-        <div class="row product-slider-row">
+        <div class="row Product-slider-row">
             <div class="col-12 Product-Chinese-Title">
                 <h3>新產品介紹</h3>
             </div>
@@ -53,31 +53,81 @@
                 <h3>NEW PRODUCT</h3>
             </div>
             <div class="col-12">
-                <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
+                <div id="carouselProduct" class="carousel slide" data-ride="carousel" data-interval="9000">
                     <div class="carousel-inner row w-100 mx-auto" role="listbox">
                         <?php $count = 0?>
                         @foreach($NewProduct as $NewProducts)
                             <?php $count += 1?>
                             @if($count == 1)
                                 <div class="carousel-item col-md-4 active">
-                                    <img class="img-fluid mx-auto d-block img-thumbnail" src="{{url('../img/product/' . $NewProducts->img)}}"
-                                         alt="slide {{$count}}">
-                                    <h4>{{$NewProducts->name}}</h4>
+                                    <a href="{{route('product.detail',$NewProducts->id)}}"><img
+                                                class="img-fluid mx-auto d-block img-thumbnail"
+                                                src="{{url('../img/product/' . $NewProducts->img)}}"
+                                                alt="slide {{$count}}"></a>
+                                    <a href="{{route('product.detail',$NewProducts->id)}}">
+                                        <h4>{{$NewProducts->name}}</h4></a>
                                 </div>
                             @else
                                 <div class="carousel-item col-md-4">
-                                    <img class="img-fluid mx-auto d-block img-thumbnail" src="{{url('../img/product/' . $NewProducts->img)}}"
-                                         alt="slide 2">
-                                    <h4>{{$NewProducts->name}}</h4>
+                                    <a href="{{route('product.detail',$NewProducts->id)}}"><img
+                                                class="img-fluid mx-auto d-block img-thumbnail"
+                                                src="{{url('../img/product/' . $NewProducts->img)}}"
+                                                alt="slide 2"></a>
+                                    <a href="{{route('product.detail',$NewProducts->id)}}">
+                                        <h4>{{$NewProducts->name}}</h4></a>
                                 </div>
                             @endif
                         @endforeach
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#carouselProduct" role="button" data-slide="prev">
                         <i class="fa fa-chevron-left fa-lg text-muted"></i>
                         <span class="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
+                    <a class="carousel-control-next text-faded" href="#carouselProduct" role="button" data-slide="next">
+                        <i class="fa fa-chevron-right fa-lg text-muted"></i>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <hr class="style-two"/>
+        <div class="row Menu-slider-row">
+            <div class="col-12 Menu-Chinese-Title">
+                <h3>新菜餚介紹</h3>
+            </div>
+            <div class="col-12 Menu-English-Title">
+                <h3>NEW DISHES</h3>
+            </div>
+            <div class="col-12">
+                <div id="carouselMenu" class="carousel slide" data-ride="carousel" data-interval="9000">
+                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                        <?php $count = 0?>
+                        @foreach($NewMenu as $NewMenus)
+                            <?php $count += 1?>
+                            @if($count == 1)
+                                <div class="carousel-item col-md-4 active">
+                                    <a href="{{route('menu.detail',$NewMenus->id)}}"><img
+                                                class="img-fluid mx-auto d-block img-thumbnail"
+                                                src="{{url('../img/menu/' . $NewMenus->img)}}"
+                                                alt="slide {{$count}}"></a>
+                                    <a href="{{route('menu.detail',$NewMenus->id)}}"><h4>{{$NewMenus->name}}</h4></a>
+                                </div>
+                            @else
+                                <div class="carousel-item col-md-4">
+                                    <a href="{{route('menu.detail',$NewMenus->id)}}"><img
+                                                class="img-fluid mx-auto d-block img-thumbnail"
+                                                src="{{url('../img/menu/' . $NewMenus->img)}}"
+                                                alt="slide 2"></a>
+                                    <a href="{{route('menu.detail',$NewMenus->id)}}"><h4>{{$NewMenus->name}}</h4></a>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselMenu" role="button" data-slide="prev">
+                        <i class="fa fa-chevron-left fa-lg text-muted"></i>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next text-faded" href="#carouselMenu" role="button" data-slide="next">
                         <i class="fa fa-chevron-right fa-lg text-muted"></i>
                         <span class="sr-only">Next</span>
                     </a>

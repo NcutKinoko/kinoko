@@ -178,6 +178,14 @@ Route::group(['middleware' => ['auth:backstage']], function() {
         Route::POST('/update/{id}','FooterController@update')->name('update.footer');
         Route::delete('/destroy/{id}','FooterController@destroy')->name('destroy.footer');
     });
+
+    Route::prefix('OutSiteLink')->group(function (){
+        Route::get('/create/form','OutSiteLinkController@create')->name('show.OutSiteLink.form');
+        Route::POST('/store','OutSiteLinkController@store')->name('store.OutSiteLink');
+        Route::get('/update/form/{id}','OutSiteLinkController@edit')->name('show.OutSiteLink.updateForm');
+        Route::POST('/update/{id}','OutSiteLinkController@update')->name('update.OutSiteLink');
+        Route::delete('/destroy/{id}','OutSiteLinkController@destroy')->name('destroy.OutSiteLink');
+    });
 });
 
 Route::prefix('product')->group(function (){
@@ -218,5 +226,6 @@ Route::prefix('activity_record')->group(function (){
 });
 
 Route::prefix('announcement')->group(function (){
+    Route::get('/list','AnnouncementController@list')->name('announcement.list');
     Route::get('/detail/{id}','AnnouncementController@detail')->name('announcement.detail');
 });

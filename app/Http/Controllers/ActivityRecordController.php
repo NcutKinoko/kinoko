@@ -26,7 +26,8 @@ class ActivityRecordController extends Controller
             ->groupBy('subtitle.activity_id')
             ->get();
         $FooterList = DB::table('footer')->get();
-        return view('activity.list',compact('ActivityList','SubtitleList','ActivityRecordList','countSubtitle','FooterList'));
+        $OutSiteLink = DB::table('outsitelink')->get();
+        return view('activity.list',compact('ActivityList','SubtitleList','ActivityRecordList','countSubtitle','FooterList','OutSiteLink'));
     }
 
     /**

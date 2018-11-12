@@ -52,10 +52,31 @@ table tr:hover{
     background-color: #AEAEAE;
     text-decoration: none;
 }
-.morebutton{
+.MoreButton{
     font-size: large;
     font-family:Microsoft JhengHei;
     font-weight: bold;
+    background-color: darksalmon;
+    color: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #FFFFFF;
+    line-height: 35px;
+    -webkit-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+
+.MoreButton:hover
+{
+    color: darksalmon;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid darksalmon;
+    cursor: pointer;
+}
+
+.MoreButton:focus
+{
+    outline: 0;
 }
 
 tr:nth-child(even) {background:#ebebeb}
@@ -210,35 +231,35 @@ tr:nth-child(odd) {background: #FFF}
     }
 }
 
-.row.product-slider-row
+.row.Product-slider-row, .row.Menu-slider-row
 {
     margin: 16px 0;
 }
 
-.Product-English-Title
+.Product-English-Title, .Menu-English-Title
 {
     text-align: center;
     height: 50px;
 }
 
-.Product-Chinese-Title
+.Product-Chinese-Title, .Menu-Chinese-Title
 {
     text-align: center;
     height: 50px;
 }
 
-.Product-English-Title h3, .Product-Chinese-Title h3
+.Product-English-Title h3, .Product-Chinese-Title h3, .Menu-English-Title h3, .Menu-Chinese-Title h3
 {
     font-family: '微軟正黑體', serif;
 }
 
-.Product-Chinese-Title h3
+.Product-Chinese-Title h3, .Menu-Chinese-Title h3
 {
     font-weight: bolder;
     color: #01b468;
 }
 
-.Product-English-Title h3
+.Product-English-Title h3, .Menu-English-Title h3
 {
     color: darksalmon;
 }
@@ -257,4 +278,11 @@ tr:nth-child(odd) {background: #FFF}
     font-family: '微軟正黑體', serif;
     color: #01b468;
     text-shadow: 0 2px 5px #01b468;
+}
+
+hr.style-two {
+    width: 90%;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
 }

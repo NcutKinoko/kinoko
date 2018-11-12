@@ -21,8 +21,8 @@ class MenuController extends Controller
     {
         $MenuList = DB::table('menu')->get();
         $FooterList = DB::table('footer')->get();
-
-        return view('menu.list',compact('MenuList','FooterList'));
+        $OutSiteLink = DB::table('outsitelink')->get();
+        return view('menu.list',compact('MenuList','FooterList','OutSiteLink'));
     }
 
     /**
@@ -170,7 +170,8 @@ class MenuController extends Controller
             ->get();
         $DetailStep = DB::table('step')->where('menu_id',$id)->get();
         $FooterList = DB::table('footer')->get();
+        $OutSiteLink = DB::table('outsitelink')->get();
 
-        return view('menu.detail',compact('DetailMenu','DetailStep','FooterList'));
+        return view('menu.detail',compact('DetailMenu','DetailStep','FooterList','OutSiteLink'));
     }
 }

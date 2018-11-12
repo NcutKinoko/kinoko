@@ -59,6 +59,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('show.footer.form')}}">footer資料</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('show.OutSiteLink.form')}}">外部網站網址</a>
+                </li>
                 @if(\Illuminate\Support\Facades\Auth::guard('backstage')->user()->level_id == 1)
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('management.BackstageAuth')}}">會員管理</a>
