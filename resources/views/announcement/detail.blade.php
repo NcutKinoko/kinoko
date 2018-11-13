@@ -32,7 +32,7 @@
                                 <div class="preview col-md-6">
                                     <div class="preview-pic tab-content">
                                         <div class="cover">
-                                            <div class="tab-pane active" id="pic-1"><img src="{{url('../img/announcement/' . $announcementDetails->img)}}"/></div>
+                                            <div class="tab-pane active" id="pic-1"><img class="img-thumbnail" src="{{url('../img/announcement/' . $announcementDetails->img)}}"/></div>
                                         </div>
                                     </div>
                                 </div>

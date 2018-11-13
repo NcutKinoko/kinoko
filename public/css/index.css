@@ -267,7 +267,7 @@ tr:nth-child(odd) {background: #FFF}
 .img-fluid.img-thumbnail
 {
     width: 400px;
-    height: 400px;
+    height: 350px;
 }
 
 .carousel-item h4

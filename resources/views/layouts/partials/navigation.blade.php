@@ -12,9 +12,8 @@
         <li style="border-right: none"><a href="{{$OutSiteLinks->Youtube}}" title="YotTube"><img alt="YotTube" src="{{url('../img/icon/youtube.png')}}"
                                                                        height="25px" width="25px"></a></li>
         <li><a href="{{$OutSiteLinks->Facebook}}" title="粉絲專頁連結"><img alt="粉絲專頁連結" src="{{url('../img/icon/FB.png')}}" height="25px" width="25px"></a></li>
-        <li><a href="" title="購物車"><img alt="購物車" src="{{url('../img/icon/shoppingcart.png')}}" height="25px" width="25px"></a>
+        <li><a href="http://www.ssfa.com.tw/default2.aspx?EpfJdId9UuCM43XlWesODdishmL3WQld" title="新社農會網站"><img alt="新社農會網站" src="{{url('../img/icon/xinshe.png')}}" height="25px" width="25px"></a>
         </li>
-        <li><a href="" title="會員專區"><img alt="會員專區" src="{{url('../img/icon/man.png')}}" height="25px" width="25px"></a></li>
         @endforeach
     </ul>
     <ul class="headstyle">

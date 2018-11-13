@@ -16,6 +16,7 @@
                 </div>
                 <div class="text-left">
                     <button type="submit" class="btn btn-success" id="createButton">修改</button>
+                    <a href="{{route('show.process.form')}}" class="btn btn-danger">返回</a>
                 </div>
             </form>
         @endforeach
