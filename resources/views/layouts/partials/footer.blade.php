@@ -17,9 +17,7 @@
     </div>
     <div class="row footer-bottom">
         <div class="col-12" style="padding: 0;">
-            <div class="footer-copyright text-center py-3">© 2018 Copyright:
-                <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
-            </div>
+            <div class="footer-copyright text-center py-3"><h5>此網站僅支援chrome瀏覽器</h5></div>
         </div>
     </div>
 </footer>
