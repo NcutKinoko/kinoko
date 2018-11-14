@@ -41,7 +41,7 @@ class ActivityController extends Controller
             'name' => $request['name'],
         ]);
 
-        return redirect()->back();
+        return redirect()->route('show.activity.form');
     }
 
     /**

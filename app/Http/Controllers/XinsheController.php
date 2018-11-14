@@ -48,7 +48,7 @@ class XinsheController extends Controller
                 'img' => $file_name,
             ]);
         }
-        return redirect()->back();
+        return redirect()->route('show.xinshe.form');
     }
 
     /**
@@ -116,7 +116,7 @@ class XinsheController extends Controller
             File::delete($image_path);
         }
         DB::table('xinshe')->where('id', $id)->delete();
-        return redirect()->back();
+        return redirect()->route('show.xinshe.form');
     }
 
     public function search(Request $request)

@@ -47,7 +47,7 @@ class SubtitleController extends Controller
            'name' => $request['name'],
             'activity_id' => $request['activity_id']
         ]);
-        return redirect()->back();
+        return redirect()->route('show.subtitle.form');
     }
 
     /**

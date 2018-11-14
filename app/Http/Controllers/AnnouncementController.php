@@ -63,7 +63,7 @@ class AnnouncementController extends Controller
             ]);
         }
 
-        return redirect()->back();
+        return redirect()->route('show.announcement.form');
     }
 
     /**
@@ -138,7 +138,7 @@ class AnnouncementController extends Controller
             File::delete($image_path);
         }
         DB::table('announcement')->where('id', $id)->delete();
-        return redirect()->back();
+        return redirect()->route('show.announcement.form');
     }
 
     public function search(Request $request)

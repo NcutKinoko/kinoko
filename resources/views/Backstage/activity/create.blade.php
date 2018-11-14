@@ -17,7 +17,7 @@
         </div>
     </form>
 
-    <form action="{{route('search.menu')}}" method="POST" class="card card-sm" style="margin-bottom: 16px;">
+    <form action="{{route('search.activity')}}" method="POST" class="card card-sm" style="margin-bottom: 16px;">
         {{ csrf_field() }}
         <div class="card-body row no-gutters align-items-center">
             <!--end of col-->

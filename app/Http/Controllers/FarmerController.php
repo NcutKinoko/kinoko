@@ -59,7 +59,7 @@ class FarmerController extends Controller
                 'img' => $file_name,
             ]);
         }
-        return redirect()->back();
+        return redirect()->route('show.farmer.form');
     }
 
     /**
@@ -134,7 +134,7 @@ class FarmerController extends Controller
             File::delete($image_path);
         }
         DB::table('farmer')->where('id',$id)->delete();
-        return redirect()->back();
+        return redirect()->route('show.farmer.form');
     }
 
     public function search(Request $request)

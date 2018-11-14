@@ -43,7 +43,7 @@ class FooterController extends Controller
             'AssistingUnit' => $request['AssistingUnit'],
             'ProvidingUnit' => $request['ProvidingUnit'],
         ]);
-        return redirect()->back();
+        return redirect()->route('show.footer.form');
     }
 
     /**
@@ -100,6 +100,6 @@ class FooterController extends Controller
     {
         DB::table('footer')->where('id',$id)->delete();
 
-        return redirect()->back();
+        return redirect()->route('show.footer.form');
     }
 }

@@ -70,7 +70,7 @@ class MenuController extends Controller
 //        Step::create([
 //            'menu_id' => $productID
 //        ]);
-        return redirect()->back();
+        return redirect()->route('show.menu.form');
     }
 
     /**
@@ -146,7 +146,7 @@ class MenuController extends Controller
         }
         $whereArray = array('menu_id' => $id);
         DB::table('step')->where($whereArray)->delete();
-        return redirect()->back();
+        return redirect()->route('show.menu.form');
     }
 
     public function search(Request $request)

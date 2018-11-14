@@ -63,7 +63,7 @@ class ProductController extends Controller
                 'introduction' => $request['introduction'],
             ]);
         }
-        return redirect()->back();
+        return redirect()->route('show.product.form');
     }
 
     /**
@@ -139,7 +139,7 @@ class ProductController extends Controller
         DB::table('menu')->where('product_id', $id)->update([
             'product_id' => 0
         ]);
-        return redirect()->back();
+        return redirect()->route('show.product.form');
     }
 
     public function detail($id)

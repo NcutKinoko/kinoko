@@ -64,7 +64,7 @@ class ActivityRecordController extends Controller
                 'img' => $file_name,
             ]);
         }
-        return redirect()->back();
+        return redirect()->route('show.activity_record.form');
     }
 
     /**
@@ -128,7 +128,7 @@ class ActivityRecordController extends Controller
     public function destroy($id)
     {
         DB::table('activity_record')->where('id',$id)->delete();
-        return redirect()->back();
+        return redirect()->route('show.activity_record.form');
     }
 
     public function search(Request $request)

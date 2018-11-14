@@ -49,7 +49,7 @@ class KinokoController extends Controller
             'distribution' => $request['distribution'],
             'TestMethod' => $request['TestMethod'],
         ]);
-        return redirect()->back();
+        return redirect()->route('show.kinoko.form');
     }
 
     /**
@@ -102,6 +102,6 @@ class KinokoController extends Controller
     {
         DB::table('kinoko_standard')->where('id' , $id)->delete();
         DB::table('ratingdescription')->where('KinokoStandard_id' , $id)->delete();
-        return redirect()->back();
+        return redirect()->route('show.kinoko.form');
     }
 }
