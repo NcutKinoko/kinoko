@@ -12,9 +12,12 @@
         <li style="border-right: none"><a href="{{$OutSiteLinks->Youtube}}" title="YotTube"><img alt="YotTube" src="{{url('../img/icon/youtube.png')}}"
                                                                        height="25px" width="25px"></a></li>
         <li><a href="{{$OutSiteLinks->Facebook}}" title="粉絲專頁連結"><img alt="粉絲專頁連結" src="{{url('../img/icon/FB.png')}}" height="25px" width="25px"></a></li>
-        <li><a href="http://www.ssfa.com.tw/default2.aspx?EpfJdId9UuCM43XlWesODdishmL3WQld" title="新社農會網站"><img alt="新社農會網站" src="{{url('../img/icon/xinshe.png')}}" height="25px" width="25px"></a>
-        </li>
         @endforeach
+            @if($OutSiteLink->isEmpty())
+                <li style="border-right: none"><a href="http://www.ssfa.com.tw/default2.aspx?EpfJdId9UuCM43XlWesODdishmL3WQld" title="新社農會網站"><img alt="新社農會網站" src="{{url('../img/icon/xinshe.png')}}" height="25px" width="25px"></a></li>
+                @else
+                <li><a href="http://www.ssfa.com.tw/default2.aspx?EpfJdId9UuCM43XlWesODdishmL3WQld" title="新社農會網站"><img alt="新社農會網站" src="{{url('../img/icon/xinshe.png')}}" height="25px" width="25px"></a></li>
+            @endif
     </ul>
     <ul class="headstyle">
         <li><a href="{{route('show.index')}}">首頁</a></li>
