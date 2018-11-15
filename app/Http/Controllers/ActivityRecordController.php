@@ -22,12 +22,12 @@ class ActivityRecordController extends Controller
         $SubtitleList = DB::table('subtitle')->get();
         $ActivityRecordList = DB::table('activity_record')->get();
         $countSubtitle = DB::table('subtitle')
-            ->select(DB::raw('count(subtitle.name) as count'),'subtitle.activity_id')
+            ->select(DB::raw('count(subtitle.name) as count'), 'subtitle.activity_id')
             ->groupBy('subtitle.activity_id')
             ->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
-        return view('activity.list',compact('ActivityList','SubtitleList','ActivityRecordList','countSubtitle','FooterList','OutSiteLink'));
+        return view('activity.list', compact('ActivityList', 'SubtitleList', 'ActivityRecordList', 'countSubtitle', 'FooterList', 'OutSiteLink'));
     }
 
     /**
@@ -37,18 +37,25 @@ class ActivityRecordController extends Controller
      */
     public function create()
     {
-        $subtitleList = Subtitle::all();
-        $activity_record = DB::table('activity_record')
-            ->leftJoin('subtitle','activity_record.subtitle_id','=','subtitle.id')
-            ->select('activity_record.id','activity_record.name as activity_recordName',DB::raw('(CASE WHEN activity_record.subtitle_id = "0" THEN "此圖片未有所屬的副標" ELSE subtitle.name END) AS subtitleName'),'activity_record.img')
+        $subtitleList = DB::table('subtitle')
+            ->leftJoin('activity', 'subtitle.activity_id', '=', 'activity.id')
+            ->select('subtitle.id', DB::raw('(CASE WHEN subtitle.activity_id = "0" THEN CONCAT(subtitle.Name,"(此副標未有所屬的活動)") ELSE CONCAT(activity.name,"－",subtitle.name) END) AS SubtitleName'))
             ->get();
-        return view('Backstage.activity_record.create',compact('subtitleList','activity_record'));
+
+
+        $activity_record = DB::table(DB::raw('(select activity_record.id,activity_record.subtitle_id, activity_record.name, activity_record.img,subtitle.name AS subtitleName,subtitle.activity_id from activity_record left join subtitle on activity_record.subtitle_id = subtitle.id) AS activity_record'))
+            ->leftJoin('activity','activity_record.activity_id', '=', 'activity.id')
+            ->select('activity_record.id',DB::raw('(CASE WHEN activity_record.subtitle_id = "0" THEN "此圖片未有所屬的副標" WHEN activity_record.subtitle_id != "0" AND activity_record.activity_id = "0" THEN CONCAT(activity_record.subtitleName,"(此副標未有所屬的活動)") ELSE CONCAT(activity.name,"－",activity_record.subtitleName) END) AS subtitleName'),'activity_record.name as activity_recordName','activity_record.img')
+            ->get();
+
+
+        return view('Backstage.activity_record.create', compact('subtitleList', 'activity_record'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -70,7 +77,7 @@ class ActivityRecordController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -81,21 +88,24 @@ class ActivityRecordController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $updateActivity_record = ActivityRecord::all()->where('id',$id);
-        $subtitleList = Subtitle::all();
-        return view('Backstage.activity_record.update',compact("updateActivity_record","subtitleList"));
+        $updateActivity_record = ActivityRecord::all()->where('id', $id);
+        $subtitleList = DB::table('subtitle')
+            ->leftJoin('activity', 'subtitle.activity_id', '=', 'activity.id')
+            ->select('subtitle.id', DB::raw('(CASE WHEN subtitle.activity_id = "0" THEN CONCAT(subtitle.Name,"(此副標未有所屬的活動)") ELSE CONCAT(activity.name,"－",subtitle.name) END) AS SubtitleName'))
+            ->get();
+        return view('Backstage.activity_record.update', compact("updateActivity_record", "subtitleList"));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -122,12 +132,12 @@ class ActivityRecordController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        DB::table('activity_record')->where('id',$id)->delete();
+        DB::table('activity_record')->where('id', $id)->delete();
         return redirect()->route('show.activity_record.form');
     }
 
@@ -135,10 +145,10 @@ class ActivityRecordController extends Controller
     {
         $subtitleList = Subtitle::all();
         $activity_record = DB::table('activity_record')
-            ->leftJoin('subtitle','activity_record.subtitle_id','=','subtitle.id')
-            ->select('activity_record.id','activity_record.name as activity_recordName',DB::raw('(CASE WHEN activity_record.subtitle_id = "0" THEN "此圖片未有所屬的副標" ELSE subtitle.name END) AS subtitleName'),'activity_record.img')
-            ->where('activity_record.name','like',"%{$request['search']}%")
+            ->leftJoin('subtitle', 'activity_record.subtitle_id', '=', 'subtitle.id')
+            ->select('activity_record.id', 'activity_record.name as activity_recordName', DB::raw('(CASE WHEN activity_record.subtitle_id = "0" THEN "此圖片未有所屬的副標" ELSE subtitle.name END) AS subtitleName'), 'activity_record.img')
+            ->where('activity_record.name', 'like', "%{$request['search']}%")
             ->get();
-        return view('Backstage.activity_record.create',compact('subtitleList','activity_record'));
+        return view('Backstage.activity_record.create', compact('subtitleList', 'activity_record'));
     }
 }

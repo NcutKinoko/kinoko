@@ -21,9 +21,9 @@
                     @endif
                     @foreach($subtitleList as $subtitleLists)
                         @if($subtitleLists->id == $updateActivity_records->subtitle_id)
-                            <option value="{{$subtitleLists->id}}" selected="selected">{{$subtitleLists->name}}</option>
+                            <option value="{{$subtitleLists->id}}" selected="selected">{{$subtitleLists->SubtitleName}}</option>
                         @else
-                            <option value="{{$subtitleLists->id}}">{{$subtitleLists->name}}</option>
+                            <option value="{{$subtitleLists->id}}">{{$subtitleLists->SubtitleName}}</option>
                         @endif
                     @endforeach
                 </select>

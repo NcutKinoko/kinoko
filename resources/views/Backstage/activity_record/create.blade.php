@@ -17,7 +17,7 @@
                 <select name="subtitle_id" class="form-control" required>
                     <option value="" disabled="disabled" selected="selected">請選擇副標題</option>
                     @foreach($subtitleList as $subtitleLists)
-                        <option value={{$subtitleLists->id}}>{{$subtitleLists->name}}</option>
+                        <option value={{$subtitleLists->id}}>{{$subtitleLists->SubtitleName}}</option>
                     @endforeach
                 </select>
             </div>
