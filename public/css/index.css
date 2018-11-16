@@ -25,7 +25,7 @@ table {
 }
 
 table tr{
-    height: 50px;
+    line-height: 50px;
     text-decoration: none;
 
 }
@@ -82,7 +82,17 @@ table tr:hover{
 tr:nth-child(even) {background:#ebebeb}
 tr:nth-child(odd) {background: #FFF}
 
+table tr :nth-child(3){
+    padding: 0;
+}
 
+table tr :nth-child(3){
+    padding: 0;
+}
+
+table tr :nth-child(3){
+    padding: 0;
+}
 
 
 
