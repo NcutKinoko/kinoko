@@ -24,14 +24,14 @@
                         <table style="width: 100%">
                             @foreach($AnnouncementList as $AnnouncementLists)
                                 <tr>
-                                    <td>
+                                    <td style="width: 20%">
                                         <a href="{{route('announcement.detail',$AnnouncementLists->id)}}">{{$AnnouncementLists->announcementCategoryName}}</a>
                                     </td>
-                                    <td>
+                                    <td style="width: 60%">
                                         <a href="{{route('announcement.detail',$AnnouncementLists->id)}}">{{$AnnouncementLists->title}}</a>
                                     </td>
                                     <?php $NewDate = explode(' ', $AnnouncementLists->created_at)?>
-                                    <td>
+                                    <td style="width: 20%">
                                         <span><a style="color: white" href="{{route('announcement.detail',$AnnouncementLists->id)}}">{{$NewDate['0']}}</a></span>
                                     </td>
                                 </tr>

@@ -109,22 +109,11 @@ table tr{
     text-decoration: none;
 }
 
-table tr :nth-child(1){
-    width: 20%;
-}
-
-table tr :nth-child(2){
-    width: 60%;
-}
-
-table tr :nth-child(3){
-    width: 20%;
-    text-align: right;
-}
-
 table tr td>a{
+    width: 100%;
+    display: block;
     color: #5a6268;
-    margin-right:0;
+    margin:0;
 }
 
 table tr td span{
@@ -142,6 +131,10 @@ table tr td a:hover{
 table tr:hover{
     background-color: #AEAEAE;
     text-decoration: none;
+}
+
+table tr :nth-child(3){
+text-align: right;
 }
 
 tr:nth-child(even) {background: #ecffff}
