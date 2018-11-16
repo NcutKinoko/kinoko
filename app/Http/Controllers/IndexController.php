@@ -23,6 +23,7 @@ class IndexController extends Controller
             ->leftJoin('announcementcategory','announcement.announcement_category_id','=','announcementcategory.id')
             ->select('announcement.id','announcement.title','announcement.content',DB::raw('(CASE WHEN announcement.announcement_category_id = "0" THEN "此公告未分類" ELSE announcementcategory.name END) AS announcementCategoryName'),'announcement.created_at')
             ->take(5)
+            ->orderBy('announcement.created_at','desc')
             ->get();
         $FooterList = DB::table('footer')->get();
         $NewProduct = DB::table('product')->take(10)->get();

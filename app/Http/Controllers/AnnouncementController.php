@@ -166,6 +166,7 @@ class AnnouncementController extends Controller
         $AnnouncementList = DB::table('announcement')
             ->leftJoin('announcementcategory','announcement.announcement_category_id','=','announcementcategory.id')
             ->select('announcement.id','announcement.title','announcement.content',DB::raw('(CASE WHEN announcement.announcement_category_id = "0" THEN "此公告未分類" ELSE announcementcategory.name END) AS announcementCategoryName'),'announcement.created_at')
+            ->orderBy('announcement.created_at','desc')
             ->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
