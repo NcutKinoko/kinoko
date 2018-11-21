@@ -18,6 +18,9 @@
                 @else
                 <li><a href="http://www.ssfa.com.tw/default2.aspx?EpfJdId9UuCM43XlWesODdishmL3WQld" title="新社農會網站"><img alt="新社農會網站" src="{{url('../img/icon/xinshe.png')}}" height="25px" width="25px"></a></li>
             @endif
+            @foreach($CountResult as $CountResults)
+                <li style="width: auto"><h6 style="color: #FFFFFF; margin-right: 10px;">網站瀏覽次數：{{$CountResults->count}}</h6></li>
+            @endforeach
     </ul>
     <ul class="headstyle">
         <li><a href="{{route('show.index')}}">首頁</a></li>
