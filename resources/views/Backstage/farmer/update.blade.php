@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label>上傳菇農照片</label>
-                <input type="file" class="form-control" name="img" value="{{old('img')}}" placeholder="上傳圖片" required>
+                <input type="file" class="form-control" name="img" value="{{old('img')}}" placeholder="上傳圖片">
             </div>
             <div class="text-left">
                 <button type="submit" id="updateButton" class="btn btn-success">修改</button>

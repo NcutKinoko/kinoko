@@ -27,7 +27,9 @@ class ActivityRecordController extends Controller
             ->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
-        return view('activity.list', compact('ActivityList', 'SubtitleList', 'ActivityRecordList', 'countSubtitle', 'FooterList', 'OutSiteLink'));
+        $CountResult = DB::table('countview')->get();
+
+        return view('activity.list', compact('ActivityList', 'SubtitleList', 'ActivityRecordList', 'countSubtitle', 'FooterList', 'OutSiteLink','CountResult'));
     }
 
     /**
@@ -110,12 +112,12 @@ class ActivityRecordController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fileName = ActivityRecord::all()->where('id', $id)->pluck('img');
-        $image_path = public_path("\img\activity_record\\") . $fileName[0];
-        if (File::exists($image_path)) {
-            File::delete($image_path);
-        }
         if ($request->hasFile('img')) {
+            $fileName = ActivityRecord::all()->where('id', $id)->pluck('img');
+            $image_path = public_path("\img\activity_record\\") . $fileName[0];
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+            }
             //取得檔案名稱
             $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
             $file_name2 = $file_name;
@@ -124,6 +126,11 @@ class ActivityRecordController extends Controller
                 'subtitle_id' => $request['subtitle_id'],
                 'name' => $request['name'],
                 'img' => $file_name2,
+            ]);
+        }else{
+            DB::table('activity_record')->where('id', $id)->update([
+                'subtitle_id' => $request['subtitle_id'],
+                'name' => $request['name'],
             ]);
         }
         return redirect()->Route('show.activity_record.form');

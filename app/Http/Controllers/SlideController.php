@@ -85,18 +85,22 @@ class SlideController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fileName = Slide::all()->where('id', $id)->pluck('img');
-        $image_path = public_path("\img\slide\\") . $fileName[0];
-        if (File::exists($image_path)) {
-            File::delete($image_path);
-        }
         if ($request->hasFile('img')) {
+            $fileName = Slide::all()->where('id', $id)->pluck('img');
+            $image_path = public_path("\img\slide\\") . $fileName[0];
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+            }
             //取得檔案名稱
             $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
             $file_name2 = $file_name;
             $request->file('img')->move(public_path("/img/slide"), $file_name2);
             DB::table('slide')->where('id', $id)->update([
                 'img' => $file_name2,
+                'url' => $request['url'],
+            ]);
+        }else{
+            DB::table('slide')->where('id', $id)->update([
                 'url' => $request['url'],
             ]);
         }

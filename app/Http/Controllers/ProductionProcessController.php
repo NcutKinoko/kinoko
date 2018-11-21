@@ -19,7 +19,8 @@ class ProductionProcessController extends Controller
         $ProductionProcessList = DB::table('productionprocess')->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
-        return view('product-process.product-process',compact('ProductionProcessList','FooterList','OutSiteLink'));
+        $CountResult = DB::table('countview')->get();
+        return view('product-process.product-process',compact('ProductionProcessList','FooterList','OutSiteLink','CountResult'));
     }
 
     /**
@@ -85,12 +86,12 @@ class ProductionProcessController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fileName = ProductionProcess::all()->where('id', $id)->pluck('img');
-        $image_path = public_path("\img\ProductionProcess\\") . $fileName[0];
-        if (File::exists($image_path)) {
-            File::delete($image_path);
-        }
         if ($request->hasFile('img')) {
+            $fileName = ProductionProcess::all()->where('id', $id)->pluck('img');
+            $image_path = public_path("\img\ProductionProcess\\") . $fileName[0];
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+            }
             //取得檔案名稱
             $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
             $file_name2 = $file_name;

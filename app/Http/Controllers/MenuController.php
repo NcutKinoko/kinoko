@@ -22,7 +22,8 @@ class MenuController extends Controller
         $MenuList = DB::table('menu')->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
-        return view('menu.list',compact('MenuList','FooterList','OutSiteLink'));
+        $CountResult = DB::table('countview')->get();
+        return view('menu.list',compact('MenuList','FooterList','OutSiteLink','CountResult'));
     }
 
     /**
@@ -106,12 +107,12 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fileName = Menu::all()->where('id', $id)->pluck('img');
-        $image_path = public_path("\img\menu\\") . $fileName[0];
-        if (File::exists($image_path)) {
-            File::delete($image_path);
-        }
         if ($request->hasFile('img')) {
+            $fileName = Menu::all()->where('id', $id)->pluck('img');
+            $image_path = public_path("\img\menu\\") . $fileName[0];
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+            }
             //取得檔案名稱
             $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
             $file_name2 = $file_name;
@@ -123,6 +124,15 @@ class MenuController extends Controller
                 'seasoning' => $request['seasoning'],
                 'material' => $request['material'],
                 'img' => $file_name2,
+                'remark' => $request['remark']
+            ]);
+        }else{
+            DB::table('menu')->where('id', $id)->update([
+                'product_id' => $request['product'],
+                'sauce' => $request['sauce'],
+                'name' => $request['name'],
+                'seasoning' => $request['seasoning'],
+                'material' => $request['material'],
                 'remark' => $request['remark']
             ]);
         }
@@ -171,7 +181,8 @@ class MenuController extends Controller
         $DetailStep = DB::table('step')->where('menu_id',$id)->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
+        $CountResult = DB::table('countview')->get();
 
-        return view('menu.detail',compact('DetailMenu','DetailStep','FooterList','OutSiteLink'));
+        return view('menu.detail',compact('DetailMenu','DetailStep','FooterList','OutSiteLink','CountResult'));
     }
 }

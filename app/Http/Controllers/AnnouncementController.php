@@ -157,8 +157,9 @@ class AnnouncementController extends Controller
         $announcementDetail = DB::table('announcement')->where('id', $id)->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
+        $CountResult = DB::table('countview')->get();
 
-        return view('announcement.detail', compact('announcementDetail','FooterList','OutSiteLink'));
+        return view('announcement.detail', compact('announcementDetail','FooterList','OutSiteLink','CountResult'));
     }
 
     public function list()
@@ -170,6 +171,7 @@ class AnnouncementController extends Controller
             ->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
-        return view('announcement.list', compact('AnnouncementList','FooterList','OutSiteLink'));
+        $CountResult = DB::table('countview')->get();
+        return view('announcement.list', compact('AnnouncementList','FooterList','OutSiteLink','CountResult'));
     }
 }

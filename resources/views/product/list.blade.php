@@ -18,6 +18,7 @@
             <div class="col-md-3">
                 <h3 class="category-title">產品類別</h3>
                 <ul class="list-group category-list">
+                    <li><a href="{{route('product.list')}}">所有產品</a></li>
                     @foreach($categoryList as $categoryLists)
                         <li><a href="{{route('product.group.list',$categoryLists->id)}}">{{$categoryLists->name}}</a></li>
                     @endforeach

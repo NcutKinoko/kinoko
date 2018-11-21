@@ -22,7 +22,8 @@ class ProductController extends Controller
         $categoryList = DB::table('category')->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
-        return view('product.list', compact('productList', 'categoryList','FooterList','OutSiteLink'));
+        $CountResult = DB::table('countview')->get();
+        return view('product.list', compact('productList', 'categoryList','FooterList','OutSiteLink','CountResult'));
     }
 
     /**
@@ -99,12 +100,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fileName = Product::all()->where('id', $id)->pluck('img');
-        $image_path = public_path("\img\product\\") . $fileName[0];
-        if (File::exists($image_path)) {
-            File::delete($image_path);
-        }
         if ($request->hasFile('img')) {
+            $fileName = Product::all()->where('id', $id)->pluck('img');
+            $image_path = public_path("\img\product\\") . $fileName[0];
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+            }
             //取得檔案名稱
             $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
             $file_name2 = $file_name;
@@ -115,6 +116,15 @@ class ProductController extends Controller
                 'price' => $request['price'],
                 'size' => $request['size'],
                 'img' => $file_name2,
+                'inventory' => $request['inventory'],
+                'introduction' => $request['introduction'],
+            ]);
+        }else{
+            DB::table('product')->where('id', $id)->update([
+                'category_id' => $request['category'],
+                'name' => $request['name'],
+                'price' => $request['price'],
+                'size' => $request['size'],
                 'inventory' => $request['inventory'],
                 'introduction' => $request['introduction'],
             ]);
@@ -151,7 +161,8 @@ class ProductController extends Controller
             ->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
-        return view('product.detail', compact('productDetail','FooterList','OutSiteLink'));
+        $CountResult = DB::table('countview')->get();
+        return view('product.detail', compact('productDetail','FooterList','OutSiteLink','CountResult'));
     }
 
     public function search(Request $request)
@@ -171,6 +182,7 @@ class ProductController extends Controller
         $productList = DB::table('product')->where('category_id', $id)->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
-        return view('product.list', compact('productList', 'categoryList','FooterList','OutSiteLink'));
+        $CountResult = DB::table('countview')->get();
+        return view('product.list', compact('productList', 'categoryList','FooterList','OutSiteLink','CountResult'));
     }
 }

@@ -19,7 +19,9 @@ class FarmerController extends Controller
         $farmerList = DB::table('farmer')->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
-        return view('farmer.list',compact('farmerList','FooterList','OutSiteLink'));
+        $CountResult = DB::table('countview')->get();
+
+        return view('farmer.list',compact('farmerList','FooterList','OutSiteLink','CountResult'));
     }
 
     /**
@@ -94,12 +96,12 @@ class FarmerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fileName = Farmer::all()->where('id', $id)->pluck('img');
-        $image_path = public_path("\img\\farmer\\") . $fileName[0];
-        if (File::exists($image_path)) {
-            File::delete($image_path);
-        }
         if ($request->hasFile('img')) {
+            $fileName = Farmer::all()->where('id', $id)->pluck('img');
+            $image_path = public_path("\img\\farmer\\") . $fileName[0];
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+            }
             //取得檔案名稱
             $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
             $file_name2 = $file_name;
@@ -115,6 +117,18 @@ class FarmerController extends Controller
                 'PlantingYear' => $request['PlantingYear'],
                 'result' => $request['result'],
                 'img' => $file_name2,
+            ]);
+        }else{
+            DB::table('farmer')->where('id', $id)->update([
+                'name' => $request['name'],
+                'age' => $request['age'],
+                'phone' => $request['phone'],
+                'area' => $request['area'],
+                'class' => $request['class'],
+                'PlantingArea' => $request['PlantingArea'],
+                'PlantingQuantity' => $request['PlantingQuantity'],
+                'PlantingYear' => $request['PlantingYear'],
+                'result' => $request['result'],
             ]);
         }
         return redirect()->route('show.farmer.form');
@@ -148,7 +162,8 @@ class FarmerController extends Controller
         $farmerDetail = DB::table('farmer')->where('id',$id)->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
+        $CountResult = DB::table('countview')->get();
 
-        return view('farmer.detail',compact('farmerDetail','FooterList','OutSiteLink'));
+        return view('farmer.detail',compact('farmerDetail','FooterList','OutSiteLink','CountResult'));
     }
 }

@@ -83,12 +83,12 @@ class XinsheController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fileName = Xinshe::all()->where('id', $id)->pluck('img');
-        $image_path = public_path("\img\Xinshe\\") . $fileName[0];
-        if (File::exists($image_path)) {
-            File::delete($image_path);
-        }
         if ($request->hasFile('img')) {
+            $fileName = Xinshe::all()->where('id', $id)->pluck('img');
+            $image_path = public_path("\img\Xinshe\\") . $fileName[0];
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+            }
             //取得檔案名稱
             $file_name = time() . '.' . $request['img']->getClientOriginalExtension();
             $file_name2 = $file_name;
@@ -97,6 +97,11 @@ class XinsheController extends Controller
                 'title' => $request['title'],
                 'AboutXinshe' => $request['AboutXinshe'],
                 'img' => $file_name2,
+            ]);
+        }else{
+            DB::table('xinshe')->where('id', $id)->update([
+                'title' => $request['title'],
+                'AboutXinshe' => $request['AboutXinshe'],
             ]);
         }
         return redirect()->route('show.xinshe.form');
@@ -131,6 +136,8 @@ class XinsheController extends Controller
         $count = count($introductionList);
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
-        return view('xinshe.list',compact('introductionList','count','FooterList','OutSiteLink'));
+        $CountResult = DB::table('countview')->get();
+
+        return view('xinshe.list',compact('introductionList','count','FooterList','OutSiteLink','CountResult'));
     }
 }

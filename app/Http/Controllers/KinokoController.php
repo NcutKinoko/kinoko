@@ -20,8 +20,9 @@ class KinokoController extends Controller
         $RatingDescription = DB::table('ratingdescription')->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
+        $CountResult = DB::table('countview')->get();
 
-        return view('kinoko-standard.kinoko-standard',compact('KinokoStandard','RatingDescription','FooterList','OutSiteLink'));
+        return view('kinoko-standard.kinoko-standard',compact('KinokoStandard','RatingDescription','FooterList','OutSiteLink','CountResult'));
     }
 
     /**

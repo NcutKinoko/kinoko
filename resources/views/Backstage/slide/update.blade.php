@@ -11,8 +11,7 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label>修改幻燈片圖</label>
-                    <input type="file" class="form-control" name="img" value="{{old('img')}}" placeholder="上傳圖片"
-                           required>
+                    <input type="file" class="form-control" name="img" value="{{old('img')}}" placeholder="上傳圖片">
                 </div>
                 <div class="form-group">
                     <label>圖片網址</label>

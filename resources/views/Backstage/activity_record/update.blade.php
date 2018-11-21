@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label>圖片</label>
-                <input type="file" id="img" name="img" class="form-control" placeholder="請輸選擇圖片" required>
+                <input type="file" id="img" name="img" class="form-control" placeholder="請輸選擇圖片">
             </div>
             <div class="text-left">
                 <button type="submit" class="create btn btn-success" id="createButton">修改</button>
