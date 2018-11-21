@@ -17,7 +17,7 @@ class Menu extends Migration
             $table->increments('id');
             $table->integer('product_id');
             $table->string('name');
-            $table->string('sauce');
+            $table->string('sauce')->nullable();
             $table->string('seasoning')->nullable();
             $table->string('material');
             $table->string('img');

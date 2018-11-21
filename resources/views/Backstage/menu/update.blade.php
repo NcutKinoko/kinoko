@@ -37,7 +37,7 @@
         </div>
         <div class="form-group">
             <label>醬汁</label>
-            <input name="sauce" class="form-control" placeholder="請輸入醬汁名稱" value="{{$updateMenus->sauce}}" required>
+            <input name="sauce" class="form-control" placeholder="請輸入醬汁名稱" value="{{$updateMenus->sauce}}">
         </div>
         <div class="form-group">
             <label>備註</label>
