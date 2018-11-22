@@ -26,7 +26,7 @@
                                 <div class="details col-md-12">
                                     <h3 class="announcement-title-NoImg">{{$announcementDetails->title}}</h3>
                                     <h4 class="announcement-content-NoImg">公告內容：</h4>
-                                    <p class="product-description">{{$announcementDetails->content}}</p>
+                                    <p class="product-description">{!! $announcementDetails->content !!}</p>
                                 </div>
                             @else
                                 <div class="preview col-md-6">

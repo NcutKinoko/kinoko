@@ -154,7 +154,10 @@ class AnnouncementController extends Controller
 
     public function detail($id)
     {
-        $announcementDetail = DB::table('announcement')->where('id', $id)->get();
+        $announcementDetail = DB::table('announcement')
+            ->select('title',DB::raw('replace(content,"\r\n","<br />") as content'),'img')
+            ->where('id', $id)
+            ->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
         $CountResult = DB::table('countview')->get();

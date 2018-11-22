@@ -39,7 +39,7 @@
                                     <span class="size" data-toggle="tooltip" title="small">{{$productDetails->size}}</span>
                                 </h4>
                                 <h4 class="introduction">商品介紹：</h4>
-                                <p class="product-description">{{$productDetails->introduction}}</p>
+                                <p class="product-description">{!! $productDetails->introduction !!}</p>
                             </div>
                         @endforeach
                     </div>

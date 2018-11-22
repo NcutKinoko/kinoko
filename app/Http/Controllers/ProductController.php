@@ -156,7 +156,7 @@ class ProductController extends Controller
     {
         $productDetail = DB::table('product')
             ->leftJoin('category', 'product.category_id', 'category.id')
-            ->select('product.id', 'product.name as productName', DB::raw('(CASE WHEN product.category_id = "0" THEN "此產品未分類" ELSE category.name END) AS categoryName'), 'product.price', 'product.inventory', 'product.size', 'product.introduction', 'product.img')
+            ->select('product.id', 'product.name as productName', DB::raw('(CASE WHEN product.category_id = "0" THEN "此產品未分類" ELSE category.name END) AS categoryName'), 'product.price', 'product.inventory', 'product.size', DB::raw('replace(product.introduction,"\r\n","<br />") as introduction'), 'product.img')
             ->where('product.id', $id)
             ->get();
         $FooterList = DB::table('footer')->get();

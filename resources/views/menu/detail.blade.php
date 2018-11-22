@@ -31,7 +31,7 @@
                                 <h4 class="seasoning">調味料： <span>{{$DetailMenus->seasoning}}</span></h4>
                                 <h4 class="material">材料： <span>{{$DetailMenus->material}}</span></h4>
                                 <h4 class="sauce">醬汁： <span>{{$DetailMenus->sauce}}</span></h4>
-                                <h4 class="remark">備註： <span>{{$DetailMenus->remark}}</span></h4>
+                                <h4 class="remark">備註： <span>{!! $DetailMenus->remark !!}</span></h4>
                                 <h4 class="step">製作步驟：</h4>
                                 @foreach($DetailStep as $DetailSteps)
                                     <span class="step-list">{{$DetailSteps->step}}</span>

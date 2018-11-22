@@ -50,7 +50,7 @@
                                     <span data-toggle="tooltip" title="small">{{$farmerDetails->PlantingYear}}</span>
                                 </h4>
                                 <h4 class="result">經營現況與成果：</h4>
-                                <p class="product-description">{{$farmerDetails->result}}</p>
+                                <p class="product-description">{!! $farmerDetails->result !!}</p>
                             </div>
                         @endforeach
                     </div>

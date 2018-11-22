@@ -159,7 +159,10 @@ class FarmerController extends Controller
 
     public function detail($id)
     {
-        $farmerDetail = DB::table('farmer')->where('id',$id)->get();
+        $farmerDetail = DB::table('farmer')
+            ->select('name','age','phone','area','class','PlantingArea','PlantingQuantity','PlantingYear',DB::raw('replace(result,"\r\n","<br />") as result'),'img')
+            ->where('id',$id)
+            ->get();
         $FooterList = DB::table('footer')->get();
         $OutSiteLink = DB::table('outsitelink')->get();
         $CountResult = DB::table('countview')->get();
