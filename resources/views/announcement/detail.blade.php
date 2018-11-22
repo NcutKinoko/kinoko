@@ -39,7 +39,7 @@
                                 <div class="details col-md-6">
                                     <h3 class="announcement-title">{{$announcementDetails->title}}</h3>
                                     <h4 class="announcement-content">公告內容：</h4>
-                                    <p class="product-description">{{$announcementDetails->content}}</p>
+                                    <p class="product-description">{!! $announcementDetails->content !!}</p>
                                 </div>
                             @endif
                         @endforeach
