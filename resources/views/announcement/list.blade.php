@@ -20,6 +20,19 @@
         <div class="container">
             <div class="card">
                 <div class="container-fluid">
+                    <div class="row justify-content-end">
+                        <div class="dropdown announcement-category">
+                            <button type="button" class="dropdown-toggle" data-toggle="dropdown">
+                                公告類別
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="{{route('announcement.list')}}">所有公告</a>
+                                @foreach($AnnouncementCategoryList as $AnnouncementCategoryLists)
+                                    <a class="dropdown-item" href="{{route('announcement.group.list',$AnnouncementCategoryLists->id)}}">{{$AnnouncementCategoryLists->name}}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                     <div class="wrapper row">
                         <table style="width: 100%">
                             @foreach($AnnouncementList as $AnnouncementLists)

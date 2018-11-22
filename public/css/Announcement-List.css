@@ -141,3 +141,30 @@ text-align: right;
 
 tr:nth-child(even) {background: #ecffff}
 tr:nth-child(odd) {background: #FFF}
+
+.announcement-category button{
+    background-color: #ff9f1a;
+    border: solid #9E5007 2px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(20%,20%,40%,0.5);
+}
+
+.announcement-category button:hover{
+    background-color: #9E5007;
+    outline: 0;
+    border-color: #ff9f1a;
+    color: #FFFFFF;
+}
+
+.announcement-category :focus{
+    outline: 0;
+}
+
+.announcement-category button :active{
+    outline: 0;
+    background-color: #9E5007;
+}
+
+.row.justify-content-end{
+    margin-bottom: 20px;
+}

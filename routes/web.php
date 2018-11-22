@@ -228,4 +228,5 @@ Route::prefix('activity_record')->group(function (){
 Route::prefix('announcement')->group(function (){
     Route::get('/list','AnnouncementController@list')->name('announcement.list');
     Route::get('/detail/{id}','AnnouncementController@detail')->name('announcement.detail');
+    Route::get('/list/{id}','AnnouncementController@category')->name('announcement.group.list');
 });
