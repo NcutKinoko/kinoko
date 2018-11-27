@@ -40,7 +40,7 @@
             </div>
             <div class="form-group">
                 <label>介紹</label>
-                <textarea name="introduction" class="form-control" placeholder="請輸入介紹" style="width: 50%">{{$updateProducts->introduction}}</textarea>
+                <textarea name="introduction" class="form-control" placeholder="請輸入介紹">{{$updateProducts->introduction}}</textarea>
             </div>
             <div class="form-group">
                 <label>上傳產品照片</label>
