@@ -36,7 +36,7 @@ class ProductController extends Controller
         $CategoryList = Category::all();
         $product = DB::table('product')
             ->leftJoin('category', 'product.category_id', '=', 'category.id')
-            ->select('product.id', 'product.name', DB::raw('(CASE WHEN product.category_id = "0" THEN "此產品未分類" ELSE category.name END) AS categoryName'), 'product.price', 'product.inventory', 'product.size', 'product.introduction', 'product.img')
+            ->select('product.id', 'product.name', DB::raw('(CASE WHEN product.category_id = "0" THEN "此產品未分類" ELSE category.name END) AS categoryName'), 'product.price', 'product.size', 'product.introduction', 'product.img')
             ->get();
         return view('Backstage.product.create', compact('CategoryList', 'product'));
     }
@@ -60,7 +60,6 @@ class ProductController extends Controller
                 'price' => $request['price'],
                 'size' => $request['size'],
                 'img' => $file_name,
-                'inventory' => $request['inventory'],
                 'introduction' => $request['introduction'],
             ]);
         }
@@ -116,7 +115,6 @@ class ProductController extends Controller
                 'price' => $request['price'],
                 'size' => $request['size'],
                 'img' => $file_name2,
-                'inventory' => $request['inventory'],
                 'introduction' => $request['introduction'],
             ]);
         }else{
@@ -125,7 +123,6 @@ class ProductController extends Controller
                 'name' => $request['name'],
                 'price' => $request['price'],
                 'size' => $request['size'],
-                'inventory' => $request['inventory'],
                 'introduction' => $request['introduction'],
             ]);
         }
@@ -156,7 +153,7 @@ class ProductController extends Controller
     {
         $productDetail = DB::table('product')
             ->leftJoin('category', 'product.category_id', 'category.id')
-            ->select('product.id', 'product.name as productName', DB::raw('(CASE WHEN product.category_id = "0" THEN "此產品未分類" ELSE category.name END) AS categoryName'), 'product.price', 'product.inventory', 'product.size', DB::raw('replace(product.introduction,"\r\n","<br />") as introduction'), 'product.img')
+            ->select('product.id', 'product.name as productName', DB::raw('(CASE WHEN product.category_id = "0" THEN "此產品未分類" ELSE category.name END) AS categoryName'), 'product.price', 'product.size', DB::raw('replace(product.introduction,"\r\n","<br />") as introduction'), 'product.img')
             ->where('product.id', $id)
             ->get();
         $FooterList = DB::table('footer')->get();
@@ -170,7 +167,7 @@ class ProductController extends Controller
         $CategoryList = DB::table('category')->get();
         $product = DB::table('product')
             ->leftJoin('category', 'product.category_id', '=', 'category.id')
-            ->select('product.id', 'product.name', DB::raw('(CASE WHEN product.category_id = "0" THEN "此產品未分類" ELSE category.name END) AS categoryName'), 'product.price', 'product.inventory', 'product.size', 'product.introduction', 'product.img')
+            ->select('product.id', 'product.name', DB::raw('(CASE WHEN product.category_id = "0" THEN "此產品未分類" ELSE category.name END) AS categoryName'), 'product.price', 'product.size', 'product.introduction', 'product.img')
             ->where("product.name", "like", "%{$request['search']}%")
             ->get();
         return view('Backstage.product.create', compact('product', 'CategoryList'));

@@ -35,11 +35,6 @@
                        value="{{$updateProducts->price}}" required>
             </div>
             <div class="form-group">
-                <label>庫存量</label>
-                <input id="inventory" name="inventory" class="form-control" placeholder="請輸入庫存量"
-                       value="{{$updateProducts->inventory}}" required>
-            </div>
-            <div class="form-group">
                 <label>大小</label>
                 <input name="size" class="form-control" placeholder="請輸入大小" value="{{$updateProducts->size}}" required>
             </div>
@@ -61,14 +56,9 @@
         var createButton = document.getElementById('updateButton');
         createButton.addEventListener('click', function (e) {
             var price = document.getElementById('price');
-            var inventory = document.getElementById('inventory');
             if (isNaN(price.value)) {
                 e.preventDefault();
                 alert("價格必須為數字");
-            }
-            if (isNaN(inventory.value)) {
-                e.preventDefault();
-                alert("庫存量必須為數字");
             }
         });
     </script>

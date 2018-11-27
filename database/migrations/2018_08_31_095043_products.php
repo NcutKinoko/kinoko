@@ -20,7 +20,6 @@ class Products extends Migration
             $table->integer('price');
             $table->string('size',255);
             $table->string('img',255);
-            $table->integer('inventory');
             $table->longText('introduction');
             $table->timestamps();
         });

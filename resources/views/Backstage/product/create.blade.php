@@ -26,10 +26,6 @@
                 <input id="price" name="price" class="form-control" placeholder="請輸入單價" required>
             </div>
             <div class="form-group">
-                <label>庫存量：</label>
-                <input id="inventory" name="inventory" class="form-control" placeholder="請輸入庫存量" required>
-            </div>
-            <div class="form-group">
                 <label>大小：</label>
                 <input name="size" class="form-control" placeholder="請輸入大小" required>
             </div>
@@ -66,7 +62,6 @@
                 <th scope="col">產品名稱</th>
                 <th scope="col">產品類別</th>
                 <th scope="col">單價</th>
-                <th scope="col">庫存量</th>
                 <th scope="col">大小</th>
                 <th scope="col">介紹</th>
                 <th scope="col">照片</th>
@@ -79,7 +74,6 @@
                         <td class="align-middle">{{$products->name}}</td>
                         <td class="align-middle">{{$products->categoryName}}</td>
                         <td class="align-middle">{{$products->price}}</td>
-                        <td class="align-middle">{{$products->inventory}}</td>
                         <td class="align-middle">{{$products->size}}</td>
                         <td class="align-middle" style="width: 500px; height: auto">{{$products->introduction}}</td>
                         <td class="align-middle"><img src="{{url('../img/product/' . $products->img)}}"
@@ -102,14 +96,9 @@
             var createButton = document.getElementById('createButton');
             createButton.addEventListener('click', function (e) {
                 var price = document.getElementById('price');
-                var inventory = document.getElementById('inventory');
                 if (isNaN(price.value)) {
                     e.preventDefault();
                     alert("價格必須為數字");
-                }
-                if (isNaN(inventory.value)) {
-                    e.preventDefault();
-                    alert("庫存量必須為數字");
                 }
             });
 
