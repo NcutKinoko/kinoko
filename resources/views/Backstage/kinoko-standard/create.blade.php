@@ -28,7 +28,7 @@
         <thead>
         <tr style="text-align: center">
             <th style="width: 50%">評分項目/配分/測定方法 資料</th>
-            <th>步驟資料</th>
+            <th>評分說明</th>
         </tr>
         </thead>
         @foreach($KinokoList as $KinokoLists)
@@ -69,7 +69,7 @@
                         <thead>
                         <tr>
                             <th scope="col" style="width: 59px;text-align: center;">編號</th>
-                            <th scope="col">步驟</th>
+                            <th scope="col">評分說明內容</th>
                             <th scope="col" style="text-align: center">刪除</th>
                             <th scope="col" style="text-align: center">修改</th>
                         </tr>

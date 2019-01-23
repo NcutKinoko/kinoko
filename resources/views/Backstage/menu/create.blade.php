@@ -8,7 +8,7 @@
     <form action="{{route('store.menu')}}" method="POST" role="form" enctype="multipart/form-data" style="margin-bottom: 16px">
         {{ csrf_field() }}
         <div class="form-group">
-            <label>料理名稱</label>
+            <label>菜餚名稱</label>
             <input name="name" class="form-control" placeholder="請輸入料理名稱" required>
         </div>
         <div class="form-group">
@@ -65,7 +65,7 @@
         <thead>
         <tr style="text-align: center">
             <th style="width: 50%">菜餚資料</th>
-            <th>步驟資料</th>
+            <th>烹飪資料</th>
         </tr>
         </thead>
         @foreach($menuList as $menuLists)
@@ -117,8 +117,8 @@
                 <table style="border: 3px  #cccccc solid;" class="step" id="{{$menuLists->id}}">
                     <thead>
                     <tr>
-                        <th scope="col" style="width: 59px;text-align: center;">編號</th>
-                        <th scope="col">步驟</th>
+                        <th scope="col" style="width: 59px;text-align: center;">步驟</th>
+                        <th scope="col">步驟內容</th>
                         <th scope="col" style="text-align: center">刪除</th>
                         <th scope="col" style="text-align: center">修改</th>
                     </tr>
