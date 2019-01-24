@@ -32,7 +32,7 @@
         <li><a href="{{route('show.introduction')}}">關於農會</a></li>
         <li><a href="{{route('farmer.list')}}">菇農介紹</a></li>
         <li><a href="{{route('show.kinoko.standard')}}">優質香菇評鑑標準表</a></li>
-        <li><a href="{{route('activity_record.list')}}">農會活動</a></li>
+        <li><a href="{{route('activity_record.list')}}">活動紀錄</a></li>
     </ul>
 </nav>
 <div class="padding"></div>
