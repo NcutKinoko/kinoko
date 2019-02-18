@@ -13,11 +13,11 @@
         </div>
         <div class="form-group">
             <label>調味料</label>
-            <input name="seasoning" class="form-control" placeholder="請輸入調味料名稱">
+            <input name="seasoning" class="form-control" placeholder="請輸入調味料資料">
         </div>
         <div class="form-group">
             <label>材料</label>
-            <input name="material" class="form-control" placeholder="請輸入材料名稱" required>
+            <input name="material" class="form-control" placeholder="請輸入材料資料" required>
         </div>
         <div class="form-group">
             <label>使用產品</label>
@@ -30,7 +30,7 @@
         </div>
         <div class="form-group">
             <label>醬汁</label>
-            <input name="sauce" class="form-control" placeholder="請輸入醬汁名稱">
+            <input name="sauce" class="form-control" placeholder="請輸入醬汁資料">
         </div>
         <div class="form-group">
             <label>備註</label>

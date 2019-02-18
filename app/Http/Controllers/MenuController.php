@@ -94,8 +94,8 @@ class MenuController extends Controller
     public function edit($id)
     {
         $updateMenu = Menu::all()->where('id',$id);
-        $categoryList = Category::all();
-        return view('Backstage.menu.update',compact('updateMenu','categoryList'));
+        $productList = Product::all();
+        return view('Backstage.menu.update',compact('updateMenu','productList'));
     }
 
     /**

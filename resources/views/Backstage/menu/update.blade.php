@@ -14,11 +14,11 @@
         </div>
         <div class="form-group">
             <label>調味料</label>
-            <input name="seasoning" class="form-control" placeholder="請輸入調味料名稱" value="{{$updateMenus->seasoning}}">
+            <input name="seasoning" class="form-control" placeholder="請輸入調味料資料" value="{{$updateMenus->seasoning}}">
         </div>
         <div class="form-group">
             <label>材料</label>
-            <input name="material" class="form-control" placeholder="請輸入材料名稱" value="{{$updateMenus->material}}" required>
+            <input name="material" class="form-control" placeholder="請輸入材料資料" value="{{$updateMenus->material}}" required>
         </div>
         <div class="form-group">
             <label>使用產品</label>
@@ -26,18 +26,18 @@
                 @if($updateMenus->product_id == 0)
                     <option value="0" selected="selected">此菜餚未使用產品</option>
                 @endif
-                @foreach($categoryList as $categoryLists)
-                    @if($categoryLists->id == $updateMenus->product_id)
-                        <option value="{{$categoryLists->id}}" selected="selected">{{$categoryLists->name}}</option>
+                @foreach($productList as $productLists)
+                    @if($productLists->id == $updateMenus->product_id)
+                        <option value="{{$productLists->id}}" selected="selected">{{$productLists->name}}</option>
                     @else
-                        <option value="{{$categoryLists->id}}">{{$categoryLists->name}}</option>
+                        <option value="{{$productLists->id}}">{{$productLists->name}}</option>
                     @endif
                 @endforeach
             </select>
         </div>
         <div class="form-group">
             <label>醬汁</label>
-            <input name="sauce" class="form-control" placeholder="請輸入醬汁名稱" value="{{$updateMenus->sauce}}">
+            <input name="sauce" class="form-control" placeholder="請輸入醬汁資料" value="{{$updateMenus->sauce}}">
         </div>
         <div class="form-group">
             <label>備註</label>
