@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label>內文：</label>
-                <textarea name="content" class="form-control" placeholder="請輸入內文"></textarea>
+                <textarea name="content" class="form-control" placeholder="請輸入內文" required></textarea>
             </div>
             <div class="form-group">
                 <label>上傳公告圖片：</label>
