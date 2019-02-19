@@ -80,8 +80,8 @@
             <th scope="col">栽種包數</th>
             <th scope="col">栽種年資</th>
             <th scope="col">經營現況與成果</th>
-            <th scope="col">修改/刪除</th>
             <th scope="col">圖片</th>
+            <th scope="col">修改/刪除</th>
         </tr>
         </thead>
         <tbody>
