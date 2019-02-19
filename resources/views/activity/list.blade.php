@@ -34,9 +34,9 @@
                                         @if($SubtitleLists->id == $ActivityRecordLists->subtitle_id)
                                             <div class="col-xs-6 col-lg-6">
                                                 <div class="row activity-img justify-content-center align-items-center">
-                                                    <img class="img-thumbnail"
+                                                    <img class="img-thumbnail" id="myImg"
                                                          src="{{url('../img/activity_record/' . $ActivityRecordLists->img)}}"
-                                                         alt="此介紹尚未有圖片"
+                                                         alt="{{$ActivityRecordLists->name}}"
                                                          style="width: 60%;height: 60%">
                                                 </div>
                                                 <div class="row activity-description justify-content-center align-items-center">
@@ -59,8 +59,43 @@
                     @endforeach
                 </div>
             @endforeach
+
+                <div id="myModal" class="modal">
+
+                    <!-- 关闭按钮 -->
+                    <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+
+                    <!-- 弹窗内容 -->
+                    <img class="modal-content" id="img01">
+
+                    <!-- 文本描述 -->
+                    <div id="caption"></div>
+                </div>
         </div>
     </div>
+
+    <script>
+        // 获取弹窗
+        var modal = document.getElementById('myModal');
+
+        // 获取图片插入到弹窗 - 使用 "alt" 属性作为文本部分的内容
+        var img = document.getElementById('myImg');
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        img.onclick = function(){
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        };
+
+        // 获取 <span> 元素，设置关闭按钮
+        var span = document.getElementsByClassName("close")[0];
+
+        // 当点击 (x), 关闭弹窗
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+    </script>
 
 @endsection
 
