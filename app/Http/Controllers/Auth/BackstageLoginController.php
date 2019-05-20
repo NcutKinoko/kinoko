@@ -51,7 +51,7 @@ class BackstageLoginController extends Controller
 
 
         //attempt to login the stores in 判斷店家是否有使用權(0=false)，1=true
-        if (Auth::guard('backstage')->attempt(['account' => $request->account, 'password' => $request->password,'IsCancel' => 1],$request->remember)){
+        if (Auth::guard('backstage')->attempt(['account' => $request->account, 'password' => $request->password,'IsCancel' => 0],$request->remember)){
             //if successful redirect to stores dashboard
             return redirect()->intended(route('Backstage.index'));
         }

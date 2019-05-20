@@ -35,24 +35,22 @@ class BackstageController extends Controller
 
     public function ShowManagement()
     {
-        $LevelList = DB::table('level')->get();
         $AuthList = DB::table('backstage_users')
-            ->leftJoin('level','backstage_users.level_id','level.id')
-            ->select('backstage_users.id','backstage_users.account','backstage_users.name as UserName','backstage_users.email',DB::raw('(CASE WHEN backstage_users.IsCancel = "0" THEN "未開啟" ELSE "已開啟" END) as IsCancel'),'level_id','level.name as LevelName')
+            ->select('backstage_users.id','backstage_users.account','backstage_users.name as UserName','backstage_users.email',DB::raw('(CASE WHEN backstage_users.IsCancel = "0" THEN "已開啟" ELSE "未開啟" END) as IsCancel'),'level_id',DB::raw('(CASE WHEN backstage_users.level_id = "1" THEN "系統管理員" WHEN backstage_users.level_id = "2" THEN "一般使用者" END) as level_name'))
             ->where('backstage_users.id','!=', Auth::guard('backstage')->user()->id)
             ->get();
-        return view('Backstage.AuthManagement.AuthManagement',compact('AuthList','LevelList'));
+        return view('Backstage.AuthManagement.AuthManagement',compact('AuthList'));
     }
 
     public function open($id)
     {
-        DB::table('backstage_users')->where('id',$id)->update(['IsCancel' => 1]);
+        DB::table('backstage_users')->where('id',$id)->update(['IsCancel' => 0]);
         return redirect()->back();
     }
 
     public function close($id)
     {
-        DB::table('backstage_users')->where('id',$id)->update(['IsCancel' => 0]);
+        DB::table('backstage_users')->where('id',$id)->update(['IsCancel' => 1]);
         return redirect()->back();
     }
 

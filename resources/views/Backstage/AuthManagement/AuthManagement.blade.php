@@ -23,21 +23,24 @@
                     <td class="align-middle">{{$AuthLists->account}}</td>
                     <td class="align-middle">{{$AuthLists->UserName}}</td>
                     <td class="align-middle">{{$AuthLists->email}}</td>
-                    <td class="align-middle">{{$AuthLists->LevelName}}</td>
+                    <td class="align-middle">{{$AuthLists->level_name}}</td>
                     <td class="align-middle">
                         <form action="{{route('update.BackstageAuth',$AuthLists->id)}}" method="POST" role="form"
                               enctype="multipart/form-data" onsubmit="return ConfirmIsCancel()">
                             {{ csrf_field() }}
                             <div class="form-group" style="display: inline-block; margin:0;">
                                 <select class="form-control" name="level" required>
-                                    @foreach($LevelList as $LevelLists)
-                                        @if($LevelLists->id == $AuthLists->level_id)
-                                            <option value="{{$LevelLists->id}}"
-                                                    selected="selected">{{$LevelLists->name}}</option>
-                                        @else
-                                            <option value="{{$LevelLists->id}}">{{$LevelLists->name}}</option>
-                                        @endif
-                                    @endforeach
+                                    @if($AuthLists->level_id == 1)
+                                        <option value="1"
+                                                selected="selected">系統管理員
+                                        </option>
+                                        <option value="2">一般使用者</option>
+                                    @elseif($AuthLists->level_id == 2)
+                                        <option value="2"
+                                                selected="selected">一般使用者
+                                        </option>
+                                        <option value="1">系統管理員</option>
+                                    @endif
                                 </select>
                             </div>
                             <div class="text-left" style="display: inline-block">
@@ -74,6 +77,7 @@
             else
                 return false;
         }
+
         function ConfirmIsCancel() {
             var x = confirm("你確定要變更此會員權限嗎?");
             if (x)
@@ -81,6 +85,7 @@
             else
                 return false;
         }
+
         function ConfirmOpen() {
             var x = confirm("你確定要開起此會員使用權嗎?");
             if (x)
@@ -88,6 +93,7 @@
             else
                 return false;
         }
+
         function ConfirmClose() {
             var x = confirm("你確定要關閉此會員使用權嗎?");
             if (x)
