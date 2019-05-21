@@ -90,7 +90,7 @@
     border: solid #ff9f1a;
     text-align: center;
     list-style: none;
-    margin: 0;
+    margin-bottom: 15px;
 }
 
 .category-list li
